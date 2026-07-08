@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class LoginController extends Controller
 {
     public function index()
@@ -14,12 +15,61 @@ class LoginController extends Controller
     }
 
     public function authenticate(Request $request)
-    {
-        //
+{
+    $credentials = $request->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required'],
+    ]);
+
+    if (!Auth::attempt($credentials)) {
+        return back()
+            ->withErrors([
+                'email' => 'Email atau password salah.',
+            ])
+            ->withInput();
     }
 
-    public function logout(Request $request)
-    {
-        //
+    $request->session()->regenerate();
+
+    $user = Auth::user();
+
+    if (!$user->is_active) {
+        Auth::logout();
+
+        return back()->withErrors([
+            'email' => 'Akun Anda tidak aktif.',
+        ]);
     }
+
+    switch ($user->role) {
+
+        case 'superadmin':
+            return redirect('/superadmin/dashboard');
+
+        case 'operator':
+            return redirect('/operator/dashboard');
+
+        case 'mentor':
+            return redirect('/mentor/dashboard');
+
+        case 'mahasiswa':
+            return redirect('/mahasiswa/dashboard');
+
+        default:
+            Auth::logout();
+
+            return redirect('/login');
+    }
+}
+
+    public function logout(Request $request)
+{
+    Auth::logout();
+
+    $request->session()->invalidate();
+
+    $request->session()->regenerateToken();
+
+    return redirect('/login');
+}
 }
