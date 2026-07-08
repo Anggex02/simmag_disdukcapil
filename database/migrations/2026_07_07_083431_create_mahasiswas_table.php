@@ -21,6 +21,11 @@ return new class extends Migration
                   ->constrained('mentors')
                   ->nullOnDelete();
 
+            $table->foreignId('periode_magang_id')
+                  ->nullable()
+                  ->constrained('periode_magangs')
+                  ->nullOnDelete();
+
             $table->string('nim')->unique();
             $table->string('universitas');
             $table->string('jurusan');
@@ -29,6 +34,11 @@ return new class extends Migration
             $table->string('foto')->nullable();
 
             $table->timestamps();
+            $table->enum('status', [
+            'belum_magang',
+            'aktif',
+            'selesai'
+        ])->default('belum_magang');
         });
     }
 
