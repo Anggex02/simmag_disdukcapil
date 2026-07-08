@@ -1,11 +1,40 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Auth\LoginController;
+
+use App\Http\Controllers\SuperAdmin\DashboardController as SuperAdminDashboard;
+use App\Http\Controllers\Operator\DashboardController as OperatorDashboard;
+use App\Http\Controllers\Mentor\DashboardController as MentorDashboard;
+use App\Http\Controllers\Mahasiswa\DashboardController as MahasiswaDashboard;
 
 Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::get('/login', [LoginController::class, 'index'])
-    ->name('login');
+/*
+|--------------------------------------------------------------------------
+| Authentication
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
+
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+/*
+|--------------------------------------------------------------------------
+| Dashboard
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/superadmin/dashboard', [SuperAdminDashboard::class, 'index']);
+
+Route::get('/operator/dashboard', [OperatorDashboard::class, 'index']);
+
+Route::get('/mentor/dashboard', [MentorDashboard::class, 'index']);
+
+Route::get('/mahasiswa/dashboard', [MahasiswaDashboard::class, 'index']);
