@@ -1,47 +1,145 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | SIMMAG Disdukcapil</title>
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+    @vite(['resources/css/app.css','resources/js/app.js'])
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body{
+            font-family:'Inter',sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-100">
+
+<div class="min-h-screen flex">
+
+    <!-- Left Side -->
+    <div class="hidden lg:flex w-1/2 bg-indigo-700 text-white items-center justify-center p-16">
+
+        <div class="max-w-md">
+
+            <h1 class="text-5xl font-bold leading-tight">
+                SIMMAG
+            </h1>
+
+            <p class="mt-3 text-indigo-100 text-lg">
+                Sistem Informasi Magang Disdukcapil
+            </p>
+
+            <div class="mt-10">
+
+                <h2 class="text-2xl font-semibold">
+                    Selamat Datang 👋
+                </h2>
+
+                <p class="mt-4 leading-7 text-indigo-100">
+                    Kelola proses magang mahasiswa mulai dari
+                    pendaftaran, validasi, monitoring, hingga laporan
+                    dalam satu sistem terintegrasi.
+                </p>
+
+            </div>
+
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+    </div>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+    <!-- Right Side -->
+    <div class="w-full lg:w-1/2 flex justify-center items-center px-6 py-10">
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <div class="w-full max-w-md">
+
+            <div class="text-center lg:text-left">
+
+                <h2 class="text-3xl font-bold text-slate-800">
+                    Login
+                </h2>
+
+                <p class="mt-2 text-slate-500">
+                    Silakan login menggunakan akun Anda.
+                </p>
+
+            </div>
+
+            <form action="{{ route('login.authenticate') }}" method="POST" class="mt-8 space-y-5">
+
+                @csrf
+
+                <div>
+
+                    <label class="block text-sm font-medium text-slate-700 mb-2">
+                        Username / Email
+                    </label>
+
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="Masukkan username"
+                        class="w-full rounded-xl border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+
+                </div>
+
+                <div>
+
+                    <label class="block text-sm font-medium text-slate-700 mb-2">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Masukkan password"
+                        class="w-full rounded-xl border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+
+                </div>
+
+                <div class="flex justify-between items-center">
+
+                    <label class="flex items-center gap-2 text-sm">
+
+                        <input
+                            type="checkbox"
+                            class="rounded border-slate-300">
+
+                        Ingat Saya
+
+                    </label>
+
+                    <a href="#" class="text-sm text-indigo-600 hover:underline">
+                        Lupa Password?
+                    </a>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl font-semibold transition">
+
+                    Login
+
+                </button>
+
+            </form>
+
+            <div class="mt-8 text-center text-sm text-slate-500">
+
+                © {{ date('Y') }} SIMMAG Disdukcapil
+
+            </div>
+
         </div>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+    </div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
+</div>
 
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</body>
+</html>
