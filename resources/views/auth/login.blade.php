@@ -102,65 +102,77 @@
 
                 <form action="{{ route('login.authenticate') }}" method="POST" class="mt-8 space-y-5">
 
-                    @csrf
+    @csrf
 
-                    <div>
+    {{-- Error Login --}}
+    @if ($errors->any())
+        <div class="bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-xl">
+            {{ $errors->first() }}
+        </div>
+    @endif
 
-                        <label class="block text-sm font-medium text-slate-700 mb-2">
-                            Username / Email
-                        </label>
+    {{-- Email --}}
+    <div>
 
-                        <input
-                            type="text"
-                            name="username"
-                            value="{{ old('username') }}"
-                            placeholder="Masukkan username atau email"
-                            class="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-3 transition duration-300 focus:outline-none focus:ring-4 focus:ring-cyan-200 focus:border-[#00B4B6] focus:bg-white">
+        <label class="block text-sm font-medium text-slate-700 mb-2">
+            Email
+        </label>
 
-                    </div>
+        <input
+            type="email"
+            name="email"
+            value="{{ old('email') }}"
+            placeholder="Masukkan email"
+            required
+            class="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-3 transition duration-300 focus:outline-none focus:ring-4 focus:ring-cyan-200 focus:border-[#00B4B6] focus:bg-white">
 
-                    <div>
+    </div>
 
-                        <label class="block text-sm font-medium text-slate-700 mb-2">
-                            Password
-                        </label>
+    {{-- Password --}}
+    <div>
 
-                        <input
-                            type="password"
-                            name="password"
-                            placeholder="Masukkan password"
-                            class="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-3 transition duration-300 focus:outline-none focus:ring-4 focus:ring-cyan-200 focus:border-[#00B4B6] focus:bg-white">
+        <label class="block text-sm font-medium text-slate-700 mb-2">
+            Password
+        </label>
 
-                    </div>
+        <input
+            type="password"
+            name="password"
+            placeholder="Masukkan password"
+            required
+            class="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-3 transition duration-300 focus:outline-none focus:ring-4 focus:ring-cyan-200 focus:border-[#00B4B6] focus:bg-white">
 
-                    <div class="flex justify-between items-center">
+    </div>
 
-                        <label class="flex items-center gap-2 text-sm text-slate-600">
+    {{-- Remember --}}
+    <div class="flex justify-between items-center">
 
-                            <input
-                                type="checkbox"
-                                name="remember"
-                                class="rounded border-slate-300">
+        <label class="flex items-center gap-2 text-sm">
 
-                            Ingat Saya
+            <input
+                type="checkbox"
+                name="remember"
+                class="rounded border-slate-300">
 
-                        </label>
+            Ingat Saya
 
-                        <a href="#" class="text-sm text-[#00B4B6] hover:text-[#00D1D4] transition">
-                            Lupa Password?
-                        </a>
+        </label>
 
-                    </div>
+        <a href="#" class="text-sm text-[#00B4B6] hover:text-[#00D1D4]">
+            Lupa Password?
+        </a>
 
-                    <button
-                        type="submit"
-                        class="w-full bg-[#00B4B6] hover:bg-[#00D1D4] text-white py-3 rounded-xl font-semibold shadow-lg transition duration-300">
+    </div>
 
-                        Login
+    <button
+        type="submit"
+        class="w-full bg-[#00B4B6] hover:bg-[#00D1D4] text-white py-3 rounded-xl font-semibold shadow-lg transition">
 
-                    </button>
+        Login
 
-                </form>
+    </button>
+
+</form>
 
                 <!-- Divider -->
                 <div class="relative my-6">

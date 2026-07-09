@@ -30,14 +30,48 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 /*
 |--------------------------------------------------------------------------
-| Dashboard
+| Super Admin
 |--------------------------------------------------------------------------
 */
 
-Route::get('/superadmin/dashboard', [SuperAdminDashboard::class, 'index']);
+Route::middleware(['auth', 'role:superadmin'])->group(function () {
 
-Route::get('/operator/dashboard', [OperatorDashboard::class, 'index']);
+    Route::get('/superadmin/dashboard', [SuperAdminDashboard::class, 'index']);
 
-Route::get('/mentor/dashboard', [MentorDashboard::class, 'index']);
+});
 
-Route::get('/mahasiswa/dashboard', [MahasiswaDashboard::class, 'index']);
+/*
+|--------------------------------------------------------------------------
+| Operator
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware(['auth', 'role:operator'])->group(function () {
+
+    Route::get('/operator/dashboard', [OperatorDashboard::class, 'index']);
+
+});
+
+/*
+|--------------------------------------------------------------------------
+| Mentor
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware(['auth', 'role:mentor'])->group(function () {
+
+    Route::get('/mentor/dashboard', [MentorDashboard::class, 'index']);
+
+});
+
+/*
+|--------------------------------------------------------------------------
+| Mahasiswa
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
+
+    Route::get('/mahasiswa/dashboard', [MahasiswaDashboard::class, 'index']);
+
+});
