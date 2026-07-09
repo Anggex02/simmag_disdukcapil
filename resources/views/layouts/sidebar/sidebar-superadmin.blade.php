@@ -1,30 +1,87 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<aside class="hidden lg:flex flex-col w-72 bg-sidebar border-r border-bordercolor min-h-screen">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+    {{-- Header --}}
+    <div class="h-16 flex items-center px-6 border-b border-bordercolor">
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <h2 class="text-xl font-bold">
+            Super Admin
+        </h2>
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
+    </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
-            </div>
-        </div>
-    </body>
-</html>
+    {{-- Menu --}}
+    <nav class="flex-1 px-4 py-6 space-y-2">
+
+        {{-- Dashboard --}}
+        <a href="#"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary text-white font-medium transition">
+
+            Dashboard
+
+        </a>
+
+        {{-- Manajemen --}}
+        <p class="text-xs uppercase text-textsecondary mt-6 mb-2 px-4">
+            Manajemen
+        </p>
+
+        <a href="#"
+            class="flex items-center px-4 py-3 rounded-xl hover:bg-card transition">
+
+            Data Operator
+
+        </a>
+
+        <a href="#"
+            class="flex items-center px-4 py-3 rounded-xl hover:bg-card transition">
+
+            Validasi Berkas
+
+        </a>
+
+        {{-- Monitoring --}}
+        <p class="text-xs uppercase text-textsecondary mt-6 mb-2 px-4">
+            Monitoring
+        </p>
+
+        <a href="#"
+            class="flex items-center px-4 py-3 rounded-xl hover:bg-card transition">
+
+            Log Aktivitas
+
+        </a>
+
+        <a href="#"
+            class="flex items-center px-4 py-3 rounded-xl hover:bg-card transition">
+
+            Laporan
+
+        </a>
+
+        {{-- System --}}
+        <p class="text-xs uppercase text-textsecondary mt-6 mb-2 px-4">
+            System
+        </p>
+
+        <a href="#"
+            class="flex items-center px-4 py-3 rounded-xl hover:bg-card transition">
+
+            Pengaturan
+
+        </a>
+
+    </nav>
+
+    {{-- Logout --}}
+    <div class="p-4 border-t border-bordercolor">
+
+        <a href="#"
+            class="block w-full text-center bg-danger hover:bg-red-600 py-3 rounded-xl font-medium transition">
+
+            Logout
+
+        </a>
+
+    </div>
+
+</aside>
