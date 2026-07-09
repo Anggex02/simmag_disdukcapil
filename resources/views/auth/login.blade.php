@@ -22,37 +22,53 @@
 
     <div class="min-h-screen flex">
 
-        <!-- Left Side -->
-        <div class="hidden lg:flex w-1/2 bg-[#0A4B52] text-white items-center justify-center p-16">
+       <!-- Left Side -->
+<div class="hidden lg:flex w-1/2 relative overflow-hidden">
 
-            <div class="max-w-md">
+    <!-- Background Image -->
+    <img
+    src="{{ asset('images/login-bg.jpg') }}"
+    alt="Background SIMMAG"
+    class="absolute inset-0 w-full h-full object-cover object-center">
 
-                <h1 class="text-5xl font-bold leading-tight">
-                    SIMMAG
-                </h1>
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-[#062C30]/80"></div>
 
-                <p class="mt-3 text-cyan-100 text-lg">
-                    Sistem Informasi Magang Disdukcapil
+    <!-- Optional Gradient -->
+    <div class="absolute inset-0 bg-gradient-to-br from-[#0A4B52]/80 via-[#0A4B52]/60 to-[#062C30]/90"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 flex flex-col justify-center px-16 text-white">
+
+        <div class="max-w-lg">
+
+            <h1 class="text-5xl font-bold leading-tight">
+                SIMMAG
+            </h1>
+
+            <p class="mt-3 text-cyan-100 text-lg">
+                Sistem Informasi Magang Disdukcapil
+            </p>
+
+            <div class="mt-10">
+
+                <h2 class="text-2xl font-semibold">
+                    Selamat Datang 👋
+                </h2>
+
+                <p class="mt-4 leading-8 text-cyan-100">
+                    Kelola proses magang mahasiswa mulai dari
+                    pendaftaran, validasi, monitoring, hingga
+                    laporan dalam satu sistem terintegrasi.
                 </p>
-
-                <div class="mt-10">
-
-                    <h2 class="text-2xl font-semibold">
-                        Selamat Datang 👋
-                    </h2>
-
-                    <p class="mt-4 leading-7 text-cyan-100">
-                        Kelola proses magang mahasiswa mulai dari
-                        pendaftaran, validasi, monitoring, hingga laporan
-                        dalam satu sistem terintegrasi.
-                    </p>
-
-                </div>
 
             </div>
 
         </div>
 
+    </div>
+
+</div>
         <!-- Right Side -->
         <div class="w-full lg:w-1/2 flex justify-center items-center px-6 py-10">
 
