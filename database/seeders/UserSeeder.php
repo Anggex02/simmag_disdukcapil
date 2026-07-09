@@ -10,36 +10,44 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        User::create([
-            'name' => 'Super Admin',
-            'email' => 'admin@simmag.com',
-            'password' => Hash::make('admin123'),
-            'role' => 'superadmin',
-            'is_active' => true,
-        ]);
+        User::updateOrCreate(
+            ['email' => 'admin@simmag.com'],
+            [
+                'name' => 'Super Admin',
+                'password' => Hash::make('password123'),
+                'role' => 'superadmin',
+                'is_active' => true,
+            ]
+        );
 
-        User::create([
-            'name' => 'Operator',
-            'email' => 'operator@simmag.com',
-            'password' => Hash::make('operator123'),
-            'role' => 'operator',
-            'is_active' => true,
-        ]);
+        User::updateOrCreate(
+            ['email' => 'operator@simmag.com'],
+            [
+                'name' => 'Operator',
+                'password' => Hash::make('password123'),
+                'role' => 'operator',
+                'is_active' => true,
+            ]
+        );
 
-        User::create([
-            'name' => 'Mentor',
-            'email' => 'mentor@simmag.com',
-            'password' => Hash::make('mentor123'),
-            'role' => 'mentor',
-            'is_active' => true,
-        ]);
+        User::updateOrCreate(
+            ['email' => 'mentor@simmag.com'],
+            [
+                'name' => 'Mentor',
+                'password' => Hash::make('password123'),
+                'role' => 'mentor',
+                'is_active' => true,
+            ]
+        );
 
-        User::create([
-            'name' => 'Mahasiswa',
-            'email' => 'mahasiswa@simmag.com',
-            'password' => Hash::make('mahasiswa123'),
-            'role' => 'mahasiswa',
-            'is_active' => true,
-        ]);
+        User::updateOrCreate(
+            ['email' => 'mahasiswa@simmag.com'],
+            [
+                'name' => 'Mahasiswa',
+                'password' => Hash::make('password123'),
+                'role' => 'mahasiswa',
+                'is_active' => true,
+            ]
+        );
     }
 }

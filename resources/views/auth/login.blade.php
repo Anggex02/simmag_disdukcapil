@@ -70,6 +70,20 @@
 
                 </div>
 
+                {{-- Flash Message --}}
+                @if(session('success'))
+                    <div class="mt-5 rounded-xl border border-green-200 bg-green-50 p-4 text-sm text-green-700">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                {{-- Error Validasi --}}
+                @if ($errors->any())
+                    <div class="mt-5 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+                        {{ $errors->first() }}
+                    </div>
+                @endif
+
                 <form action="{{ route('login.authenticate') }}" method="POST" class="mt-8 space-y-5">
 
                     @csrf
@@ -80,44 +94,88 @@
                             Username / Email
                         </label>
 
-                        <input type="text" name="username" placeholder="Masukkan username"
-                            class="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-3 transition duration-300 focus:outline-none focus:ring-4 focus:ring-cyan-200 focus:border-[#00B4B6] focus:bg-white"
-                            </div>
+                        <input
+                            type="text"
+                            name="username"
+                            value="{{ old('username') }}"
+                            placeholder="Masukkan username atau email"
+                            class="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-3 transition duration-300 focus:outline-none focus:ring-4 focus:ring-cyan-200 focus:border-[#00B4B6] focus:bg-white">
 
-                        <div>
+                    </div>
 
-                            <label class="block text-sm font-medium text-slate-700 mb-2">
-                                Password
-                            </label>
+                    <div>
 
-                            <input type="password" name="password" placeholder="Masukkan password"
-                                class="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-3 transition duration-300 focus:outline-none focus:ring-4 focus:ring-cyan-200 focus:border-[#00B4B6] focus:bg-white"
-                                </div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">
+                            Password
+                        </label>
 
-                            <div class="flex justify-between items-center">
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Masukkan password"
+                            class="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-3 transition duration-300 focus:outline-none focus:ring-4 focus:ring-cyan-200 focus:border-[#00B4B6] focus:bg-white">
 
-                                <label class="flex items-center gap-2 text-sm">
+                    </div>
 
-                                    <input type="checkbox" class="rounded border-slate-300">
+                    <div class="flex justify-between items-center">
 
-                                    Ingat Saya
+                        <label class="flex items-center gap-2 text-sm text-slate-600">
 
-                                </label>
+                            <input
+                                type="checkbox"
+                                name="remember"
+                                class="rounded border-slate-300">
 
-                                <a href="#" class="text-sm text-[#00B4B6] hover:text-[#00D1D4] transition">
-                                    Lupa Password?
-                                </a>
+                            Ingat Saya
 
-                            </div>
+                        </label>
 
-                            <button type="submit"
-                                class="w-full bg-[#00B4B6] hover:bg-[#00D1D4] text-white py-3 rounded-xl font-semibold shadow-lg transition duration-300"="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl font-semibold transition">
+                        <a href="#" class="text-sm text-[#00B4B6] hover:text-[#00D1D4] transition">
+                            Lupa Password?
+                        </a>
 
-                                Login
+                    </div>
 
-                            </button>
+                    <button
+                        type="submit"
+                        class="w-full bg-[#00B4B6] hover:bg-[#00D1D4] text-white py-3 rounded-xl font-semibold shadow-lg transition duration-300">
+
+                        Login
+
+                    </button>
 
                 </form>
+
+                <!-- Divider -->
+                <div class="relative my-6">
+
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-200"></div>
+                    </div>
+
+                    <div class="relative flex justify-center">
+                        <span class="bg-white px-4 text-sm text-gray-500">
+                            atau
+                        </span>
+                    </div>
+
+                </div>
+
+                <!-- Register -->
+                <div class="text-center">
+
+                    <p class="text-sm text-gray-600">
+                        Belum memiliki akun?
+                    </p>
+
+                    <a href="{{ route('register') }}"
+                        class="mt-4 inline-block w-full border-2 border-[#00B4B6] text-[#00B4B6] hover:bg-[#00B4B6] hover:text-white py-3 rounded-xl font-semibold transition duration-300">
+
+                        Daftar Akun Mahasiswa
+
+                    </a>
+
+                </div>
 
                 <div class="mt-8 text-center text-sm text-gray-500">
 
