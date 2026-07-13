@@ -12,7 +12,7 @@
         <div class="flex items-center gap-3">
 
             <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center font-bold text-lg text-white">
-                S
+                <img src="{{ asset('images/logo.png') }}">
             </div>
 
             <div>
@@ -55,17 +55,17 @@
         <div class="flex items-center gap-3 cursor-pointer">
 
             <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center font-semibold">
-                W
+                {{ strtoupper(substr(Auth::user()->name ?? 'U',0,1)) }}
             </div>
 
             <div class="hidden md:block">
 
                 <p class="text-sm font-medium">
-                    Wildan
+                    {{ Auth::user()->name ?? 'Guest' }}
                 </p>
 
                 <p class="text-xs text-textsecondary">
-                    Super Admin
+                    {{ ucfirst(Auth::user()->role ?? '-') }}
                 </p>
 
             </div>
