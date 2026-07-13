@@ -5,9 +5,12 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 
 use App\Http\Controllers\SuperAdmin\DashboardController as SuperAdminDashboard;
+use App\Http\Controllers\SuperAdmin\PeriodeMagangController;
+
 use App\Http\Controllers\Operator\DashboardController as OperatorDashboard;
 use App\Http\Controllers\Mentor\DashboardController as MentorDashboard;
 use App\Http\Controllers\Mahasiswa\DashboardController as MahasiswaDashboard;
+
 
 Route::get('/', function () {
     return redirect('/login');
@@ -37,6 +40,9 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware(['auth', 'role:superadmin'])->group(function () {
 
     Route::get('/superadmin/dashboard', [SuperAdminDashboard::class, 'index']);
+
+    Route::resource('/superadmin/periode-magang', PeriodeMagangController::class)
+        ->names('periode-magang');
 
 });
 
