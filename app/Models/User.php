@@ -15,7 +15,8 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        'is_active'
+        'is_active',
+        'no_hp'
     ];
 
     protected $hidden = [
@@ -45,5 +46,10 @@ class User extends Authenticatable
     public function mahasiswa()
     {
         return $this->hasOne(Mahasiswa::class);
+    }
+
+    public function pendaftaranMagang()
+    {
+        return $this->hasOne(PendaftaranMagang::class);
     }
 }

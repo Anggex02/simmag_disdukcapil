@@ -27,35 +27,31 @@
 
         <div>
 
-            <x-ui.button>
-
-                + Tambah Operator
-
-            </x-ui.button>
-
+           <a href="{{ route('operator.create') }}">
+    <x-ui.button>
+        + Tambah Operator
+    </x-ui.button>
+</a>
         </div>
 
     </div>
 
     {{-- Search --}}
-    <x-ui.card>
+    <form method="GET" action="{{ route('operator.index') }}">
 
-        <div class="flex flex-col md:flex-row gap-4">
+    <input
+    type="text"
+    name="search"
+    value="{{ request('search') }}"
+    placeholder="Cari Operator..."
+    class="flex-1 rounded-xl bg-background border border-bordercolor px-4 py-3 text-white placeholder:text-gray-500">
+    
 
-            <input
-                type="text"
-                placeholder="Cari Operator..."
-                class="flex-1 rounded-xl bg-background border border-bordercolor px-4 py-3">
+    <x-ui.button>
+        Cari
+    </x-ui.button>
 
-            <x-ui.button>
-
-                Cari
-
-            </x-ui.button>
-
-        </div>
-
-    </x-ui.card>
+</form>
 
     {{-- Table --}}
     <x-table.table>
@@ -86,59 +82,82 @@
 
         <x-table.tbody>
 
-            <tr>
+            @forelse($operators as $operator)
 
-                <x-table.td>1</x-table.td>
+<tr>
 
-                <x-table.td>
+    <x-table.td>
+        {{ $loop->iteration }}
+    </x-table.td>
 
-                    Wildan Zahid
+    <x-table.td>
+        {{ $operator->name }}
+    </x-table.td>
 
-                </x-table.td>
+    <x-table.td>
+        {{ $operator->email }}
+    </x-table.td>
 
-                <x-table.td>
+    <x-table.td>
+        {{ $operator->no_hp ?? '-' }}
+    </x-table.td>
 
-                    admin@gmail.com
+    <x-table.td>
 
-                </x-table.td>
+        <x-ui.badge>
 
-                <x-table.td>
+            {{ $operator->is_active ? 'Aktif' : 'Nonaktif' }}
 
-                    08123456789
+        </x-ui.badge>
 
-                </x-table.td>
+    </x-table.td>
 
-                <x-table.td>
+    <x-table.td>
 
-                    <x-ui.badge>
+        <div class="flex justify-center gap-2">
 
-                        Aktif
+            <x-ui.button color="warning">
 
-                    </x-ui.badge>
+                Edit
 
-                </x-table.td>
+            </x-ui.button>
 
-                <x-table.td>
+    <form action="{{ route('operator.destroy', $operator->id) }}"
+      method="POST"
+      onsubmit="return confirm('Yakin ingin menghapus operator ini?')">
 
-                    <div class="flex justify-center gap-2">
+    @csrf
+    @method('DELETE')
 
-                        <x-ui.button color="warning">
+    <button
+        type="submit"
+        class="px-3 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600">
 
-                            Edit
+        Hapus
 
-                        </x-ui.button>
+    </button>
 
-                        <x-ui.button color="danger">
+</form>
+</form>
+        </div>
 
-                            Hapus
+    </x-table.td>
 
-                        </x-ui.button>
+</tr>
 
-                    </div>
+@empty
 
-                </x-table.td>
+<tr>
 
-            </tr>
+    <td colspan="6" class="text-center py-8">
+
+        Belum ada data operator.
+
+    </td>
+
+</tr>
+
+@endforelse
 
         </x-table.tbody>
 

@@ -6,6 +6,8 @@ use App\Http\Controllers\Auth\LoginController;
 
 use App\Http\Controllers\SuperAdmin\DashboardController as SuperAdminDashboard;
 use App\Http\Controllers\SuperAdmin\PeriodeMagangController;
+use App\Http\Controllers\SuperAdmin\OperatorController;
+
 
 use App\Http\Controllers\Operator\DashboardController as OperatorDashboard;
 use App\Http\Controllers\Mentor\DashboardController as MentorDashboard;
@@ -39,10 +41,14 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth', 'role:superadmin'])->group(function () {
 
-    Route::get('/superadmin/dashboard', [SuperAdminDashboard::class, 'index']);
+    Route::get('/superadmin/dashboard', [SuperAdminDashboard::class, 'index'])
+        ->name('superadmin.dashboard');
 
     Route::resource('/superadmin/periode-magang', PeriodeMagangController::class)
         ->names('periode-magang');
+
+    Route::resource('/superadmin/operator', OperatorController::class)
+        ->names('operator');
 
 });
 
@@ -79,5 +85,6 @@ Route::middleware(['auth', 'role:mentor'])->group(function () {
 Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
 
     Route::get('/mahasiswa/dashboard', [MahasiswaDashboard::class, 'index']);
+    Route::resource('pendaftaran-magang', \App\Http\Controllers\Mahasiswa\PendaftaranMagangController::class);
 
 });

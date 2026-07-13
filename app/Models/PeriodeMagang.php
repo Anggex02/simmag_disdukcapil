@@ -22,4 +22,9 @@ class PeriodeMagang extends Model
     {
         return $this->hasMany(Mahasiswa::class);
     }
+    
+    public function pendaftaranMagangs()
+    {
+        return $this->hasMany(PendaftaranMagang::class);
+    }
 }

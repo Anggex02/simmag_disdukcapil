@@ -124,7 +124,7 @@
             value="{{ old('email') }}"
             placeholder="Masukkan email"
             required
-            class="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-3 transition duration-300 focus:outline-none focus:ring-4 focus:ring-cyan-200 focus:border-[#00B4B6] focus:bg-white">
+            class="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-3 transition duration-300 text-black focus:outline-none focus:ring-4 focus:ring-cyan-200 focus:border-[#00B4B6] focus:bg-white">
 
     </div>
 
@@ -140,7 +140,7 @@
             name="password"
             placeholder="Masukkan password"
             required
-            class="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-3 transition duration-300 focus:outline-none focus:ring-4 focus:ring-cyan-200 focus:border-[#00B4B6] focus:bg-white">
+            class="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-3 transition duration-300 text-black focus:outline-none focus:ring-4 focus:ring-cyan-200 focus:border-[#00B4B6] focus:bg-white">
 
     </div>
 

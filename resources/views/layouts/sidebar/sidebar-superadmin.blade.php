@@ -13,24 +13,23 @@
     <nav class="flex-1 px-4 py-6 space-y-2">
 
         {{-- Dashboard --}}
-        <a href="#"
-            class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary text-white font-medium transition">
-
-            Dashboard
-
-        </a>
+       <a href="{{ route('superadmin.dashboard') }}"
+class="flex items-center px-4 py-3 rounded-xl transition
+{{ request()->routeIs('superadmin.dashboard') ? 'bg-primary text-white' : 'hover:bg-card' }}">
+    Dashboard
+</a>
 
         {{-- Manajemen --}}
         <p class="text-xs uppercase text-textsecondary mt-6 mb-2 px-4">
             Manajemen
         </p>
 
-        <a href="#"
-            class="flex items-center px-4 py-3 rounded-xl hover:bg-card transition">
+        <a href="{{ route('operator.index') }}"
+    class="flex items-center px-4 py-3 rounded-xl hover:bg-card transition">
 
-            Data Operator
+    Data Operator
 
-        </a>
+</a>
 
         <a href="#"
             class="flex items-center px-4 py-3 rounded-xl hover:bg-card transition">
