@@ -15,16 +15,33 @@ class PendaftaranMagangController extends Controller
      */
     public function index()
     {
-        $periode = PeriodeMagang::where('status', 'aktif')->first();
+        $periode = PeriodeMagang::where('status', 'aktif')->get();
 
-        return view('mahasiswa.pendaftaran.index', compact('periode'));
+        return view('mahasiswa.pendaftaran-magang.index', compact('periode'));
+
+        $periode = PeriodeMagang::where('status','aktif')->get();
+
+        if($periode->isEmpty()){
+
+            return back()->with(
+                'error',
+                'Belum ada periode magang yang dibuka.'
+            );
+
+        }
     }
+    
 
     /**
      * Menyimpan pendaftaran
      */
     public function store(Request $request)
 {
+        $cek = PendaftaranMagang::where('user_id', Auth::id())->first();
+
+if ($cek) {
+    return back()->with('error', 'Anda sudah pernah mengajukan pendaftaran magang.');
+}
     $request->validate([
 
         'periode_magang_id' => 'required|exists:periode_magangs,id',
@@ -52,6 +69,9 @@ class PendaftaranMagangController extends Controller
 
     // Upload Surat Pengantar
     $surat = $request->file('surat_pengantar')->store('surat_pengantar', 'public');
+    
+
+
 
     PendaftaranMagang::create([
 

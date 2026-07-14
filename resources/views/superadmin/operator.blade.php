@@ -37,17 +37,16 @@
     </div>
 
     {{-- Search --}}
-    <form method="GET" action="{{ route('operator.index') }}">
+   <form method="GET" action="{{ route('operator.index') }}" class="flex gap-4">
 
     <input
-    type="text"
-    name="search"
-    value="{{ request('search') }}"
-    placeholder="Cari Operator..."
-    class="flex-1 rounded-xl bg-background border border-bordercolor px-4 py-3 text-white placeholder:text-gray-500">
-    
+        type="text"
+        name="search"
+        value="{{ request('search') }}"
+        placeholder="Cari Operator..."
+        class="flex-1 rounded-xl bg-background border border-bordercolor px-4 py-3 text-white placeholder:text-gray-500">
 
-    <x-ui.button>
+    <x-ui.button type="submit">
         Cari
     </x-ui.button>
 
@@ -136,7 +135,6 @@
         Hapus
 
     </button>
-
 </form>
 </form>
         </div>

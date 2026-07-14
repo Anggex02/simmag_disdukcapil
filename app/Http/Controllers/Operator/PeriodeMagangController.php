@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\SuperAdmin;
+namespace App\Http\Controllers\Operator;
 
 use App\Http\Controllers\Controller;
 use App\Models\PeriodeMagang;
@@ -12,12 +12,12 @@ class PeriodeMagangController extends Controller
     {
         $periode = PeriodeMagang::latest()->get();
 
-        return view('superadmin.periode-magang.index', compact('periode'));
+        return view('Operator.periode-magang.index', compact('periode'));
     }
 
     public function create()
     {
-        return view('superadmin.periode_magang.create');
+        return view('Operator.periode_magang.create');
     }
 
     public function store(Request $request)

@@ -31,12 +31,7 @@ class="flex items-center px-4 py-3 rounded-xl transition
 
 </a>
 
-        <a href="#"
-            class="flex items-center px-4 py-3 rounded-xl hover:bg-card transition">
 
-            Validasi Berkas
-
-        </a>
 
         {{-- Monitoring --}}
         <p class="text-xs uppercase text-textsecondary mt-6 mb-2 px-4">

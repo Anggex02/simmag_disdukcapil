@@ -98,3 +98,16 @@
         </div>
     </div>
 </nav>
+
+
+
+
+
+
+
+        <a href="#"
+            class="flex items-center px-4 py-3 rounded-xl hover:bg-card transition">
+
+            Validasi Berkas
+
+        </a>

@@ -48,7 +48,7 @@
             </p>
 
             <h2 class="text-4xl font-bold mt-3">
-                12
+               {{ $totalOperator }}
             </h2>
 
         </div>
@@ -61,7 +61,7 @@
             </p>
 
             <h2 class="text-4xl font-bold mt-3">
-                3
+                {{ $totalPeriode }}
             </h2>
 
         </div>
@@ -74,7 +74,7 @@
             </p>
 
             <h2 class="text-4xl font-bold mt-3">
-                20
+                {{ $totalMentor }}
             </h2>
 
         </div>
@@ -87,7 +87,7 @@
             </p>
 
             <h2 class="text-4xl font-bold mt-3">
-                150
+                {{ $totalMahasiswa }}
             </h2>
 
         </div>

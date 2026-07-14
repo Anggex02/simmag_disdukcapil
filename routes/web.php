@@ -5,13 +5,17 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 
 use App\Http\Controllers\SuperAdmin\DashboardController as SuperAdminDashboard;
-use App\Http\Controllers\SuperAdmin\PeriodeMagangController;
 use App\Http\Controllers\SuperAdmin\OperatorController;
 
 
 use App\Http\Controllers\Operator\DashboardController as OperatorDashboard;
+use App\Http\Controllers\Operator\PeriodeMagangController;
+use App\Http\Controllers\Operator\ValidasiPendaftaranController;
+
 use App\Http\Controllers\Mentor\DashboardController as MentorDashboard;
+
 use App\Http\Controllers\Mahasiswa\DashboardController as MahasiswaDashboard;
+use App\Http\Controllers\Mahasiswa\PendaftaranMagangController;
 
 
 Route::get('/', function () {
@@ -44,8 +48,6 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::get('/superadmin/dashboard', [SuperAdminDashboard::class, 'index'])
         ->name('superadmin.dashboard');
 
-    Route::resource('/superadmin/periode-magang', PeriodeMagangController::class)
-        ->names('periode-magang');
 
     Route::resource('/superadmin/operator', OperatorController::class)
         ->names('operator');
@@ -61,8 +63,17 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
 Route::middleware(['auth', 'role:operator'])->group(function () {
 
     Route::get('/operator/dashboard', [OperatorDashboard::class, 'index']);
+    Route::resource('/superadmin/periode-magang', PeriodeMagangController::class)
+        ->names('periode-magang');
+
+    Route::get('/operator/dashboard', [OperatorDashboard::class, 'index'])
+        ->name('operator.dashboard');
+
+    Route::get('/operator/validasi', [ValidasiPendaftaranController::class, 'index'])
+        ->name('operator.validasi');
 
 });
+
 
 /*
 |--------------------------------------------------------------------------
@@ -84,7 +95,12 @@ Route::middleware(['auth', 'role:mentor'])->group(function () {
 
 Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
 
-    Route::get('/mahasiswa/dashboard', [MahasiswaDashboard::class, 'index']);
-    Route::resource('pendaftaran-magang', \App\Http\Controllers\Mahasiswa\PendaftaranMagangController::class);
+    Route::get('/mahasiswa/dashboard', [MahasiswaDashboard::class, 'index'])
+        ->name('mahasiswa.dashboard');
+
+    Route::resource(
+        '/mahasiswa/pendaftaran-magang',
+        PendaftaranMagangController::class
+    )->names('mahasiswa.pendaftaran');
 
 });
