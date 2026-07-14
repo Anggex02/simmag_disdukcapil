@@ -63,7 +63,7 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
 Route::middleware(['auth', 'role:operator'])->group(function () {
 
     Route::get('/operator/dashboard', [OperatorDashboard::class, 'index']);
-    Route::resource('/superadmin/periode-magang', PeriodeMagangController::class)
+    Route::resource('/operator/periode-magang', PeriodeMagangController::class)
         ->names('periode-magang');
 
     Route::get('/operator/dashboard', [OperatorDashboard::class, 'index'])

@@ -3,7 +3,7 @@
 @section('title', 'Periode Magang')
 
 @section('sidebar')
-    @include('layouts.sidebar.sidebar-superadmin')
+    @include('layouts.sidebar.sidebar-operator')
 @endsection
 
 @section('content')
