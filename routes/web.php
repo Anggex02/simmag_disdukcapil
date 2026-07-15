@@ -11,6 +11,7 @@ use App\Http\Controllers\SuperAdmin\OperatorController;
 use App\Http\Controllers\Operator\DashboardController as OperatorDashboard;
 use App\Http\Controllers\Operator\PeriodeMagangController;
 use App\Http\Controllers\Operator\ValidasiPendaftaranController;
+use App\Http\Controllers\Operator\MahasiswaController;
 
 use App\Http\Controllers\Mentor\DashboardController as MentorDashboard;
 
@@ -71,6 +72,14 @@ Route::middleware(['auth', 'role:operator'])->group(function () {
 
     Route::get('/operator/validasi', [ValidasiPendaftaranController::class, 'index'])
         ->name('operator.validasi');
+    Route::get('/operator/validasi/{id}', [ValidasiPendaftaranController::class, 'show'])
+        ->name('operator.validasi.show');
+    Route::put('/operator/validasi/{id}/terima', [ValidasiPendaftaranController::class, 'terima'])
+    ->name('operator.validasi.terima');
+    Route::put('/operator/validasi/{id}/tolak', [ValidasiPendaftaranController::class, 'tolak'])
+    ->name('operator.validasi.tolak');
+
+   
 
 });
 
@@ -103,4 +112,18 @@ Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
         PendaftaranMagangController::class
     )->names('mahasiswa.pendaftaran');
 
+     Route::get('/mahasiswa/logbook', function () {
+    return view('mahasiswa.logbook.index');
+    })->name('mahasiswa.logbook.index');
+
+    Route::get('/mahasiswa/pengumuman', function () {
+        return view('mahasiswa.pengumuman.index');
+    })->name('mahasiswa.pengumuman.index');
+
+    Route::get('/mahasiswa/profil', function () {
+        return view('mahasiswa.profil.index');
+    })->name('mahasiswa.profil.index');
+
+    Route::resource('/operator/mahasiswa', MahasiswaController::class)
+    ->names('mahasiswa');
 });

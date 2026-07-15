@@ -10,99 +10,90 @@
 
 <div class="space-y-6">
 
+    {{-- Header --}}
     <div>
-
         <h1 class="text-3xl font-bold text-white">
-
             Dashboard Mahasiswa
-
         </h1>
 
         <p class="text-textsecondary mt-2">
-
             Selamat datang, {{ Auth::user()->name }}.
-
         </p>
-
     </div>
 
+    {{-- Statistik --}}
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
 
-        <x-ui.card>
+        <a href="{{ route('mahasiswa.pendaftaran.index') }}">
+            <x-ui.card class="hover:scale-105 transition cursor-pointer">
 
-            <p class="text-textsecondary">
+                <p class="text-textsecondary">
+                    Lowongan Tersedia
+                </p>
 
-                Lowongan Tersedia
+                <h2 class="text-4xl font-bold mt-3">
+                    {{ $lowongan }}
+                </h2>
 
-            </p>
+            </x-ui.card>
+        </a>
 
-            <h2 class="text-4xl font-bold mt-3">
+        <a href="{{ route('mahasiswa.pendaftaran.index') }}">
+            <x-ui.card class="hover:scale-105 transition cursor-pointer">
 
-                20
+                <p class="text-textsecondary">
+                    Lamaran Saya
+                </p>
 
-            </h2>
+                <h2 class="text-4xl font-bold mt-3">
+                    {{ $lamaran }}
+                </h2>
 
-        </x-ui.card>
+            </x-ui.card>
+        </a>
 
-        <x-ui.card>
+        <a href="{{ route('mahasiswa.logbook.index') }}">
 
-            <p class="text-textsecondary">
+    <x-ui.card class="hover:scale-105 transition cursor-pointer">
 
-                Lamaran Saya
+        <p class="text-textsecondary">
+            Logbook
+        </p>
 
-            </p>
+        <h2 class="text-4xl font-bold mt-3">
+            0
+        </h2>
 
-            <h2 class="text-4xl font-bold mt-3">
+    </x-ui.card>
 
-                2
+</a>
 
-            </h2>
+        <a href="{{ route('mahasiswa.pengumuman.index') }}">
 
-        </x-ui.card>
+    <x-ui.card class="hover:scale-105 transition cursor-pointer">
 
-        <x-ui.card>
+        <p class="text-textsecondary">
+            Pengumuman
+        </p>
 
-            <p class="text-textsecondary">
+        <h2 class="text-4xl font-bold mt-3">
+            0
+        </h2>
 
-                Logbook
+    </x-ui.card>
 
-            </p>
-
-            <h2 class="text-4xl font-bold mt-3">
-
-                30
-
-            </h2>
-
-        </x-ui.card>
-
-        <x-ui.card>
-
-            <p class="text-textsecondary">
-
-                Pengumuman
-
-            </p>
-
-            <h2 class="text-4xl font-bold mt-3">
-
-                5
-
-            </h2>
-
-        </x-ui.card>
+</a>
 
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    {{-- Status Magang --}}
+    <x-ui.card>
 
-        <x-ui.card>
+        <h2 class="text-xl font-semibold mb-5">
+            Status Magang
+        </h2>
 
-            <h2 class="text-xl font-semibold mb-4">
-
-                Status Magang
-
-            </h2>
+        @if($pendaftaran)
 
             <div class="space-y-4">
 
@@ -110,19 +101,25 @@
 
                     <span>Status Lamaran</span>
 
-                    <x-ui.badge color="green">
+                    @if($pendaftaran->status == 'menunggu')
 
-                        Diterima
+                        <span class="bg-yellow-500 text-white px-3 py-1 rounded-full">
+                            Menunggu
+                        </span>
 
-                    </x-ui.badge>
+                    @elseif($pendaftaran->status == 'diterima')
 
-                </div>
+                        <span class="bg-green-500 text-white px-3 py-1 rounded-full">
+                            Diterima
+                        </span>
 
-                <div class="flex justify-between">
+                    @else
 
-                    <span>Mentor</span>
+                        <span class="bg-red-500 text-white px-3 py-1 rounded-full">
+                            Ditolak
+                        </span>
 
-                    <span>Budi Santoso</span>
+                    @endif
 
                 </div>
 
@@ -130,35 +127,38 @@
 
                     <span>Periode</span>
 
-                    <span>Juli - Desember 2026</span>
+                    <span>
+                        {{ $pendaftaran->periodeMagang->nama_periode }}
+                    </span>
 
                 </div>
 
             </div>
 
-        </x-ui.card>
+        @else
 
-        <x-ui.card>
+            <p class="text-gray-400">
+                Anda belum mengajukan pendaftaran magang.
+            </p>
 
-            <h2 class="text-xl font-semibold mb-4">
+        @endif
 
-                Aktivitas Terbaru
+    </x-ui.card>
 
-            </h2>
+    {{-- Aktivitas --}}
+    <x-ui.card>
 
-            <ul class="space-y-3 text-textsecondary">
+        <h2 class="text-xl font-semibold mb-4">
+            Aktivitas Terbaru
+        </h2>
 
-                <li>• Mengisi Logbook Harian.</li>
+        <ul class="space-y-3 text-textsecondary">
 
-                <li>• Melihat Pengumuman Baru.</li>
+            <li>• Belum ada aktivitas.</li>
 
-                <li>• Lamaran telah disetujui.</li>
+        </ul>
 
-            </ul>
-
-        </x-ui.card>
-
-    </div>
+    </x-ui.card>
 
 </div>
 

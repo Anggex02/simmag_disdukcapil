@@ -39,15 +39,58 @@
 
                 @csrf
 
-                <x-form.input label="Nama Lengkap" name="name" />
+                <div>
+                <label class="block mb-2 text-white">Nama Lengkap</label>
 
-                <x-form.input label="Email" name="email" type="email" />
+                <input
+                    type="text"
+                    name="name"
+                    value="{{ old('name') }}"
+                    class="w-full rounded-xl bg-background border border-bordercolor px-4 py-3 text-white"
+                    required>
+                </div>
 
-                <x-form.input label="Username" name="username" />
+                <div>
+                <label class="block mb-2 text-white">Email</label>
 
-                <x-form.input label="Password" name="password" type="password" />
+                <input
+                    type="email"
+                    name="email"
+                    value="{{ old('email') }}"
+                    class="w-full rounded-xl bg-background border border-bordercolor px-4 py-3 text-white"
+                    required>
+                </div>
 
-                <x-form.input label="Konfirmasi Password" name="password_confirmation" type="password" />
+                <div>
+                <label class="block mb-2 text-white">Username</label>
+
+                <input
+                    type="text"
+                    name="username"
+                    value="{{ old('username') }}"
+                    class="w-full rounded-xl bg-background border border-bordercolor px-4 py-3 text-white"
+                    required>
+                </div>
+
+                <div>
+                <label class="block mb-2 text-white">Password</label>
+
+                <input
+                    type="password"
+                    name="password"
+                    class="w-full rounded-xl bg-background border border-bordercolor px-4 py-3 text-white"
+                    required>
+                </div>
+
+                <div>
+                <label class="block mb-2 text-white">Konfirmasi Password</label>
+
+                <input
+                    type="password"
+                    name="password_confirmation"
+                    class="w-full rounded-xl bg-background border border-bordercolor px-4 py-3 text-white"
+                    required>
+                </div>
 
                 <button type="submit"
                     class="w-full bg-primary hover:opacity-90 py-3 rounded-xl font-semibold text-white">

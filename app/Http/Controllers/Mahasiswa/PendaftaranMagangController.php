@@ -14,22 +14,16 @@ class PendaftaranMagangController extends Controller
      * Menampilkan form pendaftaran magang
      */
     public function index()
-    {
-        $periode = PeriodeMagang::where('status', 'aktif')->get();
+{
+    $periode = PeriodeMagang::where('status', 'aktif')->first();
 
-        return view('mahasiswa.pendaftaran-magang.index', compact('periode'));
+    $pendaftaran = PendaftaranMagang::where('user_id', Auth::id())->first();
 
-        $periode = PeriodeMagang::where('status','aktif')->get();
-
-        if($periode->isEmpty()){
-
-            return back()->with(
-                'error',
-                'Belum ada periode magang yang dibuka.'
-            );
-
-        }
-    }
+    return view(
+        'mahasiswa.pendaftaran-magang.index',
+        compact('periode', 'pendaftaran')
+    );
+}
     
 
     /**
@@ -37,7 +31,11 @@ class PendaftaranMagangController extends Controller
      */
     public function store(Request $request)
 {
-        $cek = PendaftaranMagang::where('user_id', Auth::id())->first();
+    $request->validate([
+        // ...
+    ]);
+
+$cek = PendaftaranMagang::where('user_id', Auth::id())->first();
 
 if ($cek) {
     return back()->with('error', 'Anda sudah pernah mengajukan pendaftaran magang.');
@@ -69,39 +67,38 @@ if ($cek) {
 
     // Upload Surat Pengantar
     $surat = $request->file('surat_pengantar')->store('surat_pengantar', 'public');
-    
 
 
+   PendaftaranMagang::create([
 
-    PendaftaranMagang::create([
+    'user_id' => Auth::id(),
 
-        'user_id' => Auth::id(),
+    'periode_magang_id' => $request->periode_magang_id,
 
-        'periode_magang_id' => $request->periode_magang_id,
+    'nim' => $request->nim,
 
-        'nim' => $request->nim,
+    'universitas' => $request->universitas,
 
-        'universitas' => $request->universitas,
+    'program_studi' => $request->program_studi,
 
-        'program_studi' => $request->program_studi,
+    'semester' => $request->semester,
 
-        'semester' => $request->semester,
+    'no_hp' => $request->no_hp,
 
-        'no_hp' => $request->no_hp,
+    'alamat' => $request->alamat,
 
-        'alamat' => $request->alamat,
+    'cv' => $cv,
 
-        'cv' => $cv,
+    'surat_pengantar' => $surat,
 
-        'surat_pengantar' => $surat,
+    'status' => 'menunggu',
 
-        'status' => 'menunggu',
+]);
 
-    ]);
 
-    return redirect()
-        ->back()
-        ->with('success', 'Pendaftaran magang berhasil dikirim.');
+ return redirect()
+    ->route('mahasiswa.dashboard')
+    ->with('success', 'Pendaftaran magang berhasil dikirim.');
 }
 
     /**

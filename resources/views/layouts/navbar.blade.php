@@ -29,15 +29,6 @@
 
     </div>
 
-    {{-- Tengah --}}
-    <div class="hidden md:flex flex-1 justify-center px-10">
-
-        <input
-            type="text"
-            placeholder="Cari..."
-            class="w-full max-w-md bg-card border border-bordercolor rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
-
-    </div>
 
     {{-- Kanan --}}
     <div class="flex items-center gap-5">

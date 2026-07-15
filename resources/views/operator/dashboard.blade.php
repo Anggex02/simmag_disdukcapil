@@ -23,26 +23,26 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
         <x-ui.card>
-            <p class="text-textsecondary">Data Mahasiswa</p>
+            <p class="text-textsecondary">Total Pendaftar</p>
 
             <h2 class="text-4xl font-bold mt-3">
-                120
+                {{ $totalMahasiswa }}
             </h2>
         </x-ui.card>
 
         <x-ui.card>
-            <p class="text-textsecondary">Data Belum Valid</p>
+            <p class="text-textsecondary">Menunggu Validasi</p>
 
             <h2 class="text-4xl font-bold mt-3">
-                18
+                {{ $belumValid }}
             </h2>
         </x-ui.card>
 
         <x-ui.card>
-            <p class="text-textsecondary">Data Sudah Valid</p>
+            <p class="text-textsecondary">Sudah Diverifikasi</p>
 
             <h2 class="text-4xl font-bold mt-3">
-                102
+                {{ $sudahValid }}
             </h2>
         </x-ui.card>
 
@@ -56,12 +56,25 @@
 
         <ul class="space-y-3 text-textsecondary">
 
-            <li>• Mahasiswa melakukan registrasi.</li>
+            <ul class="space-y-3">
 
-            <li>• Operator melakukan validasi data.</li>
+@forelse($aktivitas as $item)
 
-            <li>• Data mahasiswa berhasil diperbarui.</li>
+<li>
 
+{{ $item->user->name }}
+mendaftar magang
+({{ $item->universitas }})
+
+</li>
+
+@empty
+
+<li>Belum ada aktivitas.</li>
+
+@endforelse
+
+</ul>
         </ul>
 
     </x-ui.card>

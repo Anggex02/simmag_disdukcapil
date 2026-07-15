@@ -1,11 +1,11 @@
 <aside class="hidden lg:flex flex-col w-72 bg-sidebar border-r border-bordercolor min-h-screen">
 
-    {{-- Header --}}
-    <div class="h-16 flex items-center px-6 border-b border-bordercolor">
+     {{-- Logo --}}
+    <div class="h-20 flex items-center px-6 border-b border-bordercolor">
 
-        <h2 class="text-xl font-bold">
-            Super Admin
-        </h2>
+        <h1 class="text-4xl font-bold text-primary">
+          Super Admin
+        </h1>
 
     </div>
 
