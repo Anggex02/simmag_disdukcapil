@@ -37,6 +37,20 @@
             class="w-full rounded-xl p-3 bg-background border border-bordercolor">
 
         <input
+            type="text"
+            name="nip"
+             placeholder="NIP"
+            value="{{ old('nip') }}"
+            class="w-full rounded-xl border border-bordercolor bg-background p-3">
+
+        <input
+            type="text"
+            name="jabatan"
+             placeholder="Jabatan"
+            value="{{ old('jabatan') }}"
+            class="w-full rounded-xl border border-bordercolor bg-background p-3">
+
+        <input
             type="password"
             name="password"
             placeholder="Password"

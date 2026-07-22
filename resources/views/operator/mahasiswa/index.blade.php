@@ -8,29 +8,47 @@
 
 @section('content')
 
-<div class="flex justify-between items-center">
+<div class="space-y-6">
 
-    <div>
+    <div class="flex justify-between items-center">
 
-        <h1 class="text-3xl font-bold text-white">
-            Data Mahasiswa
-        </h1>
+        <div>
 
-        <p class="text-textsecondary">
-            Daftar mahasiswa yang telah mendaftar magang.
-        </p>
+            <h1 class="text-3xl font-bold text-white">
+
+                Data Mahasiswa
+
+            </h1>
+
+            <p class="text-textsecondary">
+
+                Daftar mahasiswa yang telah mendaftar magang.
+
+            </p>
+
+        </div>
+
+        <a href="{{ route('mahasiswa.create') }}">
+
+            <x-ui.button>
+
+                + Tambah Mahasiswa
+
+            </x-ui.button>
+
+        </a>
 
     </div>
 
-    <a href="{{ route('mahasiswa.create') }}">
+    @if(session('success'))
 
-        <x-ui.button>
-            + Tambah Mahasiswa
-        </x-ui.button>
+        <div class="bg-green-500/20 border border-green-500 rounded-xl p-4 text-green-300">
 
-    </a>
+            {{ session('success') }}
 
-</div>
+        </div>
+
+    @endif
 
     <form method="GET" action="{{ route('mahasiswa.index') }}">
 
@@ -43,118 +61,152 @@
 
     </form>
 
-    
+    <x-table.table>
 
-  <x-table.table>
+        <x-table.thead>
 
-    <x-table.thead>
+            <tr>
 
-        <tr>
+                <x-table.th>No</x-table.th>
 
-            <x-table.th>No</x-table.th>
-            <x-table.th>Nama</x-table.th>
-            <x-table.th>NIM</x-table.th>
-            <x-table.th>Universitas</x-table.th>
-            <x-table.th>Program Studi</x-table.th>
-            <x-table.th>Semester</x-table.th>
-            <x-table.th>Status</x-table.th>
-            <x-table.th>Aksi</x-table.th>
+                <x-table.th>Nama</x-table.th>
 
-        </tr>
+                <x-table.th>NIM</x-table.th>
 
-    </x-table.thead>
+                <x-table.th>Universitas</x-table.th>
 
-    <x-table.tbody>
+                <x-table.th>Program Studi</x-table.th>
 
-        @forelse($mahasiswas as $mhs)
+                <x-table.th>Status</x-table.th>
 
-        <tr>
+                <x-table.th>Mentor</x-table.th>
 
-            <x-table.td>
-                {{ $loop->iteration }}
-            </x-table.td>
+                <x-table.th>Aksi</x-table.th>
 
-            <x-table.td>
-                {{ $mhs->user->name }}
-            </x-table.td>
+            </tr>
 
-            <x-table.td>
-                {{ $mhs->nim }}
-            </x-table.td>
+        </x-table.thead>
 
-            <x-table.td>
-                {{ $mhs->universitas }}
-            </x-table.td>
+        <x-table.tbody>
 
-            <x-table.td>
-                {{ $mhs->program_studi }}
-            </x-table.td>
+            @forelse($mahasiswas as $mhs)
 
-            <x-table.td>
-                {{ $mhs->semester }}
-            </x-table.td>
+            <tr>
 
-            <x-table.td>
+                <x-table.td>
 
-                <x-ui.badge>
-                    {{ ucfirst($mhs->status) }}
-                </x-ui.badge>
+                    {{ $loop->iteration }}
 
-            </x-table.td>
+                </x-table.td>
 
-            <x-table.td>
+                <x-table.td>
 
-                <div class="flex gap-2">
+                    {{ $mhs->user->name }}
 
-                    <a
-                        href="{{ route('mahasiswa.edit', $mhs->id) }}"
-                        class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-lg">
+                </x-table.td>
 
-                        Edit
+                <x-table.td>
 
-                    </a>
+                    {{ $mhs->nim }}
 
-                    <form
-                        action="{{ route('mahasiswa.destroy', $mhs->id) }}"
-                        method="POST"
-                        onsubmit="return confirm('Yakin ingin menghapus data mahasiswa ini?')">
+                </x-table.td>
 
-                        @csrf
-                        @method('DELETE')
+                <x-table.td>
 
-                        <button
-                            type="submit"
-                            class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-lg">
+                    {{ $mhs->universitas }}
 
-                            Hapus
+                </x-table.td>
 
-                        </button>
+                <x-table.td>
 
-                    </form>
+                    {{ $mhs->program_studi }}
 
-                </div>
+                </x-table.td>
 
-            </x-table.td>
+                <x-table.td>
 
-        </tr>
+                    <x-ui.badge>
 
-        @empty
+                        {{ ucfirst($mhs->status) }}
 
-        <tr>
+                    </x-ui.badge>
 
-            <td colspan="8" class="text-center py-8">
+                </x-table.td>
 
-                Belum ada mahasiswa yang mendaftar.
+                <x-table.td class="text-center">
 
-            </td>
+    @if($mhs->mentor_id)
 
-        </tr>
+        <span
+            class="inline-block w-4 h-4 rounded-full bg-green-500"
+            title="Mentor sudah ditentukan">
+        </span>
 
-        @endforelse
+    @else
 
-    </x-table.tbody>
+        <span
+            class="inline-block w-4 h-4 rounded-full bg-red-500"
+            title="Belum ada mentor">
+        </span>
 
-</x-table.table>
+    @endif
+
+</x-table.td>
+
+                <x-table.td>
+
+                    <div class="flex gap-2">
+
+                        <a
+                            href="{{ route('mahasiswa.edit',$mhs->id) }}"
+                            class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-lg">
+
+                            Edit
+
+                        </a>
+
+                        <form
+                            action="{{ route('mahasiswa.destroy',$mhs->id) }}"
+                            method="POST"
+                            onsubmit="return confirm('Yakin ingin menghapus data mahasiswa ini?')">
+
+                            @csrf
+                            @method('DELETE')
+
+                            <button
+                                type="submit"
+                                class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-lg">
+
+                                Hapus
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </x-table.td>
+
+            </tr>
+
+            @empty
+
+            <tr>
+
+                <td colspan="8" class="text-center py-8">
+
+                    Belum ada mahasiswa yang mendaftar.
+
+                </td>
+
+            </tr>
+
+            @endforelse
+
+        </x-table.tbody>
+
+    </x-table.table>
+
 </div>
 
 @endsection

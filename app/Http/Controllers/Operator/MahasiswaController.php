@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\PendaftaranMagang;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Mentor;
 use Illuminate\Support\Facades\Hash;
 use App\Models\PeriodeMagang;
+
 
 
 class MahasiswaController extends Controller
@@ -38,43 +40,68 @@ class MahasiswaController extends Controller
 return view('operator.mahasiswa.index', compact('mahasiswas'));
     }
 
-    public function edit($id)
+   public function edit($id)
 {
-    $mhs = PendaftaranMagang::with('user')->findOrFail($id);
+    $mahasiswa = PendaftaranMagang::findOrFail($id);
 
-    return view('operator.mahasiswa.edit', compact('mhs'));
+    $mentors = Mentor::all();
+
+    return view(
+        'operator.mahasiswa.edit',
+        compact('mahasiswa', 'mentors')
+    );
 }
 
 public function update(Request $request, $id)
 {
     $request->validate([
-        'name' => 'required|max:100',
+        'name' => 'required',
         'email' => 'required|email',
-        'nim' => 'required|max:20',
-        'universitas' => 'required|max:150',
-        'program_studi' => 'required|max:100',
-        'semester' => 'required|integer',
-        'no_hp' => 'required|max:20',
+
+        'nim' => 'required',
+        'universitas' => 'required',
+        'program_studi' => 'required',
+        'semester' => 'required|numeric',
+        'no_hp' => 'required',
         'alamat' => 'required',
+
+        'mentor_id' => 'nullable|exists:mentors,id',
+        'divisi' => 'nullable|string|max:100',
+        'tanggal_mulai' => 'nullable|date',
+        'tanggal_selesai' => 'nullable|date',
     ]);
 
-    $mhs = PendaftaranMagang::with('user')->findOrFail($id);
+    $mahasiswa = PendaftaranMagang::with('user')->findOrFail($id);
 
-    // update user
-    $mhs->user->update([
+    /*
+    |-----------------------------------
+    | Update User
+    |-----------------------------------
+    */
+
+    $mahasiswa->user->update([
         'name' => $request->name,
         'email' => $request->email,
-        'no_hp' => $request->no_hp,
     ]);
 
-    // update data pendaftaran
-    $mhs->update([
+    /*
+    |-----------------------------------
+    | Update Data Magang
+    |-----------------------------------
+    */
+
+    $mahasiswa->update([
         'nim' => $request->nim,
         'universitas' => $request->universitas,
         'program_studi' => $request->program_studi,
         'semester' => $request->semester,
         'no_hp' => $request->no_hp,
         'alamat' => $request->alamat,
+
+        'mentor_id' => $request->mentor_id,
+        'divisi' => $request->divisi,
+        'tanggal_mulai' => $request->tanggal_mulai,
+        'tanggal_selesai' => $request->tanggal_selesai,
     ]);
 
     return redirect()

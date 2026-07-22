@@ -90,17 +90,22 @@
     </x-table.td>
 
     <x-table.td>
-        {{ $operator->name }}
+        {{ $operator->user->name }}
     </x-table.td>
 
     <x-table.td>
-        {{ $operator->email }}
+        {{ $operator->user->email }}
     </x-table.td>
 
     <x-table.td>
-        {{ $operator->no_hp ?? '-' }}
+        {{ $operator->user->no_hp }}
     </x-table.td>
 
+    <x-table.td>
+        {{ $operator->nip }}
+
+    </x-table.td>
+    {{ $operator->jabatan }}
     <x-table.td>
 
         <x-ui.badge>
@@ -113,7 +118,9 @@
 
     <x-table.td>
 
-        <div class="flex justify-center gap-2">
+    <div class="flex justify-center gap-2">
+
+        <a href="{{ route('operator.edit', $operator->id) }}">
 
             <x-ui.button color="warning">
 
@@ -121,25 +128,28 @@
 
             </x-ui.button>
 
-    <form action="{{ route('operator.destroy', $operator->id) }}"
-      method="POST"
-      onsubmit="return confirm('Yakin ingin menghapus operator ini?')">
+        </a>
 
-    @csrf
-    @method('DELETE')
+        <form
+action="{{ route('operator.destroy',$operator->id) }}"
+method="POST">
 
-    <button
-        type="submit"
-        class="px-3 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600">
+@csrf
+@method('DELETE')
 
-        Hapus
+<x-ui.button
+type="submit"
+color="danger">
 
-    </button>
+Hapus
+
+</x-ui.button>
+
 </form>
-</form>
-        </div>
 
-    </x-table.td>
+    </div>
+
+</x-table.td>
 
 </tr>
 

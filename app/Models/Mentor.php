@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\PendaftaranMagang;
 
 class Mentor extends Model
 {
@@ -19,10 +20,10 @@ class Mentor extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function mahasiswas()
-    {
-        return $this->hasMany(Mahasiswa::class);
-    }
+   public function pendaftaranMagangs()
+{
+    return $this->hasMany(PendaftaranMagang::class);
+}
 
     public function penilaians()
     {
