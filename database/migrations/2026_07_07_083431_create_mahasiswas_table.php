@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -17,14 +16,14 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
 
             $table->foreignId('mentor_id')
-                  ->nullable()
-                  ->constrained('mentors')
-                  ->nullOnDelete();
+                ->nullable()
+                ->constrained('mentors')
+                ->nullOnDelete();
 
             $table->foreignId('periode_magang_id')
-                  ->nullable()
-                  ->constrained('periode_magangs')
-                  ->nullOnDelete();
+                ->nullable()
+                ->constrained('periode_magangs')
+                ->nullOnDelete();
 
             $table->string('nim')->unique();
             $table->string('universitas');
@@ -35,10 +34,10 @@ return new class extends Migration
 
             $table->timestamps();
             $table->enum('status', [
-            'belum_magang',
-            'aktif',
-            'selesai'
-        ])->default('belum_magang');
+                'belum_magang',
+                'aktif',
+                'selesai'
+            ])->default('belum_magang');
         });
     }
 

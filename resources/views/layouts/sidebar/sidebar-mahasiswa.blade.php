@@ -12,16 +12,14 @@
     {{-- Menu --}}
     <nav class="flex-1 px-4 py-6 space-y-2">
 
-        <a href="{{ route('mahasiswa.dashboard') }}"
-            class="flex items-center px-4 py-3 rounded-xl transition
+        <a href="{{ route('mahasiswa.dashboard') }}" class="flex items-center px-4 py-3 rounded-xl transition
             {{ request()->routeIs('mahasiswa.dashboard') ? 'bg-primary text-white' : 'hover:bg-card' }}">
 
             Dashboard
 
         </a>
 
-        <a href="{{ route('mahasiswa.pendaftaran.index') }}"
-            class="flex items-center px-4 py-3 rounded-xl transition
+        <a href="{{ route('mahasiswa.pendaftaran.index') }}" class="flex items-center px-4 py-3 rounded-xl transition
             {{ request()->routeIs('mahasiswa.pendaftaran.*') ? 'bg-primary text-white' : 'hover:bg-card' }}">
 
             Pendaftaran Magang
@@ -44,8 +42,7 @@
         <form action="{{ route('logout') }}" method="POST" class="mt-4">
             @csrf
 
-            <button
-                class="w-full bg-red-500 hover:bg-red-600 rounded-xl py-2 text-white">
+            <button class="w-full bg-red-500 hover:bg-red-600 rounded-xl py-2 text-white">
 
                 Logout
 

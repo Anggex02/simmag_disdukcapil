@@ -8,254 +8,227 @@
 
 @section('content')
 
-<div class="space-y-6">
+    <div class="space-y-6">
 
-    <div>
-        <h1 class="text-3xl font-bold text-white">
-            Pendaftaran Magang
-        </h1>
+        <div>
+            <h1 class="text-3xl font-bold text-white">
+                Pendaftaran Magang
+            </h1>
 
-        <p class="text-textsecondary mt-2">
-            Lengkapi seluruh data untuk mendaftar program magang Disdukcapil.
-        </p>
-    </div>
-
-    @if(session('success'))
-        <div class="bg-green-500/20 border border-green-500 rounded-xl p-4 text-green-300">
-            {{ session('success') }}
+            <p class="text-textsecondary mt-2">
+                Lengkapi seluruh data untuk mendaftar program magang Disdukcapil.
+            </p>
         </div>
-    @endif
 
-    @if(session('error'))
-        <div class="bg-red-500/20 border border-red-500 rounded-xl p-4 text-red-300">
-            {{ session('error') }}
-        </div>
-    @endif
+        @if(session('success'))
+            <div class="bg-green-500/20 border border-green-500 rounded-xl p-4 text-green-300">
+                {{ session('success') }}
+            </div>
+        @endif
 
-    @if($pendaftaran)
+        @if(session('error'))
+            <div class="bg-red-500/20 border border-red-500 rounded-xl p-4 text-red-300">
+                {{ session('error') }}
+            </div>
+        @endif
 
-        <div class="bg-card border border-bordercolor rounded-2xl p-8">
+        @if($pendaftaran)
 
-            <h2 class="text-2xl font-semibold mb-4">
-                Anda Sudah Mendaftar
-            </h2>
+            <div class="bg-card border border-bordercolor rounded-2xl p-8">
 
-            <div class="space-y-4">
+                <h2 class="text-2xl font-semibold mb-4">
+                    Anda Sudah Mendaftar
+                </h2>
 
-                <div>
-                    <p class="text-textsecondary">Status</p>
-
-                    <span class="px-4 py-2 rounded-xl bg-primary text-white">
-
-                        {{ ucfirst($pendaftaran->status) }}
-
-                    </span>
-                </div>
-
-                @if($pendaftaran->catatan_operator)
+                <div class="space-y-4">
 
                     <div>
+                        <p class="text-textsecondary">Status</p>
 
-                        <p class="text-textsecondary">
+                        <span class="px-4 py-2 rounded-xl bg-primary text-white">
 
-                            Catatan Operator
+                            {{ ucfirst($pendaftaran->status) }}
 
-                        </p>
+                        </span>
+                    </div>
 
-                        <div class="mt-2 bg-background rounded-xl p-4">
+                    @if($pendaftaran->catatan_operator)
 
-                            {{ $pendaftaran->catatan_operator }}
+                        <div>
+
+                            <p class="text-textsecondary">
+
+                                Catatan Operator
+
+                            </p>
+
+                            <div class="mt-2 bg-background rounded-xl p-4">
+
+                                {{ $pendaftaran->catatan_operator }}
+
+                            </div>
 
                         </div>
 
-                    </div>
+                    @endif
 
-                @endif
+                </div>
 
             </div>
 
-        </div>
+        @else
 
-    @else
+            <form action="{{ route('mahasiswa.pendaftaran.store') }}" method="POST" enctype="multipart/form-data"
+                class="bg-card border border-bordercolor rounded-2xl p-8">
 
-<form
-action="{{ route('mahasiswa.pendaftaran.store') }}"
-method="POST"
-enctype="multipart/form-data"
-class="bg-card border border-bordercolor rounded-2xl p-8">
+                @csrf
 
-@csrf
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
 
-<div>
+                        <label class="block mb-2">
+                            Periode Magang
+                        </label>
 
-<label class="block mb-2">
-Periode Magang
-</label>
+                        <select name="periode_magang_id" class="w-full rounded-xl bg-background border border-bordercolor p-3">
 
-<select
-name="periode_magang_id"
-class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                            @if($periode)
 
-@if($periode)
+                                <option value="{{ $periode->id }}">
+                                    {{ $periode->nama_periode }}
+                                </option>
 
-    <option value="{{ $periode->id }}">
-        {{ $periode->nama_periode }}
-    </option>
+                            @else
 
-@else
+                                <option disabled selected>
+                                    Belum ada periode magang aktif
+                                </option>
 
-    <option disabled selected>
-        Belum ada periode magang aktif
-    </option>
+                            @endif
 
-@endif
+                        </select>
 
-</select>
+                    </div>
 
-</div>
+                    <div>
 
-<div>
+                        <label class="block mb-2">
 
-<label class="block mb-2">
+                            NIM
 
-NIM
+                        </label>
 
-</label>
+                        <input type="text" name="nim" class="w-full rounded-xl bg-background border border-bordercolor p-3">
 
-<input
-type="text"
-name="nim"
-class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                    </div>
 
-</div>
+                    <div>
 
-<div>
+                        <label class="block mb-2">
 
-<label class="block mb-2">
+                            Universitas
 
-Universitas
+                        </label>
 
-</label>
+                        <input type="text" name="universitas"
+                            class="w-full rounded-xl bg-background border border-bordercolor p-3">
 
-<input
-type="text"
-name="universitas"
-class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                    </div>
 
-</div>
+                    <div>
 
-<div>
+                        <label class="block mb-2">
 
-<label class="block mb-2">
+                            Program Studi
 
-Program Studi
+                        </label>
 
-</label>
+                        <input type="text" name="program_studi"
+                            class="w-full rounded-xl bg-background border border-bordercolor p-3">
 
-<input
-type="text"
-name="program_studi"
-class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                    </div>
 
-</div>
+                    <div>
 
-<div>
+                        <label class="block mb-2">
 
-<label class="block mb-2">
+                            Semester
 
-Semester
+                        </label>
 
-</label>
+                        <input type="number" name="semester"
+                            class="w-full rounded-xl bg-background border border-bordercolor p-3">
 
-<input
-type="number"
-name="semester"
-class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                    </div>
 
-</div>
+                    <div>
 
-<div>
+                        <label class="block mb-2">
 
-<label class="block mb-2">
+                            Nomor HP
 
-Nomor HP
+                        </label>
 
-</label>
+                        <input type="text" name="no_hp" class="w-full rounded-xl bg-background border border-bordercolor p-3">
 
-<input
-type="text"
-name="no_hp"
-class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                    </div>
 
-</div>
+                    <div class="md:col-span-2">
 
-<div class="md:col-span-2">
+                        <label class="block mb-2">
 
-<label class="block mb-2">
+                            Alamat
 
-Alamat
+                        </label>
 
-</label>
+                        <textarea name="alamat" rows="3"
+                            class="w-full rounded-xl bg-background border border-bordercolor p-3"></textarea>
 
-<textarea
-name="alamat"
-rows="3"
-class="w-full rounded-xl bg-background border border-bordercolor p-3"></textarea>
+                    </div>
 
-</div>
+                    <div>
 
-<div>
+                        <label class="block mb-2">
 
-<label class="block mb-2">
+                            Upload CV (PDF)
 
-Upload CV (PDF)
+                        </label>
 
-</label>
+                        <input type="file" name="cv" accept=".pdf"
+                            class="w-full rounded-xl bg-background border border-bordercolor p-3">
 
-<input
-type="file"
-name="cv"
-accept=".pdf"
-class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                    </div>
 
-</div>
+                    <div>
 
-<div>
+                        <label class="block mb-2">
 
-<label class="block mb-2">
+                            Surat Pengantar (PDF)
 
-Surat Pengantar (PDF)
+                        </label>
 
-</label>
+                        <input type="file" name="surat_pengantar" accept=".pdf"
+                            class="w-full rounded-xl bg-background border border-bordercolor p-3">
 
-<input
-type="file"
-name="surat_pengantar"
-accept=".pdf"
-class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                    </div>
 
-</div>
+                </div>
 
-</div>
+                <div class="mt-8 flex justify-end">
 
-<div class="mt-8 flex justify-end">
+                    <button type="submit" class="bg-primary hover:opacity-90 px-5 py-3 rounded-xl text-white font-semibold">
 
-<button
-    type="submit"
-    class="bg-primary hover:opacity-90 px-5 py-3 rounded-xl text-white font-semibold">
+                        Kirim Pendaftaran
 
-    Kirim Pendaftaran
+                    </button>
 
-</button>
+                </div>
 
-</div>
+            </form>
 
-</form>
+        @endif
 
-@endif
-
-</div>
+    </div>
 
 @endsection

@@ -14,14 +14,14 @@ class DashboardController extends Controller
 
         $belumValid = PendaftaranMagang::where('status', 'menunggu')->count();
 
-        $sudahValid = PendaftaranMagang::whereIn('status', ['diterima','ditolak'])->count();
+        $sudahValid = PendaftaranMagang::whereIn('status', ['diterima', 'ditolak'])->count();
 
-        $periodeAktif = PeriodeMagang::where('status','aktif')->first();
+        $periodeAktif = PeriodeMagang::where('status', 'aktif')->first();
 
         $aktivitas = PendaftaranMagang::with('user')
-                        ->latest()
-                        ->take(5)
-                        ->get();
+            ->latest()
+            ->take(5)
+            ->get();
 
         return view('operator.dashboard', compact(
             'totalMahasiswa',

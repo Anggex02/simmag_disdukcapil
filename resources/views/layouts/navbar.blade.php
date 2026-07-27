@@ -46,7 +46,7 @@
         <div class="flex items-center gap-3 cursor-pointer">
 
             <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center font-semibold">
-                {{ strtoupper(substr(Auth::user()->name ?? 'U',0,1)) }}
+                {{ strtoupper(substr(Auth::user()->name ?? 'U', 0, 1)) }}
             </div>
 
             <div class="hidden md:block">

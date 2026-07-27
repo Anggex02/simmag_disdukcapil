@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         Schema::create('lamarans', function (Blueprint $table) {
@@ -20,7 +19,7 @@ return new class extends Migration
                 ->constrained('lowongans')
                 ->cascadeOnDelete();
 
-            $table->enum('status',[
+            $table->enum('status', [
                 'pending',
                 'diterima',
                 'ditolak'

@@ -1,169 +1,161 @@
 @extends('layouts.app')
 
-@section('title','Detail Pendaftaran')
+@section('title', 'Detail Pendaftaran')
 
 @section('sidebar')
-@include('layouts.sidebar.sidebar-operator')
+  @include('layouts.sidebar.sidebar-operator')
 @endsection
 
 @section('content')
 
-<div class="space-y-6">
+  <div class="space-y-6">
 
-<h1 class="text-3xl font-bold text-white">
+    <h1 class="text-3xl font-bold text-white">
 
-Detail Pendaftaran
+      Detail Pendaftaran
 
-</h1>
+    </h1>
 
-<x-ui.card>
+    <x-ui.card>
 
-<div class="grid grid-cols-2 gap-6">
+      <div class="grid grid-cols-2 gap-6">
 
-<div>
+        <div>
 
-<strong>Nama</strong>
+          <strong>Nama</strong>
 
-<p>{{ $pendaftaran->user->name }}</p>
+          <p>{{ $pendaftaran->user->name }}</p>
 
-</div>
+        </div>
 
-<div>
+        <div>
 
-<strong>Email</strong>
+          <strong>Email</strong>
 
-<p>{{ $pendaftaran->user->email }}</p>
+          <p>{{ $pendaftaran->user->email }}</p>
 
-</div>
+        </div>
 
-<div>
+        <div>
 
-<strong>NIM</strong>
+          <strong>NIM</strong>
 
-<p>{{ $pendaftaran->nim }}</p>
+          <p>{{ $pendaftaran->nim }}</p>
 
-</div>
+        </div>
 
-<div>
+        <div>
 
-<strong>Universitas</strong>
+          <strong>Universitas</strong>
 
-<p>{{ $pendaftaran->universitas }}</p>
+          <p>{{ $pendaftaran->universitas }}</p>
 
-</div>
+        </div>
 
-<div>
+        <div>
 
-<strong>Program Studi</strong>
+          <strong>Program Studi</strong>
 
-<p>{{ $pendaftaran->program_studi }}</p>
+          <p>{{ $pendaftaran->program_studi }}</p>
 
-</div>
+        </div>
 
-<div>
+        <div>
 
-<strong>Semester</strong>
+          <strong>Semester</strong>
 
-<p>{{ $pendaftaran->semester }}</p>
+          <p>{{ $pendaftaran->semester }}</p>
 
-</div>
+        </div>
 
-<div>
+        <div>
 
-<strong>No HP</strong>
+          <strong>No HP</strong>
 
-<p>{{ $pendaftaran->no_hp }}</p>
+          <p>{{ $pendaftaran->no_hp }}</p>
 
-</div>
+        </div>
 
-<div>
+        <div>
 
-<strong>Status</strong>
+          <strong>Status</strong>
 
-<p>{{ ucfirst($pendaftaran->status) }}</p>
+          <p>{{ ucfirst($pendaftaran->status) }}</p>
 
-</div>
+        </div>
 
-<div class="col-span-2">
+        <div class="col-span-2">
 
-<strong>Alamat</strong>
+          <strong>Alamat</strong>
 
-<p>{{ $pendaftaran->alamat }}</p>
+          <p>{{ $pendaftaran->alamat }}</p>
 
-</div>
+        </div>
 
-<div>
+        <div>
 
-<strong>CV</strong>
+          <strong>CV</strong>
 
-<br>
+          <br>
 
-<a
-href="{{ asset('storage/'.$pendaftaran->cv) }}"
-target="_blank"
-class="text-primary">
+          <a href="{{ asset('storage/' . $pendaftaran->cv) }}" target="_blank" class="text-primary">
 
-Lihat CV
+            Lihat CV
 
-</a>
+          </a>
 
-</div>
+        </div>
 
-<div>
+        <div>
 
-<strong>Surat Pengantar</strong>
+          <strong>Surat Pengantar</strong>
 
-<br>
+          <br>
 
-<a
-href="{{ asset('storage/'.$pendaftaran->surat_pengantar) }}"
-target="_blank"
-class="text-primary">
+          <a href="{{ asset('storage/' . $pendaftaran->surat_pengantar) }}" target="_blank" class="text-primary">
 
-Lihat Surat
+            Lihat Surat
 
-</a>
+          </a>
 
-</div>
+        </div>
 
-</div>
+      </div>
 
-@if($pendaftaran->status == 'menunggu')
+      @if($pendaftaran->status == 'menunggu')
 
-<div class="flex gap-4 mt-8">
+        <div class="flex gap-4 mt-8">
 
-<form action="{{ route('operator.validasi.terima', $pendaftaran->id) }}" method="POST">
+          <form action="{{ route('operator.validasi.terima', $pendaftaran->id) }}" method="POST">
 
-    @csrf
-    @method('PUT')
+            @csrf
+            @method('PUT')
 
-  <x-ui.button type="submit">
+            <x-ui.button type="submit">
 
-Terima
+              Terima
 
-</x-ui.button>
+            </x-ui.button>
 
-</form>
+          </form>
 
-<form action="{{ route('operator.validasi.tolak',$pendaftaran->id) }}"
-method="POST">
+          <form action="{{ route('operator.validasi.tolak', $pendaftaran->id) }}" method="POST">
 
-@csrf
-@method('PUT')
+            @csrf
+            @method('PUT')
 
-<button
-class="px-5 py-3 rounded-xl bg-red-500 text-white">
+            <button class="px-5 py-3 rounded-xl bg-red-500 text-white">
 
-Tolak
+              Tolak
 
-</button>
+            </button>
 
-</form>
+          </form>
 
-</div>
+        </div>
 
-@endif
+      @endif
 
-</x-ui.card>
+    </x-ui.card>
 
 @endsection

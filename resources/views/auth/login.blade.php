@@ -22,53 +22,51 @@
 
     <div class="min-h-screen flex">
 
-       <!-- Left Side -->
-<div class="hidden lg:flex w-1/2 relative overflow-hidden">
+        <!-- Left Side -->
+        <div class="hidden lg:flex w-1/2 relative overflow-hidden">
 
-    <!-- Background Image -->
-    <img
-    src="{{ asset('images/login-bg.jpg') }}"
-    alt="Background SIMMAG"
-    class="absolute inset-0 w-full h-full object-cover object-center">
+            <!-- Background Image -->
+            <img src="{{ asset('images/login-bg.jpg') }}" alt="Background SIMMAG"
+                class="absolute inset-0 w-full h-full object-cover object-center">
 
-    <!-- Overlay -->
-    <div class="absolute inset-0 bg-[#062C30]/80"></div>
+            <!-- Overlay -->
+            <div class="absolute inset-0 bg-[#062C30]/80"></div>
 
-    <!-- Optional Gradient -->
-    <div class="absolute inset-0 bg-gradient-to-br from-[#0A4B52]/80 via-[#0A4B52]/60 to-[#062C30]/90"></div>
+            <!-- Optional Gradient -->
+            <div class="absolute inset-0 bg-gradient-to-br from-[#0A4B52]/80 via-[#0A4B52]/60 to-[#062C30]/90"></div>
 
-    <!-- Content -->
-    <div class="relative z-10 flex flex-col justify-center px-16 text-white">
+            <!-- Content -->
+            <div class="relative z-10 flex flex-col justify-center px-16 text-white">
 
-        <div class="max-w-lg">
+                <div class="max-w-lg">
 
-            <h1 class="text-5xl font-bold leading-tight">
-                SIMMAG
-            </h1>
+                    <h1 class="text-5xl font-bold leading-tight">
+                        SIMMAG
+                    </h1>
 
-            <p class="mt-3 text-cyan-100 text-lg">
-                Sistem Informasi Magang Disdukcapil
-            </p>
+                    <p class="mt-3 text-cyan-100 text-lg">
+                        Sistem Informasi Magang Disdukcapil
+                    </p>
 
-            <div class="mt-10">
+                    <div class="mt-10">
 
-                <h2 class="text-2xl font-semibold">
-                    Selamat Datang 👋
-                </h2>
+                        <h2 class="text-2xl font-semibold">
+                            Selamat Datang 👋
+                        </h2>
 
-                <p class="mt-4 leading-8 text-cyan-100">
-                    Kelola proses magang mahasiswa mulai dari
-                    pendaftaran, validasi, monitoring, hingga
-                    laporan dalam satu sistem terintegrasi.
-                </p>
+                        <p class="mt-4 leading-8 text-cyan-100">
+                            Kelola proses magang mahasiswa mulai dari
+                            pendaftaran, validasi, monitoring, hingga
+                            laporan dalam satu sistem terintegrasi.
+                        </p>
+
+                    </div>
+
+                </div>
 
             </div>
 
         </div>
-
-    </div>
-
-</div>
         <!-- Right Side -->
         <div class="w-full lg:w-1/2 flex justify-center items-center px-6 py-10">
 
@@ -102,77 +100,65 @@
 
                 <form action="{{ route('login.authenticate') }}" method="POST" class="mt-8 space-y-5">
 
-    @csrf
+                    @csrf
 
-    {{-- Error Login --}}
-    @if ($errors->any())
-        <div class="bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-xl">
-            {{ $errors->first() }}
-        </div>
-    @endif
+                    {{-- Error Login --}}
+                    @if ($errors->any())
+                        <div class="bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-xl">
+                            {{ $errors->first() }}
+                        </div>
+                    @endif
 
-    {{-- Email --}}
-    <div>
+                    {{-- Email --}}
+                    <div>
 
-        <label class="block text-sm font-medium text-slate-700 mb-2">
-            Email
-        </label>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">
+                            Email
+                        </label>
 
-        <input
-            type="email"
-            name="email"
-            value="{{ old('email') }}"
-            placeholder="Masukkan email"
-            required
-            class="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-3 transition duration-300 text-black focus:outline-none focus:ring-4 focus:ring-cyan-200 focus:border-[#00B4B6] focus:bg-white">
+                        <input type="email" name="email" value="{{ old('email') }}" placeholder="Masukkan email"
+                            required
+                            class="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-3 transition duration-300 text-black focus:outline-none focus:ring-4 focus:ring-cyan-200 focus:border-[#00B4B6] focus:bg-white">
 
-    </div>
+                    </div>
 
-    {{-- Password --}}
-    <div>
+                    {{-- Password --}}
+                    <div>
 
-        <label class="block text-sm font-medium text-slate-700 mb-2">
-            Password
-        </label>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">
+                            Password
+                        </label>
 
-        <input
-            type="password"
-            name="password"
-            placeholder="Masukkan password"
-            required
-            class="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-3 transition duration-300 text-black focus:outline-none focus:ring-4 focus:ring-cyan-200 focus:border-[#00B4B6] focus:bg-white">
+                        <input type="password" name="password" placeholder="Masukkan password" required
+                            class="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-3 transition duration-300 text-black focus:outline-none focus:ring-4 focus:ring-cyan-200 focus:border-[#00B4B6] focus:bg-white">
 
-    </div>
+                    </div>
 
-    {{-- Remember --}}
-    <div class="flex justify-between items-center">
+                    {{-- Remember --}}
+                    <div class="flex justify-between items-center">
 
-        <label class="flex items-center gap-2 text-sm">
+                        <label class="flex items-center gap-2 text-sm">
 
-            <input
-                type="checkbox"
-                name="remember"
-                class="rounded border-slate-300">
+                            <input type="checkbox" name="remember" class="rounded border-slate-300">
 
-            Ingat Saya
+                            Ingat Saya
 
-        </label>
+                        </label>
 
-        <a href="#" class="text-sm text-[#00B4B6] hover:text-[#00D1D4]">
-            Lupa Password?
-        </a>
+                        <a href="#" class="text-sm text-[#00B4B6] hover:text-[#00D1D4]">
+                            Lupa Password?
+                        </a>
 
-    </div>
+                    </div>
 
-    <button
-        type="submit"
-        class="w-full bg-[#00B4B6] hover:bg-[#00D1D4] text-white py-3 rounded-xl font-semibold shadow-lg transition">
+                    <button type="submit"
+                        class="w-full bg-[#00B4B6] hover:bg-[#00D1D4] text-white py-3 rounded-xl font-semibold shadow-lg transition">
 
-        Login
+                        Login
 
-    </button>
+                    </button>
 
-</form>
+                </form>
 
                 <!-- Divider -->
                 <div class="relative my-6">

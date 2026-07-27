@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         Schema::create('dokumens', function (Blueprint $table) {
@@ -16,7 +15,7 @@ return new class extends Migration
                 ->constrained('mahasiswas')
                 ->cascadeOnDelete();
 
-            $table->enum('jenis',[
+            $table->enum('jenis', [
                 'cv',
                 'surat_pengantar',
                 'ktm',
@@ -25,7 +24,7 @@ return new class extends Migration
 
             $table->string('file');
 
-            $table->enum('status',[
+            $table->enum('status', [
                 'menunggu',
                 'valid',
                 'revisi'

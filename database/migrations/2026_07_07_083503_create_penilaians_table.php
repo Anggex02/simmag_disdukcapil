@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
         Schema::create('penilaians', function (Blueprint $table) {
@@ -38,7 +37,7 @@ return new class extends Migration
 
             $table->integer('etika_kerja');
 
-            $table->decimal('nilai_akhir',5,2);
+            $table->decimal('nilai_akhir', 5, 2);
 
             $table->text('catatan')->nullable();
 

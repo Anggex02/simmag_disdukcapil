@@ -2,7 +2,7 @@
 
 @section('title','Edit Mahasiswa')
 
-@section('sidebar')
+@section('sxidebar')
 @include('layouts.sidebar.sidebar-operator')
 @endsection
 
