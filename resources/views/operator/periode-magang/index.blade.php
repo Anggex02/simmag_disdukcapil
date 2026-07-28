@@ -3,145 +3,178 @@
 @section('title', 'Periode Magang')
 
 @section('sidebar')
-    @include('layouts.sidebar.sidebar-operator')
+@include('layouts.sidebar.sidebar-operator')
 @endsection
 
 @section('content')
 
-    <div class="space-y-6">
+<div class="space-y-6">
 
-        {{-- Header --}}
-        <div class="flex flex-col md:flex-row md:justify-between md:items-center">
+    <div class="flex flex-col md:flex-row md:justify-between md:items-center">
 
-            <div>
+        <div>
 
-                <h1 class="text-3xl font-bold text-white">
-                    Periode Magang
-                </h1>
+            <h1 class="text-3xl font-bold text-white">
+                Periode Magang
+            </h1>
 
-                <p class="text-textsecondary mt-2">
-                    Kelola seluruh periode magang mahasiswa.
-                </p>
-
-            </div>
-
-            <div class="mt-4 md:mt-0">
-
-                <button class="bg-primary hover:opacity-90 transition px-5 py-3 rounded-xl font-semibold shadow-card">
-
-                    + Tambah Periode
-
-                </button>
-
-            </div>
+            <p class="text-textsecondary mt-2">
+                Kelola seluruh periode magang mahasiswa.
+            </p>
 
         </div>
 
-        {{-- Table --}}
-        <div class="bg-card rounded-2xl shadow-card border border-bordercolor overflow-hidden">
+        <div class="mt-4 md:mt-0">
 
-            <div class="overflow-x-auto">
+            <a href="{{ route('periode-magang.create') }}"
+                class="bg-primary hover:opacity-90 transition px-5 py-3 rounded-xl font-semibold shadow-card">
 
-                <table class="w-full">
+                + Tambah Periode
 
-                    <thead class="bg-sidebar">
+            </a>
 
-                        <tr>
+        </div>
 
-                            <th class="text-left px-6 py-4">
-                                No
-                            </th>
+    </div>
 
-                            <th class="text-left px-6 py-4">
-                                Nama Periode
-                            </th>
+    @if(session('success'))
 
-                            <th class="text-left px-6 py-4">
-                                Tanggal Mulai
-                            </th>
+    <div class="bg-green-600 text-white px-4 py-3 rounded-xl">
 
-                            <th class="text-left px-6 py-4">
-                                Tanggal Selesai
-                            </th>
+        {{ session('success') }}
 
-                            <th class="text-left px-6 py-4">
-                                Status
-                            </th>
+    </div>
 
-                            <th class="text-center px-6 py-4">
-                                Aksi
-                            </th>
+    @endif
 
-                        </tr>
+    <div class="bg-card rounded-2xl shadow-card border border-bordercolor overflow-hidden">
 
-                    </thead>
+        <div class="overflow-x-auto">
 
-                    <tbody>
+            <table class="w-full">
 
-                        <tr class="border-t border-bordercolor hover:bg-sidebar/40">
+                <thead class="bg-sidebar">
 
-                            <td class="px-6 py-4">
-                                1
-                            </td>
+                    <tr>
 
-                            <td class="px-6 py-4">
-                                Magang Semester Ganjil 2026
-                            </td>
+                        <th class="text-left px-6 py-4">No</th>
+                        <th class="text-left px-6 py-4">Nama Periode</th>
+                        <th class="text-left px-6 py-4">Tanggal Mulai</th>
+                        <th class="text-left px-6 py-4">Tanggal Selesai</th>
+                        <th class="text-left px-6 py-4">Status</th>
+                        <th class="text-center px-6 py-4">Aksi</th>
 
-                            <td class="px-6 py-4">
-                                01 Juli 2026
-                            </td>
+                    </tr>
 
-                            <td class="px-6 py-4">
-                                31 Desember 2026
-                            </td>
+                </thead>
 
-                            <td class="px-6 py-4">
+                <tbody>
 
-                                <span class="bg-green-600 px-3 py-1 rounded-full text-sm">
+                    @forelse($periodes as $periode)
 
-                                    Aktif
+                    <tr class="border-t border-bordercolor hover:bg-sidebar/40">
 
-                                </span>
+                        <td class="px-6 py-4">
 
-                            </td>
+                            {{ $loop->iteration }}
 
-                            <td class="px-6 py-4">
+                        </td>
 
-                                <div class="flex justify-center gap-2">
+                        <td class="px-6 py-4">
 
-                                    <button class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-sm">
+                            {{ $periode->nama_periode }}
 
-                                        Detail
+                        </td>
 
-                                    </button>
+                        <td class="px-6 py-4">
 
-                                    <button class="bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded-lg text-sm">
+                            {{ \Carbon\Carbon::parse($periode->tanggal_mulai)->format('d M Y') }}
 
-                                        Edit
+                        </td>
 
-                                    </button>
+                        <td class="px-6 py-4">
 
-                                    <button class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-sm">
+                            {{ \Carbon\Carbon::parse($periode->tanggal_selesai)->format('d M Y') }}
+
+                        </td>
+
+                        <td class="px-6 py-4">
+
+                            @if($periode->status=='aktif')
+
+                            <span class="bg-green-600 px-3 py-1 rounded-full text-sm">
+
+                                Aktif
+
+                            </span>
+
+                            @else
+
+                            <span class="bg-red-600 px-3 py-1 rounded-full text-sm">
+
+                                Selesai
+
+                            </span>
+
+                            @endif
+
+                        </td>
+
+                        <td class="px-6 py-4">
+
+                            <div class="flex justify-center gap-2">
+
+                                <a href="{{ route('periode-magang.edit',$periode->id) }}"
+                                    class="bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded-lg text-sm">
+
+                                    Edit
+
+                                </a>
+
+                                <form action="{{ route('periode-magang.destroy',$periode->id) }}"
+                                    method="POST"
+                                    onsubmit="return confirm('Hapus periode ini?')">
+
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button
+                                        class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-sm">
 
                                         Hapus
 
                                     </button>
 
-                                </div>
+                                </form>
 
-                            </td>
+                            </div>
 
-                        </tr>
+                        </td>
 
-                    </tbody>
+                    </tr>
 
-                </table>
+                    @empty
 
-            </div>
+                    <tr>
+
+                        <td colspan="6" class="text-center py-8 text-gray-400">
+
+                            Belum ada data periode magang.
+
+                        </td>
+
+                    </tr>
+
+                    @endforelse
+
+                </tbody>
+
+            </table>
 
         </div>
 
     </div>
+
+</div>
 
 @endsection

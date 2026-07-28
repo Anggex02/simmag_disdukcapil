@@ -8,40 +8,73 @@ use Illuminate\Http\Request;
 
 class PeriodeMagangController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $periode = PeriodeMagang::latest()->get();
+        $search = $request->search;
 
-        return view('Operator.periode-magang.index', compact('periode'));
+        $periodes = PeriodeMagang::when($search, function ($query) use ($search) {
+
+            $query->where('nama_periode', 'like', "%{$search}%");
+
+        })->latest()->get();
+
+        return view('operator.periode-magang.index', compact('periodes'));
     }
 
     public function create()
     {
-        return view('Operator.periode_magang.create');
+        return view('operator.periode-magang.create');
     }
 
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_periode' => 'required|max:100',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'required|date|after:tanggal_mulai',
+            'status' => 'required'
+        ]);
+
+        PeriodeMagang::create($request->all());
+
+        return redirect()
+            ->route('periode-magang.index')
+            ->with('success','Periode magang berhasil ditambahkan.');
     }
 
-    public function show(PeriodeMagang $periodeMagang)
+    public function edit($id)
     {
-        //
+        $periode = PeriodeMagang::findOrFail($id);
+
+        return view('operator.periode-magang.edit', compact('periode'));
     }
 
-    public function edit(PeriodeMagang $periodeMagang)
+    public function update(Request $request, $id)
     {
-        return view('superadmin.periode_magang.edit', compact('periodeMagang'));
+        $request->validate([
+            'nama_periode' => 'required|max:100',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'required|date|after:tanggal_mulai',
+            'status' => 'required'
+        ]);
+
+        $periode = PeriodeMagang::findOrFail($id);
+
+        $periode->update($request->all());
+
+        return redirect()
+            ->route('periode-magang.index')
+            ->with('success','Periode berhasil diperbarui.');
     }
 
-    public function update(Request $request, PeriodeMagang $periodeMagang)
+    public function destroy($id)
     {
-        //
-    }
+        $periode = PeriodeMagang::findOrFail($id);
 
-    public function destroy(PeriodeMagang $periodeMagang)
-    {
-        //
+        $periode->delete();
+
+        return redirect()
+            ->route('periode-magang.index')
+            ->with('success','Periode berhasil dihapus.');
     }
 }
