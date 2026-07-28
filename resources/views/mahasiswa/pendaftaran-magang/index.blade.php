@@ -93,11 +93,15 @@
 
                         <select name="periode_magang_id" class="w-full rounded-xl bg-background border border-bordercolor p-3">
 
-                            @if($periode)
+                            @if($periodes->count())
 
-                                <option value="{{ $periode->id }}">
-                                    {{ $periode->nama_periode }}
-                                </option>
+                                @foreach($periodes as $periode)
+
+                                    <option value="{{ $periode->id }}">
+                                        {{ $periode->nama_periode }}
+                                    </option>
+
+                                @endforeach
 
                             @else
 
