@@ -14,6 +14,7 @@ use App\Http\Controllers\Operator\ValidasiPendaftaranController;
 use App\Http\Controllers\Operator\MahasiswaController;
 
 use App\Http\Controllers\Mentor\DashboardController as MentorDashboard;
+use App\Http\Controllers\Operator\MentorController;
 
 use App\Http\Controllers\Mahasiswa\DashboardController as MahasiswaDashboard;
 use App\Http\Controllers\Mahasiswa\PendaftaranMagangController;
@@ -62,6 +63,8 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
 */
 
 Route::middleware(['auth', 'role:operator'])->group(function () {
+    Route::resource('/operator/mentor', MentorController::class)
+    ->names('mentor');
 
     Route::get('/operator/dashboard', [OperatorDashboard::class, 'index']);
     Route::resource('/operator/periode-magang', PeriodeMagangController::class)
@@ -72,12 +75,23 @@ Route::middleware(['auth', 'role:operator'])->group(function () {
 
     Route::get('/operator/validasi', [ValidasiPendaftaranController::class, 'index'])
         ->name('operator.validasi');
+
     Route::get('/operator/validasi/{id}', [ValidasiPendaftaranController::class, 'show'])
         ->name('operator.validasi.show');
+
     Route::put('/operator/validasi/{id}/terima', [ValidasiPendaftaranController::class, 'terima'])
         ->name('operator.validasi.terima');
+
     Route::put('/operator/validasi/{id}/tolak', [ValidasiPendaftaranController::class, 'tolak'])
         ->name('operator.validasi.tolak');
+
+    Route::get('/operator/mahasiswa/{id}/mentor',[MahasiswaController::class, 'mentor'])
+        ->name('mahasiswa.mentor');
+        
+    Route::put('/operator/mahasiswa/{id}/mentor',[MahasiswaController::class, 'updateMentor'])
+    ->name('mahasiswa.updateMentor');
+    
+
 
 
 

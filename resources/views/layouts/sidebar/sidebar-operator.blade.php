@@ -24,21 +24,28 @@
         </p>
 
         <a href="{{ route('mahasiswa.index') }}" class="flex items-center px-4 py-3 rounded-xl transition
-            {{ request()->routeIs('mahasiswa.*') ? 'bg-primary text-white' : 'hover:bg-card' }}">
+{{ request()->routeIs('mahasiswa.*') ? 'bg-primary text-white' : 'hover:bg-card' }}">
 
             Data Mahasiswa
 
         </a>
 
+        <a href="{{ route('mentor.index') }}" class="flex items-center px-4 py-3 rounded-xl transition
+{{ request()->routeIs('mentor.*') ? 'bg-primary text-white' : 'hover:bg-card' }}">
+
+            Data Mentor
+
+        </a>
+
         <a href="{{ route('periode-magang.index') }}" class="flex items-center px-4 py-3 rounded-xl transition
-            {{ request()->routeIs('periode-magang.*') ? 'bg-primary text-white' : 'hover:bg-card' }}">
+{{ request()->routeIs('periode-magang.*') ? 'bg-primary text-white' : 'hover:bg-card' }}">
 
             Periode Magang
 
         </a>
 
         <a href="{{ route('operator.validasi') }}" class="flex items-center px-4 py-3 rounded-xl transition
-            {{ request()->routeIs('operator.validasi') ? 'bg-primary text-white' : 'hover:bg-card' }}">
+{{ request()->routeIs('operator.validasi*') ? 'bg-primary text-white' : 'hover:bg-card' }}">
 
             Validasi Berkas
 

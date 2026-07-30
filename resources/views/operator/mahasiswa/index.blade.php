@@ -116,7 +116,7 @@
 
                         <x-table.td>
 
-                            {{ $mhs->program_studi }}
+                            {{ $mhs->jurusan }}
 
                         </x-table.td>
 
@@ -132,38 +132,52 @@
 
                         <x-table.td class="text-center">
 
-                            @if($mhs->mentor_id)
+                            @if($mhs->mentor)
 
-                                <span class="inline-block w-4 h-4 rounded-full bg-green-500" title="Mentor sudah ditentukan">
+                                <span class="text-green-400 font-medium">
+                                    {{ $mhs->mentor->nama }}
                                 </span>
 
                             @else
 
-                                <span class="inline-block w-4 h-4 rounded-full bg-red-500" title="Belum ada mentor">
+                                <span class="text-red-400">
+                                    Belum Ada
                                 </span>
 
                             @endif
+
 
                         </x-table.td>
 
                         <x-table.td>
 
-                            <div class="flex gap-2">
+                            <div class="flex items-center justify-center gap-2">
 
+                                {{-- Assign / Ubah Mentor --}}
+                                <a href="{{ route('mahasiswa.mentor', $mhs->id) }}"
+                                    class="bg-blue-600 hover:bg-blue-700 w-28 text-center text-white py-2 rounded-lg text-sm font-medium transition">
+
+                                    {{ $mhs->mentor ? 'Ubah Mentor' : 'Mentor' }}
+
+                                </a>
+
+                                {{-- Edit --}}
                                 <a href="{{ route('mahasiswa.edit', $mhs->id) }}"
-                                    class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-lg">
+                                    class="bg-yellow-500 hover:bg-yellow-600 w-20 text-center text-white py-2 rounded-lg text-sm font-medium transition">
 
                                     Edit
 
                                 </a>
 
+                                {{-- Hapus --}}
                                 <form action="{{ route('mahasiswa.destroy', $mhs->id) }}" method="POST"
                                     onsubmit="return confirm('Yakin ingin menghapus data mahasiswa ini?')">
 
                                     @csrf
                                     @method('DELETE')
 
-                                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-lg">
+                                    <button type="submit"
+                                        class="bg-red-600 hover:bg-red-700 w-20 py-2 rounded-lg text-white text-sm font-medium transition">
 
                                         Hapus
 

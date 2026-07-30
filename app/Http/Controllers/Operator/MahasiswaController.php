@@ -169,4 +169,38 @@ class MahasiswaController extends Controller
         return redirect()->route('mahasiswa.index')
             ->with('success', 'Mahasiswa berhasil ditambahkan.');
     }
+    public function mentor($id)
+    {
+        $mahasiswa = Mahasiswa::with('mentor')->findOrFail($id);
+
+        $mentors = Mentor::all();
+
+        return view(
+            'operator.mahasiswa.mentor',
+            compact(
+                'mahasiswa',
+                'mentors'
+            )
+        );
+    }
+
+    public function updateMentor(Request $request, $id)
+    {
+        $request->validate([
+            'mentor_id' => 'required|exists:mentors,id'
+        ]);
+
+        $mahasiswa = Mahasiswa::findOrFail($id);
+
+        $mahasiswa->update([
+            'mentor_id' => $request->mentor_id
+        ]);
+
+        return redirect()
+            ->route('mahasiswa.index')
+            ->with(
+                'success',
+                'Mentor berhasil ditentukan.'
+            );
+    }
 }

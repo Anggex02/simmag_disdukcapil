@@ -3,14 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\PendaftaranMagang;
 
 class Mentor extends Model
 {
     protected $fillable = [
         'user_id',
-        'nip',
         'nama',
+        'nip',
         'jabatan',
         'no_hp'
     ];
@@ -20,10 +19,10 @@ class Mentor extends Model
         return $this->belongsTo(User::class);
     }
 
-   public function pendaftaranMagangs()
-{
-    return $this->hasMany(PendaftaranMagang::class);
-}
+    public function mahasiswas()
+    {
+        return $this->hasMany(Mahasiswa::class);
+    }
 
     public function penilaians()
     {

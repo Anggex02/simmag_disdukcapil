@@ -62,7 +62,7 @@ class ValidasiPendaftaranController extends Controller
 
         if (!$cek) {
 
-            $mahasiswa = Mahasiswa::create([
+            Mahasiswa::create([
                 'user_id' => $pendaftaran->user_id,
                 'mentor_id' => $pendaftaran->mentor_id,
                 'periode_magang_id' => $pendaftaran->periode_magang_id,
@@ -74,7 +74,6 @@ class ValidasiPendaftaranController extends Controller
                 'status' => 'aktif',
             ]);
 
-            dd($mahasiswa);
         }
 
         return back()->with('success', 'Mahasiswa berhasil diterima.');
