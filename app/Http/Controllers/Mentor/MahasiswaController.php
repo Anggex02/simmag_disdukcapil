@@ -7,35 +7,44 @@ use App\Models\Mahasiswa;
 
 class MahasiswaController extends Controller
 {
+    /**
+     * Daftar mahasiswa bimbingan
+     */
     public function index()
     {
-        // sementara
-        $mentorId = 1;
+        /*
+        |--------------------------------------------------------------------------
+        | Sementara tampilkan semua mahasiswa.
+        | Nanti jika tabel mentors sudah terisi,
+        | tinggal tambahkan where('mentor_id', ...)
+        |--------------------------------------------------------------------------
+        */
 
-        $mahasiswas = Mahasiswa::with('user')
-            ->where('mentor_id', $mentorId)
-            ->get();
+        $mahasiswas = Mahasiswa::with([
+            'user',
+            'mentor',
+            'periodeMagang'
+        ])
+        ->latest()
+        ->get();
 
-        return view(
-            'mentor.mahasiswa.index',
-            compact('mahasiswas')
-        );
+        return view('mentor.mahasiswa.index', compact('mahasiswas'));
     }
 
+    /**
+     * Detail mahasiswa
+     */
     public function show($id)
     {
-        $mentorId = 1;
-
         $mahasiswa = Mahasiswa::with([
             'user',
+            'mentor',
+            'periodeMagang',
             'logbooks'
         ])
-        ->where('mentor_id',$mentorId)
+        ->withCount('logbooks')
         ->findOrFail($id);
 
-        return view(
-            'mentor.mahasiswa.detail',
-            compact('mahasiswa')
-        );
+        return view('mentor.mahasiswa.detail', compact('mahasiswa'));
     }
 }

@@ -1,155 +1,186 @@
 @extends('layouts.app')
 
-@section('title','Detail Mahasiswa')
+@section('title', 'Detail Mahasiswa')
 
 @section('sidebar')
-@include('layouts.sidebar.sidebar-mentor')
+    @include('layouts.sidebar.sidebar-mentor')
 @endsection
 
 @section('content')
 
 <div class="space-y-6">
 
-    <x-ui.card>
+    <div>
 
-        <h1 class="text-2xl font-bold mb-6">
+        <h1 class="text-3xl font-bold text-white">
 
             Detail Mahasiswa
 
         </h1>
 
-        <div class="grid grid-cols-2 gap-6">
+        <p class="text-textsecondary mt-2">
+
+            Informasi lengkap mahasiswa bimbingan.
+
+        </p>
+
+    </div>
+
+    <x-ui.card>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
             <div>
+                <label class="text-textsecondary">Nama</label>
 
-                <p class="text-textsecondary">Nama</p>
-
-                <h2 class="font-semibold">
+                <div class="mt-2 text-lg font-semibold text-white">
 
                     {{ $mahasiswa->user->name }}
 
-                </h2>
-
+                </div>
             </div>
 
             <div>
+                <label class="text-textsecondary">Email</label>
 
-                <p class="text-textsecondary">Email</p>
-
-                <h2 class="font-semibold">
+                <div class="mt-2">
 
                     {{ $mahasiswa->user->email }}
 
-                </h2>
-
+                </div>
             </div>
 
             <div>
+                <label class="text-textsecondary">NIM</label>
 
-                <p class="text-textsecondary">NIM</p>
-
-                <h2 class="font-semibold">
+                <div class="mt-2">
 
                     {{ $mahasiswa->nim }}
 
-                </h2>
-
+                </div>
             </div>
 
             <div>
+                <label class="text-textsecondary">Universitas</label>
 
-                <p class="text-textsecondary">Universitas</p>
-
-                <h2 class="font-semibold">
+                <div class="mt-2">
 
                     {{ $mahasiswa->universitas }}
 
-                </h2>
-
+                </div>
             </div>
 
             <div>
+                <label class="text-textsecondary">Program Studi</label>
 
-                <p class="text-textsecondary">Jurusan</p>
-
-                <h2 class="font-semibold">
+                <div class="mt-2">
 
                     {{ $mahasiswa->jurusan }}
 
-                </h2>
-
+                </div>
             </div>
 
             <div>
+                <label class="text-textsecondary">No HP</label>
 
-                <p class="text-textsecondary">No HP</p>
-
-                <h2 class="font-semibold">
+                <div class="mt-2">
 
                     {{ $mahasiswa->no_hp }}
 
-                </h2>
-
+                </div>
             </div>
 
-            <div class="col-span-2">
+            <div class="md:col-span-2">
+                <label class="text-textsecondary">Alamat</label>
 
-                <p class="text-textsecondary">
-
-                    Alamat
-
-                </p>
-
-                <h2 class="font-semibold">
+                <div class="mt-2">
 
                     {{ $mahasiswa->alamat }}
 
-                </h2>
-
+                </div>
             </div>
 
             <div>
+                <label class="text-textsecondary">Mentor</label>
 
-                <p class="text-textsecondary">
+                <div class="mt-2">
 
-                    Status
+                    {{ optional($mahasiswa->mentor)->nama ?? '-' }}
 
-                </p>
-
-                <span class="px-3 py-1 rounded-lg bg-green-600 text-white">
-
-                    {{ $mahasiswa->status }}
-
-                </span>
-
+                </div>
             </div>
 
             <div>
+                <label class="text-textsecondary">Periode Magang</label>
 
-                <p class="text-textsecondary">
+                <div class="mt-2">
 
-                    Total Logbook
+                    {{ optional($mahasiswa->periodeMagang)->nama ?? '-' }}
 
-                </p>
-
-                <h2 class="font-semibold">
-
-                    {{ $mahasiswa->logbooks->count() }}
-
-                </h2>
-
+                </div>
             </div>
 
         </div>
 
     </x-ui.card>
 
-    <a href="{{ route('mentor.logbook.show',$mahasiswa->id) }}"
-    class="px-5 py-3 bg-primary rounded-xl text-white">
+    <div class="grid md:grid-cols-3 gap-6">
 
-        Lihat Logbook
+        <x-ui.card>
 
-    </a>
+            <p class="text-textsecondary">
+
+                Total Logbook
+
+            </p>
+
+            <h2 class="text-4xl font-bold mt-3">
+
+                {{ $mahasiswa->logbooks_count }}
+
+            </h2>
+
+        </x-ui.card>
+
+        <x-ui.card>
+
+            <p class="text-textsecondary">
+
+                Status
+
+            </p>
+
+            <h2 class="text-xl font-bold mt-3">
+
+                {{ ucfirst(str_replace('_',' ',$mahasiswa->status)) }}
+
+            </h2>
+
+        </x-ui.card>
+
+        <x-ui.card>
+
+            <p class="text-textsecondary">
+
+                Aksi Cepat
+
+            </p>
+
+            <div class="mt-4">
+
+                <a
+                    href="{{ route('mentor.logbook.detail',$mahasiswa->id) }}"
+                    class="inline-block bg-primary hover:opacity-90 text-white px-4 py-2 rounded-lg">
+
+                    Lihat Logbook
+
+                </a>
+
+            </div>
+
+        </x-ui.card>
+
+    </div>
 
 </div>
 

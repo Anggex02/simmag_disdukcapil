@@ -11,30 +11,34 @@
     <div class="space-y-6">
 
         <div>
+
             <h1 class="text-3xl font-bold text-white">
+
                 Mahasiswa Bimbingan
+
             </h1>
 
             <p class="text-textsecondary mt-2">
-                Daftar mahasiswa yang sedang berada di bawah bimbingan Anda.
+
+                Daftar mahasiswa yang berada di bawah bimbingan Anda.
+
             </p>
+
         </div>
 
-        {{-- Search & Filter --}}
         <x-ui.card>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
                 <input type="text" placeholder="Cari mahasiswa..."
-                    class="w-full bg-background border border-border rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary">
+                    class="w-full bg-background border border-border rounded-lg px-4 py-3 text-white">
 
-                <select
-                    class="w-full bg-background border border-border rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary">
+                <select class="w-full bg-background border border-border rounded-lg px-4 py-3 text-white">
 
                     <option>Semua Status</option>
                     <option>Aktif</option>
                     <option>Selesai</option>
-                    <option>Nonaktif</option>
+                    <option>Belum Magang</option>
 
                 </select>
 
@@ -42,29 +46,22 @@
 
         </x-ui.card>
 
-        {{-- Table --}}
         <x-ui.card>
 
             <div class="overflow-x-auto">
 
-                <table class="w-full text-left">
+                <table class="w-full">
 
                     <thead>
 
                         <tr class="border-b border-border text-textsecondary">
 
                             <th class="py-3">No</th>
-
                             <th>Nama</th>
-
                             <th>Universitas</th>
-
                             <th>Program Studi</th>
-
                             <th>Periode</th>
-
                             <th>Status</th>
-
                             <th class="text-center">Aksi</th>
 
                         </tr>
@@ -73,58 +70,68 @@
 
                     <tbody class="divide-y divide-border">
 
-                        @forelse($mahasiswas as $index => $mahasiswa)
+                        @forelse($mahasiswas as $mahasiswa)
 
                             <tr>
 
                                 <td class="py-4">
-                                    {{ $index + 1 }}
+
+                                    {{ $loop->iteration }}
+
                                 </td>
 
-                                <td class="font-medium text-white">
+                                <td>
+
                                     {{ $mahasiswa->user->name }}
+
                                 </td>
 
                                 <td>
+
                                     {{ $mahasiswa->universitas }}
+
                                 </td>
 
                                 <td>
+
                                     {{ $mahasiswa->jurusan }}
+
                                 </td>
 
                                 <td>
+
                                     {{ optional($mahasiswa->periodeMagang)->nama ?? '-' }}
+
                                 </td>
 
                                 <td>
 
-                                    @if($mahasiswa->status == 'aktif')
+                                    @php
 
-                                        <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm">
-                                            Aktif
-                                        </span>
+                                        $warna = match ($mahasiswa->status) {
 
-                                    @elseif($mahasiswa->status == 'selesai')
+                                            'aktif' => 'bg-green-500/20 text-green-400',
 
-                                        <span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-sm">
-                                            Selesai
-                                        </span>
+                                            'selesai' => 'bg-blue-500/20 text-blue-400',
 
-                                    @else
+                                            default => 'bg-yellow-500/20 text-yellow-400'
 
-                                        <span class="bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full text-sm">
-                                            {{ ucfirst($mahasiswa->status) }}
-                                        </span>
+                                        };
 
-                                    @endif
+                                    @endphp
+
+                                    <span class="px-3 py-1 rounded-full text-sm {{ $warna }}">
+
+                                        {{ ucfirst(str_replace('_', ' ', $mahasiswa->status)) }}
+
+                                    </span>
 
                                 </td>
 
                                 <td class="text-center">
 
                                     <a href="{{ route('mentor.mahasiswa.detail', $mahasiswa->id) }}"
-                                        class="bg-primary hover:opacity-90 text-white px-4 py-2 rounded-lg">
+                                        class="px-4 py-2 rounded-lg bg-primary text-white hover:opacity-90">
 
                                         Detail
 
@@ -138,9 +145,9 @@
 
                             <tr>
 
-                                <td colspan="7" class="text-center py-6 text-gray-400">
+                                <td colspan="7" class="text-center py-8 text-textsecondary">
 
-                                    Belum ada mahasiswa bimbingan.
+                                    Belum ada mahasiswa.
 
                                 </td>
 

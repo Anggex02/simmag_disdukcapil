@@ -1,26 +1,49 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\RegisterController;
+
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+
+/*
+|--------------------------------------------------------------------------
+| Super Admin
+|--------------------------------------------------------------------------
+*/
 
 use App\Http\Controllers\SuperAdmin\DashboardController as SuperAdminDashboard;
 use App\Http\Controllers\SuperAdmin\OperatorController;
 
+/*
+|--------------------------------------------------------------------------
+| Operator
+|--------------------------------------------------------------------------
+*/
 
 use App\Http\Controllers\Operator\DashboardController as OperatorDashboard;
 use App\Http\Controllers\Operator\PeriodeMagangController;
 use App\Http\Controllers\Operator\ValidasiPendaftaranController;
 use App\Http\Controllers\Operator\MahasiswaController;
+use App\Http\Controllers\Operator\MentorController;
+
+/*
+|--------------------------------------------------------------------------
+| Mentor
+|--------------------------------------------------------------------------
+*/
 
 use App\Http\Controllers\Mentor\DashboardController as MentorDashboard;
-use App\Http\Controllers\Operator\MentorController;
+use App\Http\Controllers\Mentor\MahasiswaController as MentorMahasiswaController;
+use App\Http\Controllers\Mentor\LogbookController;
+
+/*
+|--------------------------------------------------------------------------
+| Mahasiswa
+|--------------------------------------------------------------------------
+*/
 
 use App\Http\Controllers\Mahasiswa\DashboardController as MahasiswaDashboard;
 use App\Http\Controllers\Mahasiswa\PendaftaranMagangController;
-
-use App\Http\Controllers\Mentor\MahasiswaController as MentorMahasiswaController;
-
 
 Route::get('/', function () {
     return redirect('/login');
@@ -38,7 +61,6 @@ Route::post('/login', [LoginController::class, 'authenticate'])->name('login.aut
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
-
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 /*
@@ -52,10 +74,8 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::get('/superadmin/dashboard', [SuperAdminDashboard::class, 'index'])
         ->name('superadmin.dashboard');
 
-
     Route::resource('/superadmin/operator', OperatorController::class)
         ->names('operator');
-
 });
 
 /*
@@ -65,15 +85,18 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
 */
 
 Route::middleware(['auth', 'role:operator'])->group(function () {
-    Route::resource('/operator/mentor', MentorController::class)
-        ->names('mentor');
-
-    Route::get('/operator/dashboard', [OperatorDashboard::class, 'index']);
-    Route::resource('/operator/periode-magang', PeriodeMagangController::class)
-        ->names('periode-magang');
 
     Route::get('/operator/dashboard', [OperatorDashboard::class, 'index'])
         ->name('operator.dashboard');
+
+    Route::resource('/operator/periode-magang', PeriodeMagangController::class)
+        ->names('periode-magang');
+
+    Route::resource('/operator/mentor', MentorController::class)
+        ->names('mentor');
+
+    Route::resource('/operator/mahasiswa', MahasiswaController::class)
+        ->names('mahasiswa');
 
     Route::get('/operator/validasi', [ValidasiPendaftaranController::class, 'index'])
         ->name('operator.validasi');
@@ -92,13 +115,7 @@ Route::middleware(['auth', 'role:operator'])->group(function () {
 
     Route::put('/operator/mahasiswa/{id}/mentor', [MahasiswaController::class, 'updateMentor'])
         ->name('mahasiswa.updateMentor');
-
-
-
-
-
 });
-
 
 /*
 |--------------------------------------------------------------------------
@@ -111,17 +128,47 @@ Route::middleware(['auth', 'role:mentor'])->group(function () {
     Route::get('/mentor/dashboard', [MentorDashboard::class, 'index'])
         ->name('mentor.dashboard');
 
-    Route::view('/mentor/mahasiswa', 'mentor.mahasiswa.index')
+    /*
+    |--------------------------------------------------------------------------
+    | Mahasiswa
+    |--------------------------------------------------------------------------
+    */
+
+    Route::get('/mentor/mahasiswa', [MentorMahasiswaController::class, 'index'])
         ->name('mentor.mahasiswa');
 
-    Route::view('/mentor/mahasiswa/detail', 'mentor.mahasiswa.detail')
+    Route::get('/mentor/mahasiswa/{id}', [MentorMahasiswaController::class, 'show'])
         ->name('mentor.mahasiswa.detail');
 
-    Route::view('/mentor/logbook', 'mentor.logbook.index')
+    /*
+    |--------------------------------------------------------------------------
+    | Logbook
+    |--------------------------------------------------------------------------
+    */
+
+    Route::get('/mentor/logbook', [LogbookController::class, 'index'])
         ->name('mentor.logbook');
 
-    Route::view('/mentor/logbook/detail', 'mentor.logbook.detail')
+    Route::get('/mentor/logbook/{mahasiswa}', [LogbookController::class, 'detail'])
         ->name('mentor.logbook.detail');
+
+    Route::get('/mentor/logbook/{mahasiswa}/{logbook}', [LogbookController::class, 'show'])
+        ->name('mentor.logbook.show');
+
+    Route::get('/mentor/logbook', [LogbookController::class, 'index'])
+        ->name('mentor.logbook');
+
+    Route::get('/mentor/logbook/{id}', [LogbookController::class, 'detail'])
+        ->name('mentor.logbook.detail');
+
+    Route::get('/mentor/logbook/show/{id}', [LogbookController::class, 'show'])
+        ->name('mentor.logbook.show');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Absensi (sementara)
+    |--------------------------------------------------------------------------
+    */
 
     Route::view('/mentor/absensi', 'mentor.absensi.index')
         ->name('mentor.absensi');
@@ -129,19 +176,14 @@ Route::middleware(['auth', 'role:mentor'])->group(function () {
     Route::view('/mentor/absensi/detail', 'mentor.absensi.detail')
         ->name('mentor.absensi.detail');
 
+    /*
+    |--------------------------------------------------------------------------
+    | Pengaturan
+    |--------------------------------------------------------------------------
+    */
+
     Route::view('/mentor/pengaturan', 'mentor.pengaturan.index')
         ->name('mentor.pengaturan');
-
-    Route::get(
-        '/mentor/mahasiswa',
-        [MentorMahasiswaController::class, 'index']
-    )->name('mentor.mahasiswa');
-
-    Route::get(
-        '/mentor/mahasiswa/{id}',
-        [MentorMahasiswaController::class, 'show']
-    )->name('mentor.mahasiswa.detail');
-
 });
 
 /*
@@ -155,10 +197,8 @@ Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
     Route::get('/mahasiswa/dashboard', [MahasiswaDashboard::class, 'index'])
         ->name('mahasiswa.dashboard');
 
-    Route::resource(
-        '/mahasiswa/pendaftaran-magang',
-        PendaftaranMagangController::class
-    )->names('mahasiswa.pendaftaran');
+    Route::resource('/mahasiswa/pendaftaran-magang', PendaftaranMagangController::class)
+        ->names('mahasiswa.pendaftaran');
 
     Route::get('/mahasiswa/logbook', function () {
         return view('mahasiswa.logbook.index');
@@ -171,7 +211,4 @@ Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
     Route::get('/mahasiswa/profil', function () {
         return view('mahasiswa.profil.index');
     })->name('mahasiswa.profil.index');
-
-    Route::resource('/operator/mahasiswa', MahasiswaController::class)
-        ->names('mahasiswa');
 });
