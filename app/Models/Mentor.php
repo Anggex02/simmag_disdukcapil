@@ -20,9 +20,12 @@ class Mentor extends Model
     }
 
     public function mahasiswas()
-    {
-        return $this->hasMany(Mahasiswa::class);
-    }
+{
+    return $this->hasMany(
+        Mahasiswa::class,
+        'mentor_id'
+    );
+}
 
     public function penilaians()
     {

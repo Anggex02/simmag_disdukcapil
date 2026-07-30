@@ -38,7 +38,7 @@
 
                 <h2 class="text-4xl font-bold mt-3">
 
-                    15
+                    {{ $jumlahMahasiswa }}
 
                 </h2>
 
@@ -54,7 +54,7 @@
 
                 <h2 class="text-4xl font-bold mt-3">
 
-                    4
+                    {{ $menungguValidasi }}
 
                 </h2>
 
@@ -70,7 +70,7 @@
 
                 <h2 class="text-4xl font-bold mt-3">
 
-                    11
+                    {{ $logbookDisetujui }}
 
                 </h2>
 

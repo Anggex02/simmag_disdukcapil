@@ -19,6 +19,8 @@ use App\Http\Controllers\Operator\MentorController;
 use App\Http\Controllers\Mahasiswa\DashboardController as MahasiswaDashboard;
 use App\Http\Controllers\Mahasiswa\PendaftaranMagangController;
 
+use App\Http\Controllers\Mentor\MahasiswaController as MentorMahasiswaController;
+
 
 Route::get('/', function () {
     return redirect('/login');
@@ -64,7 +66,7 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
 
 Route::middleware(['auth', 'role:operator'])->group(function () {
     Route::resource('/operator/mentor', MentorController::class)
-    ->names('mentor');
+        ->names('mentor');
 
     Route::get('/operator/dashboard', [OperatorDashboard::class, 'index']);
     Route::resource('/operator/periode-magang', PeriodeMagangController::class)
@@ -85,12 +87,12 @@ Route::middleware(['auth', 'role:operator'])->group(function () {
     Route::put('/operator/validasi/{id}/tolak', [ValidasiPendaftaranController::class, 'tolak'])
         ->name('operator.validasi.tolak');
 
-    Route::get('/operator/mahasiswa/{id}/mentor',[MahasiswaController::class, 'mentor'])
+    Route::get('/operator/mahasiswa/{id}/mentor', [MahasiswaController::class, 'mentor'])
         ->name('mahasiswa.mentor');
-        
-    Route::put('/operator/mahasiswa/{id}/mentor',[MahasiswaController::class, 'updateMentor'])
-    ->name('mahasiswa.updateMentor');
-    
+
+    Route::put('/operator/mahasiswa/{id}/mentor', [MahasiswaController::class, 'updateMentor'])
+        ->name('mahasiswa.updateMentor');
+
 
 
 
@@ -106,7 +108,39 @@ Route::middleware(['auth', 'role:operator'])->group(function () {
 
 Route::middleware(['auth', 'role:mentor'])->group(function () {
 
-    Route::get('/mentor/dashboard', [MentorDashboard::class, 'index']);
+    Route::get('/mentor/dashboard', [MentorDashboard::class, 'index'])
+        ->name('mentor.dashboard');
+
+    Route::view('/mentor/mahasiswa', 'mentor.mahasiswa.index')
+        ->name('mentor.mahasiswa');
+
+    Route::view('/mentor/mahasiswa/detail', 'mentor.mahasiswa.detail')
+        ->name('mentor.mahasiswa.detail');
+
+    Route::view('/mentor/logbook', 'mentor.logbook.index')
+        ->name('mentor.logbook');
+
+    Route::view('/mentor/logbook/detail', 'mentor.logbook.detail')
+        ->name('mentor.logbook.detail');
+
+    Route::view('/mentor/absensi', 'mentor.absensi.index')
+        ->name('mentor.absensi');
+
+    Route::view('/mentor/absensi/detail', 'mentor.absensi.detail')
+        ->name('mentor.absensi.detail');
+
+    Route::view('/mentor/pengaturan', 'mentor.pengaturan.index')
+        ->name('mentor.pengaturan');
+
+    Route::get(
+        '/mentor/mahasiswa',
+        [MentorMahasiswaController::class, 'index']
+    )->name('mentor.mahasiswa');
+
+    Route::get(
+        '/mentor/mahasiswa/{id}',
+        [MentorMahasiswaController::class, 'show']
+    )->name('mentor.mahasiswa.detail');
 
 });
 
