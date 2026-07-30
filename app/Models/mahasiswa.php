@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Absensi;
 
 class Mahasiswa extends Model
 {
@@ -53,4 +54,10 @@ class Mahasiswa extends Model
     {
         return $this->hasOne(Penilaian::class);
     }
+
+    public function absensis()
+    {
+        return $this->hasMany(Absensi::class);
+    }
+
 }

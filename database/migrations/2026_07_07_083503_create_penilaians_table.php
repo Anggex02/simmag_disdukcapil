@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     public function up(): void
     {
         Schema::create('penilaians', function (Blueprint $table) {
@@ -12,36 +13,26 @@ return new class extends Migration {
             $table->id();
 
             $table->foreignId('mahasiswa_id')
-                ->constrained('mahasiswas')
+                ->constrained()
                 ->cascadeOnDelete();
 
             $table->foreignId('mentor_id')
-                ->constrained('mentors')
+                ->constrained()
                 ->cascadeOnDelete();
 
-            $table->foreignId('operator_id')
-                ->constrained('operators')
-                ->cascadeOnDelete();
+            $table->integer('disiplin')->default(0);
 
-            $table->integer('disiplin');
+            $table->integer('kerjasama')->default(0);
 
-            $table->integer('tanggung_jawab');
+            $table->integer('komunikasi')->default(0);
 
-            $table->integer('komunikasi');
+            $table->integer('tanggung_jawab')->default(0);
 
-            $table->integer('kemampuan_teknis');
+            $table->integer('inisiatif')->default(0);
 
-            $table->integer('kerja_sama');
-
-            $table->integer('inisiatif');
-
-            $table->integer('etika_kerja');
-
-            $table->decimal('nilai_akhir', 5, 2);
+            $table->decimal('nilai_akhir',5,2)->default(0);
 
             $table->text('catatan')->nullable();
-
-            $table->text('rekomendasi')->nullable();
 
             $table->timestamps();
 

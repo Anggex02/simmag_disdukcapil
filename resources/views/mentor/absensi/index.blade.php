@@ -13,36 +13,18 @@
     <div>
 
         <h1 class="text-3xl font-bold text-white">
+
             Absensi Mahasiswa
+
         </h1>
 
         <p class="text-textsecondary mt-2">
-            Pilih mahasiswa untuk melihat riwayat kehadiran.
+
+            Pilih mahasiswa untuk melihat riwayat absensi.
+
         </p>
 
     </div>
-
-    <x-ui.card>
-
-        <div class="grid md:grid-cols-2 gap-4">
-
-            <input
-                type="text"
-                placeholder="Cari mahasiswa..."
-                class="w-full bg-background border border-border rounded-lg px-4 py-3 text-white">
-
-            <select
-                class="w-full bg-background border border-border rounded-lg px-4 py-3 text-white">
-
-                <option>Semua Status</option>
-                <option>Aktif</option>
-                <option>Selesai</option>
-
-            </select>
-
-        </div>
-
-    </x-ui.card>
 
     <x-ui.card>
 
@@ -55,9 +37,13 @@
                     <tr class="border-b border-border text-textsecondary">
 
                         <th class="py-3">No</th>
-                        <th>Mahasiswa</th>
+
+                        <th>Nama</th>
+
                         <th>Universitas</th>
-                        <th class="text-center">Total Hadir</th>
+
+                        <th class="text-center">Total Absensi</th>
+
                         <th class="text-center">Aksi</th>
 
                     </tr>
@@ -66,45 +52,61 @@
 
                 <tbody class="divide-y divide-border">
 
-                    <tr>
+                    @forelse($mahasiswas as $mahasiswa)
 
-                        <td class="py-4">1</td>
-                        <td>Ahmad Fauzan</td>
-                        <td>Universitas Negeri Makassar</td>
-                        <td class="text-center">25 Hari</td>
+                        <tr>
 
-                        <td class="text-center">
+                            <td class="py-4">
 
-                            <a href="{{ route('mentor.absensi.detail') }}"
-                                class="bg-primary px-4 py-2 rounded-lg">
+                                {{ $loop->iteration }}
 
-                                Lihat
+                            </td>
 
-                            </a>
+                            <td>
 
-                        </td>
+                                {{ $mahasiswa->user->name }}
 
-                    </tr>
+                            </td>
 
-                    <tr>
+                            <td>
 
-                        <td class="py-4">2</td>
-                        <td>Nabila Putri</td>
-                        <td>Universitas Hasanuddin</td>
-                        <td class="text-center">27 Hari</td>
+                                {{ $mahasiswa->universitas }}
 
-                        <td class="text-center">
+                            </td>
 
-                            <a href="{{ route('mentor.absensi.detail') }}"
-                                class="bg-primary px-4 py-2 rounded-lg">
+                            <td class="text-center">
 
-                                Lihat
+                                {{ $mahasiswa->absensis_count }}
 
-                            </a>
+                            </td>
 
-                        </td>
+                            <td class="text-center">
 
-                    </tr>
+                                <a
+                                    href="{{ route('mentor.absensi.detail',$mahasiswa->id) }}"
+                                    class="bg-primary hover:opacity-90 text-white px-4 py-2 rounded-lg">
+
+                                    Lihat
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                    @empty
+
+                        <tr>
+
+                            <td colspan="5" class="py-8 text-center text-textsecondary">
+
+                                Belum ada mahasiswa.
+
+                            </td>
+
+                        </tr>
+
+                    @endforelse
 
                 </tbody>
 

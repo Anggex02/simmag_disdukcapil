@@ -7,19 +7,25 @@ use Illuminate\Database\Eloquent\Model;
 class Penilaian extends Model
 {
     protected $fillable = [
+
         'mahasiswa_id',
+
         'mentor_id',
-        'operator_id',
+
         'disiplin',
-        'tanggung_jawab',
+
+        'kerjasama',
+
         'komunikasi',
-        'kemampuan_teknis',
-        'kerja_sama',
+
+        'tanggung_jawab',
+
         'inisiatif',
-        'etika_kerja',
+
         'nilai_akhir',
-        'catatan',
-        'rekomendasi'
+
+        'catatan'
+
     ];
 
     public function mahasiswa()
@@ -30,10 +36,5 @@ class Penilaian extends Model
     public function mentor()
     {
         return $this->belongsTo(Mentor::class);
-    }
-
-    public function operator()
-    {
-        return $this->belongsTo(Operator::class);
     }
 }

@@ -35,6 +35,8 @@ use App\Http\Controllers\Operator\MentorController;
 use App\Http\Controllers\Mentor\DashboardController as MentorDashboard;
 use App\Http\Controllers\Mentor\MahasiswaController as MentorMahasiswaController;
 use App\Http\Controllers\Mentor\LogbookController;
+use App\Http\Controllers\Mentor\AbsensiController;
+use App\Http\Controllers\Mentor\PenilaianController;
 
 /*
 |--------------------------------------------------------------------------
@@ -164,16 +166,19 @@ Route::middleware(['auth', 'role:mentor'])->group(function () {
     Route::get('/mentor/logbook/show/{id}', [LogbookController::class, 'show'])
         ->name('mentor.logbook.show');
 
+    Route::put('/mentor/logbook/{id}', [LogbookController::class, 'update'])
+        ->name('mentor.logbook.update');
+
     /*
     |--------------------------------------------------------------------------
-    | Absensi (sementara)
+    | Absensi
     |--------------------------------------------------------------------------
     */
 
-    Route::view('/mentor/absensi', 'mentor.absensi.index')
+    Route::get('/mentor/absensi', [AbsensiController::class, 'index'])
         ->name('mentor.absensi');
 
-    Route::view('/mentor/absensi/detail', 'mentor.absensi.detail')
+    Route::get('/mentor/absensi/{id}', [AbsensiController::class, 'detail'])
         ->name('mentor.absensi.detail');
 
     /*
@@ -184,6 +189,27 @@ Route::middleware(['auth', 'role:mentor'])->group(function () {
 
     Route::view('/mentor/pengaturan', 'mentor.pengaturan.index')
         ->name('mentor.pengaturan');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Penilaian
+    |--------------------------------------------------------------------------
+    */
+
+    Route::get(
+        '/mentor/penilaian',
+        [PenilaianController::class, 'index']
+    )->name('mentor.penilaian');
+
+    Route::get(
+        '/mentor/penilaian/{id}',
+        [PenilaianController::class, 'edit']
+    )->name('mentor.penilaian.edit');
+
+    Route::put(
+        '/mentor/penilaian/{id}',
+        [PenilaianController::class, 'update']
+    )->name('mentor.penilaian.update');
 });
 
 /*
