@@ -12,10 +12,10 @@
         <div class="flex items-center gap-3">
 
             <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center font-bold text-lg text-white">
-                <img src="{{ asset('images/logo.png') }}">
+                <img src="{{ asset('images/simmag_logo.png') }}">
             </div>
 
-            <div>
+            <div>   
                 <h1 class="text-lg font-semibold">
                     SIMMAG
                 </h1>
