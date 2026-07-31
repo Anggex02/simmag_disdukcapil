@@ -13,130 +13,123 @@
     <div>
 
         <h1 class="text-3xl font-bold text-white">
-
             Logbook Mahasiswa
-
         </h1>
 
-        <p class="text-textsecondary mt-2">
-
-            Pilih mahasiswa untuk melihat logbook harian.
-
+        <p class="text-textsecondary">
+            Daftar logbook mahasiswa bimbingan.
         </p>
 
     </div>
 
-    <x-ui.card>
+    {{-- Search --}}
+    <div class="bg-card border border-bordercolor rounded-2xl p-6">
 
-        <div class="grid md:grid-cols-2 gap-4">
+        <input
+            type="text"
+            placeholder="Cari mahasiswa..."
+            class="w-full rounded-xl bg-background border border-bordercolor px-4 py-3 text-white">
 
-            <input
-                type="text"
-                placeholder="Cari mahasiswa..."
-                class="w-full bg-background border border-border rounded-lg px-4 py-3 text-white">
+    </div>
 
-            <select
-                class="w-full bg-background border border-border rounded-lg px-4 py-3 text-white">
+    {{-- Table --}}
+    <div class="bg-card border border-bordercolor rounded-2xl overflow-hidden">
 
-                <option>Semua Status</option>
-                <option>Aktif</option>
-                <option>Selesai</option>
+        <table class="w-full">
 
-            </select>
+            <thead>
 
-        </div>
+                <tr class="border-b border-bordercolor text-left">
 
-    </x-ui.card>
+                    <th class="px-8 py-5">No</th>
 
-    <x-ui.card>
+                    <th>Nama</th>
 
-        <div class="overflow-x-auto">
+                    <th>NIM</th>
 
-            <table class="w-full">
+                    <th>Universitas</th>
 
-                <thead>
+                    <th class="text-center">Jumlah Logbook</th>
 
-                    <tr class="border-b border-border text-textsecondary">
+                    <th class="text-right pr-8">Aksi</th>
 
-                        <th class="py-3 text-left">No</th>
+                </tr>
 
-                        <th class="text-left">Mahasiswa</th>
+            </thead>
 
-                        <th class="text-left">Universitas</th>
+            <tbody>
 
-                        <th class="text-center">Jumlah Logbook</th>
+                @forelse($mahasiswas as $mahasiswa)
 
-                        <th class="text-center">Aksi</th>
+                    <tr class="border-b border-bordercolor last:border-b-0 hover:bg-background/30 transition">
 
-                    </tr>
+                        <td class="px-8 py-6">
 
-                </thead>
+                            {{ $loop->iteration }}
 
-                <tbody class="divide-y divide-border">
+                        </td>
 
-                    @forelse($mahasiswas as $mahasiswa)
+                        <td class="font-medium">
 
-                        <tr>
+                            {{ $mahasiswa->user->name }}
 
-                            <td class="py-4">
+                        </td>
 
-                                {{ $loop->iteration }}
+                        <td>
 
-                            </td>
+                            {{ $mahasiswa->nim }}
 
-                            <td>
+                        </td>
 
-                                {{ $mahasiswa->user->name }}
+                        <td>
 
-                            </td>
+                            {{ $mahasiswa->universitas }}
 
-                            <td>
+                        </td>
 
-                                {{ $mahasiswa->universitas }}
+                        <td class="text-center">
 
-                            </td>
-
-                            <td class="text-center">
+                            <span
+                                class="inline-flex items-center justify-center min-w-[42px] h-8 rounded-full bg-primary/20 text-primary font-semibold">
 
                                 {{ $mahasiswa->logbooks_count }}
 
-                            </td>
+                            </span>
 
-                            <td class="text-center">
+                        </td>
 
-                                <a
-                                    href="{{ route('mentor.logbook.detail',$mahasiswa->id) }}"
-                                    class="bg-primary hover:opacity-90 text-white px-4 py-2 rounded-lg">
+                        <td class="text-right pr-8">
 
-                                    Lihat
+                            <a href="{{ route('mentor.logbook.detail',$mahasiswa->id) }}"
+                                class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-lg transition">
 
-                                </a>
+                                Detail
 
-                            </td>
+                            </a>
 
-                        </tr>
+                        </td>
 
-                    @empty
+                    </tr>
 
-                        <tr>
+                @empty
 
-                            <td colspan="5" class="py-8 text-center text-textsecondary">
+                    <tr>
 
-                                Belum ada mahasiswa.
+                        <td colspan="6" class="py-10 text-center text-textsecondary">
 
-                            </td>
+                            Belum ada mahasiswa.
 
-                        </tr>
+                        </td>
 
-                    @endforelse
+                    </tr>
 
-                </tbody>
+                @endforelse
 
-            </table>
+            </tbody>
 
-        </div>
+        </table>
 
-    </x-ui.card>
+    </div>
 
 </div>
 

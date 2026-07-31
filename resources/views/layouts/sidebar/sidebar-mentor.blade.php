@@ -1,100 +1,85 @@
-<div class="flex flex-col h-full">
+<aside class="hidden lg:flex flex-col w-72 bg-sidebar border-r border-bordercolor min-h-screen">
 
     {{-- Logo --}}
-    <div class="px-6 py-6 border-b border-border">
+    <div class="h-20 flex items-center px-6 border-b border-bordercolor">
 
-        <h1 class="text-2xl font-bold text-primary">
-            SIMMAG
+        <h1 class="text-4xl font-bold text-primary">
+            Mentor
         </h1>
-
-        <p class="text-sm text-textsecondary mt-1">
-            Mentor Panel
-        </p>
 
     </div>
 
     {{-- Menu --}}
     <nav class="flex-1 px-4 py-6 space-y-2">
 
-        {{-- Dashboard --}}
         <a href="{{ route('mentor.dashboard') }}"
-            class="flex items-center gap-3 px-4 py-3 rounded-xl transition
-            {{ request()->routeIs('mentor.dashboard') ? 'bg-primary text-white' : 'text-textsecondary hover:bg-card hover:text-white' }}">
-
-            <span class="material-symbols-outlined">
-                dashboard
-            </span>
+            class="flex items-center px-4 py-3 rounded-xl transition
+            {{ request()->routeIs('mentor.dashboard')
+                ? 'bg-primary text-white'
+                : 'hover:bg-card' }}">
 
             Dashboard
 
         </a>
 
-        {{-- Mahasiswa --}}
+        <p class="text-xs uppercase text-textsecondary mt-6 mb-2 px-4">
+
+            Manajemen
+
+        </p>
+
         <a href="{{ route('mentor.mahasiswa') }}"
-            class="flex items-center gap-3 px-4 py-3 rounded-xl transition
-            {{ request()->routeIs('mentor.mahasiswa*') ? 'bg-primary text-white' : 'text-textsecondary hover:bg-card hover:text-white' }}">
+            class="flex items-center px-4 py-3 rounded-xl transition
+            {{ request()->routeIs('mentor.mahasiswa*')
+                ? 'bg-primary text-white'
+                : 'hover:bg-card' }}">
 
-            <span class="material-symbols-outlined">
-                groups
-            </span>
-
-            Mahasiswa
+            Data Mahasiswa
 
         </a>
 
-        {{-- Logbook --}}
-        <a href="{{ route('mentor.logbook') }}"
-            class="flex items-center gap-3 px-4 py-3 rounded-xl transition
-            {{ request()->routeIs('mentor.logbook*') ? 'bg-primary text-white' : 'text-textsecondary hover:bg-card hover:text-white' }}">
-
-            <span class="material-symbols-outlined">
-                menu_book
-            </span>
-
-            Logbook
-
-        </a>
-
-        {{-- Absensi --}}
         <a href="{{ route('mentor.absensi') }}"
-            class="flex items-center gap-3 px-4 py-3 rounded-xl transition
-            {{ request()->routeIs('mentor.absensi*') ? 'bg-primary text-white' : 'text-textsecondary hover:bg-card hover:text-white' }}">
-
-            <span class="material-symbols-outlined">
-                fact_check
-            </span>
+            class="flex items-center px-4 py-3 rounded-xl transition
+            {{ request()->routeIs('mentor.absensi*')
+                ? 'bg-primary text-white'
+                : 'hover:bg-card' }}">
 
             Absensi
 
         </a>
 
-        {{-- Pengaturan --}}
-        <a href="{{ route('mentor.pengaturan') }}"
-            class="flex items-center gap-3 px-4 py-3 rounded-xl transition
-            {{ request()->routeIs('mentor.pengaturan*') ? 'bg-primary text-white' : 'text-textsecondary hover:bg-card hover:text-white' }}">
+        <a href="{{ route('mentor.logbook') }}"
+            class="flex items-center px-4 py-3 rounded-xl transition
+            {{ request()->routeIs('mentor.logbook*')
+                ? 'bg-primary text-white'
+                : 'hover:bg-card' }}">
 
-            <span class="material-symbols-outlined">
-                settings
-            </span>
-
-            Pengaturan
+            Logbook
 
         </a>
 
     </nav>
 
-    {{-- Footer --}}
-    <div class="border-t border-border p-4">
+    {{-- User --}}
+    <div class="border-t border-bordercolor p-5">
 
-        <form method="POST" action="{{ route('logout') }}">
+        <div class="font-semibold text-white">
+
+            {{ Auth::user()->name }}
+
+        </div>
+
+        <div class="text-sm text-textsecondary">
+
+            {{ Auth::user()->email }}
+
+        </div>
+
+        <form action="{{ route('logout') }}" method="POST" class="mt-4">
+
             @csrf
 
-            <button type="submit"
-                class="w-full flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white rounded-xl py-3 transition">
-
-                <span class="material-symbols-outlined">
-                    logout
-                </span>
+            <button class="w-full bg-red-500 hover:bg-red-600 rounded-xl py-2 text-white">
 
                 Logout
 
@@ -104,4 +89,4 @@
 
     </div>
 
-</div>
+</aside>

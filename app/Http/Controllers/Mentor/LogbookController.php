@@ -65,7 +65,7 @@ class LogbookController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|in:disetujui,ditolak',
+            'status' => 'required|in:disetujui,revisi',
             'komentar_mentor' => 'nullable|string'
         ]);
 

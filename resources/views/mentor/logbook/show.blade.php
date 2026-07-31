@@ -49,14 +49,22 @@
                 <div>
 
                     <label class="text-textsecondary">
-
                         Status
-
                     </label>
 
                     <div class="mt-2">
 
-                        {{ ucfirst($logbook->status) }}
+                        @php
+                            $warna = match ($logbook->status) {
+                                'disetujui' => 'bg-green-500/20 text-green-400',
+                                'revisi' => 'bg-yellow-500/20 text-yellow-400',
+                                default => 'bg-blue-500/20 text-blue-400'
+                            };
+                        @endphp
+
+                        <span class="px-3 py-1 rounded-full text-sm {{ $warna }}">
+                            {{ ucfirst($logbook->status) }}
+                        </span>
 
                     </div>
 
@@ -169,14 +177,14 @@
                     <button type="submit" name="status" value="disetujui"
                         class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg">
 
-                        Setujui
+                        ✓ Setujui
 
                     </button>
 
-                    <button type="submit" name="status" value="ditolak"
-                        class="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg">
+                    <button type="submit" name="status" value="revisi"
+                        class="bg-yellow-500 hover:bg-yellow-600 text-white px-5 py-2 rounded-lg">
 
-                        Tolak
+                        ✎ Minta Revisi
 
                     </button>
 

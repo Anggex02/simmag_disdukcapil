@@ -4,7 +4,7 @@
     <div class="h-20 flex items-center px-6 border-b border-bordercolor">
 
         <h1 class="text-4xl font-bold text-primary">
-            SIMMAG
+            WELCOME
         </h1>
 
     </div>
@@ -23,6 +23,20 @@
             {{ request()->routeIs('mahasiswa.pendaftaran.*') ? 'bg-primary text-white' : 'hover:bg-card' }}">
 
             Pendaftaran Magang
+
+        </a>
+
+        <a href="{{ route('mahasiswa.absensi') }}" class="flex items-center px-4 py-3 rounded-xl transition
+             {{ request()->routeIs('mahasiswa.absensi') ? 'bg-primary text-white' : 'hover:bg-card' }}">
+
+            Absensi
+
+        </a>
+
+        <a href="{{ route('mahasiswa.logbook.index') }}" class="flex items-center px-4 py-3 rounded-xl transition
+        {{ request()->routeIs('mahasiswa.logbook*') ? 'bg-primary text-white' : 'hover:bg-card' }}">
+
+            Logbook
 
         </a>
 

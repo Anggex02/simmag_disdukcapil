@@ -35,7 +35,7 @@ use App\Http\Controllers\Operator\MentorController;
 use App\Http\Controllers\Mentor\DashboardController as MentorDashboard;
 use App\Http\Controllers\Mentor\MahasiswaController as MentorMahasiswaController;
 use App\Http\Controllers\Mentor\LogbookController;
-use App\Http\Controllers\Mentor\AbsensiController;
+use App\Http\Controllers\Mentor\AbsensiController as MentorAbsensiController;
 use App\Http\Controllers\Mentor\PenilaianController;
 
 /*
@@ -46,6 +46,10 @@ use App\Http\Controllers\Mentor\PenilaianController;
 
 use App\Http\Controllers\Mahasiswa\DashboardController as MahasiswaDashboard;
 use App\Http\Controllers\Mahasiswa\PendaftaranMagangController;
+use App\Http\Controllers\Mahasiswa\AbsensiController as MahasiswaAbsensiController;
+use App\Http\Controllers\Mahasiswa\LogbookController as MahasiswaLogbookController;
+
+
 
 Route::get('/', function () {
     return redirect('/login');
@@ -117,6 +121,7 @@ Route::middleware(['auth', 'role:operator'])->group(function () {
 
     Route::put('/operator/mahasiswa/{id}/mentor', [MahasiswaController::class, 'updateMentor'])
         ->name('mahasiswa.updateMentor');
+
 });
 
 /*
@@ -151,15 +156,6 @@ Route::middleware(['auth', 'role:mentor'])->group(function () {
     Route::get('/mentor/logbook', [LogbookController::class, 'index'])
         ->name('mentor.logbook');
 
-    Route::get('/mentor/logbook/{mahasiswa}', [LogbookController::class, 'detail'])
-        ->name('mentor.logbook.detail');
-
-    Route::get('/mentor/logbook/{mahasiswa}/{logbook}', [LogbookController::class, 'show'])
-        ->name('mentor.logbook.show');
-
-    Route::get('/mentor/logbook', [LogbookController::class, 'index'])
-        ->name('mentor.logbook');
-
     Route::get('/mentor/logbook/{id}', [LogbookController::class, 'detail'])
         ->name('mentor.logbook.detail');
 
@@ -175,11 +171,26 @@ Route::middleware(['auth', 'role:mentor'])->group(function () {
     |--------------------------------------------------------------------------
     */
 
-    Route::get('/mentor/absensi', [AbsensiController::class, 'index'])
+    Route::get('/mentor/absensi', [MentorAbsensiController::class, 'index'])
         ->name('mentor.absensi');
 
-    Route::get('/mentor/absensi/{id}', [AbsensiController::class, 'detail'])
+    Route::get('/mentor/absensi/{id}', [MentorAbsensiController::class, 'detail'])
         ->name('mentor.absensi.detail');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Penilaian
+    |--------------------------------------------------------------------------
+    */
+
+    Route::get('/mentor/penilaian', [PenilaianController::class, 'index'])
+        ->name('mentor.penilaian');
+
+    Route::get('/mentor/penilaian/{id}', [PenilaianController::class, 'edit'])
+        ->name('mentor.penilaian.edit');
+
+    Route::put('/mentor/penilaian/{id}', [PenilaianController::class, 'update'])
+        ->name('mentor.penilaian.update');
 
     /*
     |--------------------------------------------------------------------------
@@ -190,28 +201,7 @@ Route::middleware(['auth', 'role:mentor'])->group(function () {
     Route::view('/mentor/pengaturan', 'mentor.pengaturan.index')
         ->name('mentor.pengaturan');
 
-    /*
-    |--------------------------------------------------------------------------
-    | Penilaian
-    |--------------------------------------------------------------------------
-    */
-
-    Route::get(
-        '/mentor/penilaian',
-        [PenilaianController::class, 'index']
-    )->name('mentor.penilaian');
-
-    Route::get(
-        '/mentor/penilaian/{id}',
-        [PenilaianController::class, 'edit']
-    )->name('mentor.penilaian.edit');
-
-    Route::put(
-        '/mentor/penilaian/{id}',
-        [PenilaianController::class, 'update']
-    )->name('mentor.penilaian.update');
 });
-
 /*
 |--------------------------------------------------------------------------
 | Mahasiswa
@@ -226,15 +216,55 @@ Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
     Route::resource('/mahasiswa/pendaftaran-magang', PendaftaranMagangController::class)
         ->names('mahasiswa.pendaftaran');
 
-    Route::get('/mahasiswa/logbook', function () {
-        return view('mahasiswa.logbook.index');
-    })->name('mahasiswa.logbook.index');
+    /*
+    |--------------------------------------------------------------------------
+    | Absensi
+    |--------------------------------------------------------------------------
+    */
+
+    Route::get('/mahasiswa/absensi', [MahasiswaAbsensiController::class, 'index'])
+        ->name('mahasiswa.absensi');
+
+    Route::post('/mahasiswa/absensi/masuk', [MahasiswaAbsensiController::class, 'absenMasuk'])
+        ->name('mahasiswa.absensi.masuk');
+
+    Route::post('/mahasiswa/absensi/pulang', [MahasiswaAbsensiController::class, 'absenPulang'])
+        ->name('mahasiswa.absensi.pulang');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Logbook
+    |--------------------------------------------------------------------------
+    */
+
+    Route::get('/mahasiswa/logbook', [MahasiswaLogbookController::class, 'index'])
+        ->name('mahasiswa.logbook.index');
+
+    Route::post('/mahasiswa/logbook', [MahasiswaLogbookController::class, 'store'])
+        ->name('mahasiswa.logbook.store');
+
+    Route::delete('/mahasiswa/logbook/{id}', [MahasiswaLogbookController::class, 'destroy'])
+        ->name('mahasiswa.logbook.destroy');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Pengumuman
+    |--------------------------------------------------------------------------
+    */
 
     Route::get('/mahasiswa/pengumuman', function () {
         return view('mahasiswa.pengumuman.index');
     })->name('mahasiswa.pengumuman.index');
 
+    /*
+    |--------------------------------------------------------------------------
+    | Profil
+    |--------------------------------------------------------------------------
+    */
+
     Route::get('/mahasiswa/profil', function () {
         return view('mahasiswa.profil.index');
     })->name('mahasiswa.profil.index');
+
 });
+

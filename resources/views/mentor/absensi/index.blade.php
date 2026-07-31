@@ -13,108 +13,123 @@
     <div>
 
         <h1 class="text-3xl font-bold text-white">
-
             Absensi Mahasiswa
-
         </h1>
 
-        <p class="text-textsecondary mt-2">
-
-            Pilih mahasiswa untuk melihat riwayat absensi.
-
+        <p class="text-textsecondary">
+            Daftar absensi mahasiswa bimbingan.
         </p>
 
     </div>
 
-    <x-ui.card>
+    {{-- Search --}}
+    <div class="bg-card border border-bordercolor rounded-2xl p-6">
 
-        <div class="overflow-x-auto">
+        <input
+            type="text"
+            placeholder="Cari mahasiswa..."
+            class="w-full rounded-xl bg-background border border-bordercolor px-4 py-3 text-white">
 
-            <table class="w-full">
+    </div>
 
-                <thead>
+    {{-- Table --}}
+    <div class="bg-card border border-bordercolor rounded-2xl overflow-hidden">
 
-                    <tr class="border-b border-border text-textsecondary">
+        <table class="w-full">
 
-                        <th class="py-3">No</th>
+            <thead>
 
-                        <th>Nama</th>
+                <tr class="border-b border-bordercolor text-left">
 
-                        <th>Universitas</th>
+                    <th class="px-8 py-5">No</th>
 
-                        <th class="text-center">Total Absensi</th>
+                    <th>Nama</th>
 
-                        <th class="text-center">Aksi</th>
+                    <th>NIM</th>
 
-                    </tr>
+                    <th>Universitas</th>
 
-                </thead>
+                    <th class="text-center">Total Absensi</th>
 
-                <tbody class="divide-y divide-border">
+                    <th class="text-right pr-8">Aksi</th>
 
-                    @forelse($mahasiswas as $mahasiswa)
+                </tr>
 
-                        <tr>
+            </thead>
 
-                            <td class="py-4">
+            <tbody>
 
-                                {{ $loop->iteration }}
+                @forelse($mahasiswas as $mahasiswa)
 
-                            </td>
+                    <tr class="border-b border-bordercolor last:border-b-0 hover:bg-background/30 transition">
 
-                            <td>
+                        <td class="px-8 py-6">
 
-                                {{ $mahasiswa->user->name }}
+                            {{ $loop->iteration }}
 
-                            </td>
+                        </td>
 
-                            <td>
+                        <td class="font-medium">
 
-                                {{ $mahasiswa->universitas }}
+                            {{ $mahasiswa->user->name }}
 
-                            </td>
+                        </td>
 
-                            <td class="text-center">
+                        <td>
+
+                            {{ $mahasiswa->nim }}
+
+                        </td>
+
+                        <td>
+
+                            {{ $mahasiswa->universitas }}
+
+                        </td>
+
+                        <td class="text-center">
+
+                            <span
+                                class="inline-flex items-center justify-center min-w-[42px] h-8 rounded-full bg-primary/20 text-primary font-semibold">
 
                                 {{ $mahasiswa->absensis_count }}
 
-                            </td>
+                            </span>
 
-                            <td class="text-center">
+                        </td>
 
-                                <a
-                                    href="{{ route('mentor.absensi.detail',$mahasiswa->id) }}"
-                                    class="bg-primary hover:opacity-90 text-white px-4 py-2 rounded-lg">
+                        <td class="text-right pr-8">
 
-                                    Lihat
+                            <a href="{{ route('mentor.absensi.detail', $mahasiswa->id) }}"
+                                class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-lg transition">
 
-                                </a>
+                                Detail
 
-                            </td>
+                            </a>
 
-                        </tr>
+                        </td>
 
-                    @empty
+                    </tr>
 
-                        <tr>
+                @empty
 
-                            <td colspan="5" class="py-8 text-center text-textsecondary">
+                    <tr>
 
-                                Belum ada mahasiswa.
+                        <td colspan="6" class="py-10 text-center text-textsecondary">
 
-                            </td>
+                            Belum ada mahasiswa.
 
-                        </tr>
+                        </td>
 
-                    @endforelse
+                    </tr>
 
-                </tbody>
+                @endforelse
 
-            </table>
+            </tbody>
 
-        </div>
+        </table>
 
-    </x-ui.card>
+    </div>
 
 </div>
 
