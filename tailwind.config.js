@@ -19,15 +19,15 @@ export default {
                 primary: '#14B8A6',
                 'primary-hover': '#0D9488',
 
-                background: '#0F172A',
+                background: '#fefdfd',
 
                 sidebar: '#134E4A',
 
-                card: '#1E293B',
+                card: '#134E4A',
 
-                bordercolor: '#334155',
+                bordercolor: '#010101',
 
-                textsecondary: '#CBD5E1',
+                textsecondary: '#f8f5f5',
 
                 success: '#22C55E',
 
@@ -51,7 +51,7 @@ export default {
 
             boxShadow: {
 
-                card: '0 8px 24px rgba(0,0,0,.25)',
+                card: '0 8px 24px rgb(0, 0, 0)',
 
             }
 

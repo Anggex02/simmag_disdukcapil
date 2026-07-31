@@ -12,11 +12,11 @@
 
     <div>
 
-        <h1 class="text-3xl font-bold text-white">
+        <h1 class="text-3xl font-bold text-primary">
             Logbook Mahasiswa
         </h1>
 
-        <p class="text-textsecondary">
+        <p class="text-primary">
             Daftar logbook mahasiswa bimbingan.
         </p>
 
@@ -28,7 +28,7 @@
         <input
             type="text"
             placeholder="Cari mahasiswa..."
-            class="w-full rounded-xl bg-background border border-bordercolor px-4 py-3 text-white">
+            class="w-full rounded-xl bg-background border border-bordercolor px-4 py-3 text-primary">
 
     </div>
 

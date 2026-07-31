@@ -28,7 +28,7 @@
                     <input
                         type="text"
                         name="name"
-                        class="w-full rounded-xl bg-background border border-bordercolor p-3"
+                        class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary"
                         required>
                 </div>
 
@@ -38,7 +38,7 @@
                     <input
                         type="email"
                         name="email"
-                        class="w-full rounded-xl bg-background border border-bordercolor p-3"
+                        class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary"
                         required>
                 </div>
 
@@ -48,7 +48,7 @@
                     <input
                         type="text"
                         name="no_hp"
-                        class="w-full rounded-xl bg-background border border-bordercolor p-3"
+                        class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary"
                         required>
                 </div>
 
@@ -58,7 +58,7 @@
                     <input
                         type="text"
                         name="nip"
-                        class="w-full rounded-xl bg-background border border-bordercolor p-3"
+                        class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary"
                         required>
                 </div>
 
@@ -68,7 +68,7 @@
                     <input
                         type="text"
                         name="jabatan"
-                        class="w-full rounded-xl bg-background border border-bordercolor p-3"
+                        class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary"
                         required>
                 </div>
 
@@ -78,7 +78,7 @@
                     <input
                         type="password"
                         name="password"
-                        class="w-full rounded-xl bg-background border border-bordercolor p-3"
+                        class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary"
                         required>
                 </div>
 
@@ -88,7 +88,7 @@
                     <input
                         type="password"
                         name="password_confirmation"
-                        class="w-full rounded-xl bg-background border border-bordercolor p-3"
+                        class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary"
                         required>
                 </div>
 

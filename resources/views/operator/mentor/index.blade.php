@@ -15,11 +15,11 @@
 
             <div>
 
-                <h1 class="text-3xl font-bold text-white">
+                <h1 class="text-3xl font-bold text-primary">
                     Data mentor
                 </h1>
 
-                <p class="text-textsecondary mt-2">
+                <p class="text-primary mt-2">
                     Kelola seluruh akun mentor.
                 </p>
 

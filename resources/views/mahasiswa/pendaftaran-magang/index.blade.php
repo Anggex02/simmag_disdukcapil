@@ -11,11 +11,11 @@
     <div class="space-y-6">
 
         <div>
-            <h1 class="text-3xl font-bold text-white">
+            <h1 class="text-3xl font-bold text-primary">
                 Pendaftaran Magang
             </h1>
 
-            <p class="text-textsecondary mt-2">
+            <p class="text-primary mt-2">
                 Lengkapi seluruh data untuk mendaftar program magang Disdukcapil.
             </p>
         </div>
@@ -91,7 +91,7 @@
                             Periode Magang
                         </label>
 
-                        <select name="periode_magang_id" class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                        <select name="periode_magang_id" class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
 
                             @if($periodes->count())
 
@@ -123,7 +123,7 @@
 
                         </label>
 
-                        <input type="text" name="nim" class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                        <input type="text" name="nim" class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
 
                     </div>
 
@@ -136,7 +136,7 @@
                         </label>
 
                         <input type="text" name="universitas"
-                            class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                            class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
 
                     </div>
 
@@ -149,7 +149,7 @@
                         </label>
 
                         <input type="text" name="program_studi"
-                            class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                            class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
 
                     </div>
 
@@ -162,7 +162,7 @@
                         </label>
 
                         <input type="number" name="semester"
-                            class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                            class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
 
                     </div>
 
@@ -174,7 +174,7 @@
 
                         </label>
 
-                        <input type="text" name="no_hp" class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                        <input type="text" name="no_hp" class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
 
                     </div>
 
@@ -187,7 +187,7 @@
                         </label>
 
                         <textarea name="alamat" rows="3"
-                            class="w-full rounded-xl bg-background border border-bordercolor p-3"></textarea>
+                            class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary"></textarea>
 
                     </div>
 
@@ -200,7 +200,7 @@
                         </label>
 
                         <input type="file" name="cv" accept=".pdf"
-                            class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                            class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
 
                     </div>
 
@@ -213,7 +213,7 @@
                         </label>
 
                         <input type="file" name="surat_pengantar" accept=".pdf"
-                            class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                            class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
 
                     </div>
 

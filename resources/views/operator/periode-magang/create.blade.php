@@ -10,7 +10,7 @@
 
 <div class="max-w-3xl mx-auto">
 
-    <h1 class="text-3xl font-bold mb-8">
+    <h1 class="text-3xl font-bold mb-8 text-primary">
 
         Tambah Periode Magang
 
@@ -20,7 +20,7 @@
 
         @csrf
 
-        <div class="space-y-5">
+        <div class="space-y-5 text-primary">
 
             <div>
 

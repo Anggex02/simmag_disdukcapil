@@ -15,11 +15,11 @@
 
             <div>
 
-                <h1 class="text-3xl font-bold text-white">
+                <h1 class="text-3xl font-bold text-primary">
                     Data Operator
                 </h1>
 
-                <p class="text-textsecondary mt-2">
+                <p class="text-primary mt-2">
                     Kelola seluruh akun operator.
                 </p>
 
@@ -40,7 +40,7 @@
         <form method="GET" action="{{ route('operator.index') }}" class="flex gap-4">
 
             <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari Operator..."
-                class="flex-1 rounded-xl bg-background border border-bordercolor px-4 py-3 text-white placeholder:text-gray-500">
+                class="flex-1 rounded-xl bg-background border border-bordercolor px-4 py-3 text-primary placeholder:text-gray-500">
 
             <x-ui.button type="submit">
                 Cari
