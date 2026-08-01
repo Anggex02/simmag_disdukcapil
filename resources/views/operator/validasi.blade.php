@@ -14,13 +14,13 @@
 
             <div>
 
-                <h1 class="text-3xl font-bold text-white">
+                <h1 class="text-3xl font-bold text-primary">
 
                     Validasi Berkas
 
                 </h1>
 
-                <p class="text-textsecondary mt-2">
+                <p class="text-primary mt-2">
 
                     Kelola seluruh pendaftaran mahasiswa.
 
@@ -44,7 +44,7 @@
 
             <input type="text" name="search" value="{{ request('search') }}"
                 placeholder="Cari Nama / Email / NIM / Universitas"
-                class="w-full rounded-xl bg-background border border-bordercolor p-3 text-white">
+                class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
 
         </form>
 

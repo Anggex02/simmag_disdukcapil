@@ -11,11 +11,11 @@
     <div class="space-y-6">
 
         <div>
-            <h1 class="text-3xl font-bold text-white">
+            <h1 class="text-3xl font-bold text-primary">
                 Dashboard Operator
             </h1>
 
-            <p class="text-textsecondary mt-2">
+            <p class="text-primary mt-2">
                 Selamat datang, {{ Auth::user()->name }}.
             </p>
         </div>

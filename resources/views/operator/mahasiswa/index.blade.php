@@ -14,13 +14,13 @@
 
             <div>
 
-                <h1 class="text-3xl font-bold text-white">
+                <h1 class="text-3xl font-bold text-primary">
 
                     Data Mahasiswa
 
                 </h1>
 
-                <p class="text-textsecondary">
+                <p class="text-primary">
 
                     Daftar mahasiswa yang telah mendaftar magang.
 
@@ -54,7 +54,7 @@
 
             <input type="text" name="search" value="{{ request('search') }}"
                 placeholder="Cari Nama / Email / NIM / Universitas"
-                class="w-full rounded-xl bg-background border border-bordercolor p-3 text-white">
+                class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
 
         </form>
 

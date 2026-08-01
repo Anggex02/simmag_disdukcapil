@@ -3,7 +3,7 @@
     {{-- Logo --}}
     <div class="h-20 flex items-center px-6 border-b border-bordercolor">
 
-        <h1 class="text-4xl font-bold text-primary">
+        <h1 class="text-4xl font-bold text-white">
             Super Admin
         </h1>
 

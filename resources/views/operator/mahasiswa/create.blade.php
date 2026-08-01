@@ -12,11 +12,11 @@
 
         <div>
 
-            <h1 class="text-3xl font-bold text-white">
+            <h1 class="text-3xl font-bold text-primary">
                 Tambah Mahasiswa
             </h1>
 
-            <p class="text-textsecondary mt-2">
+            <p class="text-primary mt-2">
                 Tambahkan akun dan data mahasiswa secara manual.
             </p>
 
@@ -39,28 +39,28 @@
                         <label>Nama Lengkap</label>
 
                         <input type="text" name="name" value="{{ old('name') }}"
-                            class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                            class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
                     </div>
 
                     <div>
                         <label>Email</label>
 
                         <input type="email" name="email" value="{{ old('email') }}"
-                            class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                            class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
                     </div>
 
                     <div>
                         <label>Password</label>
 
                         <input type="password" name="password"
-                            class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                            class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
                     </div>
 
                     <div>
                         <label>Konfirmasi Password</label>
 
                         <input type="password" name="password_confirmation"
-                            class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                            class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
                     </div>
 
                 </div>
@@ -68,7 +68,7 @@
             </div>
 
             {{-- DATA MAHASISWA --}}
-            <div class="bg-card border border-bordercolor rounded-2xl p-6 mb-6">
+            <div class="bg-card border border-bordercolor rounded-2xl p-6 mb-6 ">
 
                 <h2 class="text-xl font-semibold mb-6">
                     Data Mahasiswa
@@ -81,7 +81,7 @@
                         <label>NIM</label>
 
                         <input type="text" name="nim" value="{{ old('nim') }}"
-                            class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                            class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
 
                     </div>
 
@@ -90,7 +90,7 @@
                         <label>Universitas</label>
 
                         <input type="text" name="universitas" value="{{ old('universitas') }}"
-                            class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                            class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
 
                     </div>
 
@@ -99,7 +99,7 @@
                         <label>Program Studi</label>
 
                         <input type="text" name="program_studi" value="{{ old('program_studi') }}"
-                            class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                            class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
 
                     </div>
 
@@ -108,7 +108,7 @@
                         <label>Semester</label>
 
                         <input type="number" name="semester" value="{{ old('semester') }}"
-                            class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                            class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
 
                     </div>
 
@@ -117,7 +117,7 @@
                         <label>No HP</label>
 
                         <input type="text" name="no_hp" value="{{ old('no_hp') }}"
-                            class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                            class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
 
                     </div>
 
@@ -126,7 +126,7 @@
                         <label>Alamat</label>
 
                         <textarea name="alamat" rows="4"
-                            class="w-full rounded-xl bg-background border border-bordercolor p-3">{{ old('alamat') }}</textarea>
+                            class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">{{ old('alamat') }}</textarea>
 
                     </div>
 
@@ -145,7 +145,7 @@
 
                     <label>Periode Magang</label>
 
-                    <select name="periode_magang_id" class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                    <select name="periode_magang_id" class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
 
                         <option value="">
                             -- Pilih Periode --
