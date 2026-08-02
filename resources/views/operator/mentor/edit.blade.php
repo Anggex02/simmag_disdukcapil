@@ -31,7 +31,7 @@
                         type="text"
                         name="name"
                         value="{{ $mentor->user->name }}"
-                        class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                        class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
 
                 </div>
 
@@ -43,7 +43,7 @@
                         type="email"
                         name="email"
                         value="{{ $mentor->user->email }}"
-                        class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                        class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
 
                 </div>
 
@@ -55,7 +55,7 @@
                         type="text"
                         name="no_hp"
                         value="{{ $mentor->no_hp }}"
-                        class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                        class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
 
                 </div>
 
@@ -67,7 +67,7 @@
                         type="text"
                         name="nip"
                         value="{{ $mentor->nip }}"
-                        class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                        class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
 
                 </div>
 
@@ -79,7 +79,7 @@
                         type="text"
                         name="jabatan"
                         value="{{ $mentor->jabatan }}"
-                        class="w-full rounded-xl bg-background border border-bordercolor p-3">
+                        class="w-full rounded-xl bg-background border border-bordercolor p-3 text-primary">
 
                 </div>
 
