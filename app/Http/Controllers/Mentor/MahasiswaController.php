@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Mentor;
 
 use App\Http\Controllers\Controller;
 use App\Models\Mahasiswa;
+use App\Models\Mentor;
 
 class MahasiswaController extends Controller
 {
@@ -20,13 +21,12 @@ class MahasiswaController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $mahasiswas = Mahasiswa::with([
-            'user',
-            'mentor',
-            'periodeMagang'
-        ])
-        ->latest()
-        ->get();
+      $mentor = Mentor::where('user_id', auth()->id())->firstOrFail();
+
+$mahasiswas = Mahasiswa::with('user')
+    ->where('mentor_id', $mentor->id)
+    ->latest()
+    ->get();
 
         return view('mentor.mahasiswa.index', compact('mahasiswas'));
     }

@@ -38,7 +38,7 @@
                     type="text"
                     readonly
                     value="{{ $mahasiswa->user->name }}"
-                    class="w-full rounded-xl p-3 bg-background"
+                    class="w-full rounded-xl p-3 bg-background text-primary"
                 >
 
             </div>
@@ -53,7 +53,7 @@
 
                 <select
                     name="mentor_id"
-                    class="w-full rounded-xl p-3 bg-background"
+                    class="w-full rounded-xl p-3 bg-background text-primary"
                 >
 
                     @foreach($mentors as $mentor)

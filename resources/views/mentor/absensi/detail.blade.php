@@ -10,23 +10,21 @@
 
 <div class="space-y-6">
 
+    {{-- Header --}}
     <div>
 
-        <h1 class="text-3xl font-bold text-white">
-
+        <h1 class="text-3xl font-bold text-primary">
             Riwayat Absensi
-
         </h1>
 
-        <p class="text-textsecondary mt-2">
-
+        <p class="mt-2 text-primary">
             {{ $mahasiswa->user->name }}
-
         </p>
 
     </div>
 
-    <x-ui.card>
+    {{-- Card --}}
+    <div class="bg-card border border-bordercolor rounded-2xl overflow-hidden shadow-card">
 
         <div class="overflow-x-auto">
 
@@ -34,55 +32,67 @@
 
                 <thead>
 
-                    <tr class="border-b border-border text-textsecondary">
+                    <tr class="border-b border-bordercolor text-textsecondary">
 
-                        <th>No</th>
+                        <th class="w-16 py-4 text-center">
+                            No
+                        </th>
 
-                        <th>Tanggal</th>
+                        <th class="px-6 text-center">
+                            Tanggal
+                        </th>
 
-                        <th>Jam Masuk</th>
+                        <th class="px-6 text-center">
+                            Jam Masuk
+                        </th>
 
-                        <th>Jam Keluar</th>
+                        <th class="px-6 text-center">
+                            Jam Keluar
+                        </th>
 
-                        <th>Status</th>
+                        <th class="px-6 text-center">
+                            Status
+                        </th>
 
-                        <th>Keterangan</th>
+                        <th class="px-6 text-left">
+                            Keterangan
+                        </th>
 
                     </tr>
 
                 </thead>
 
-                <tbody class="divide-y divide-border">
+                <tbody class="divide-y divide-bordercolor">
 
                     @forelse($absensis as $absensi)
 
-                        <tr>
+                        <tr class="hover:bg-black/10 transition">
 
-                            <td class="py-4">
+                            <td class="py-5 text-center">
 
                                 {{ $loop->iteration }}
 
                             </td>
 
-                            <td>
+                            <td class="text-center text-white">
 
                                 {{ \Carbon\Carbon::parse($absensi->tanggal)->format('d M Y') }}
 
                             </td>
 
-                            <td>
+                            <td class="text-center text-white">
 
                                 {{ $absensi->jam_masuk ?? '-' }}
 
                             </td>
 
-                            <td>
+                            <td class="text-center text-white">
 
                                 {{ $absensi->jam_keluar ?? '-' }}
 
                             </td>
 
-                            <td>
+                            <td class="text-center">
 
                                 @php
 
@@ -100,7 +110,7 @@
 
                                 @endphp
 
-                                <span class="px-3 py-1 rounded-full {{ $warna }}">
+                                <span class="inline-flex px-3 py-1 rounded-full text-sm {{ $warna }}">
 
                                     {{ ucfirst($absensi->status) }}
 
@@ -108,9 +118,9 @@
 
                             </td>
 
-                            <td>
+                            <td class="px-6 text-white">
 
-                                {{ $absensi->keterangan ?? '-' }}
+                                {{ $absensi->keterangan ?: '-' }}
 
                             </td>
 
@@ -120,7 +130,7 @@
 
                         <tr>
 
-                            <td colspan="6" class="text-center py-8 text-textsecondary">
+                            <td colspan="6" class="py-10 text-center text-textsecondary">
 
                                 Belum ada data absensi.
 
@@ -136,7 +146,7 @@
 
         </div>
 
-    </x-ui.card>
+    </div>
 
 </div>
 

@@ -12,13 +12,13 @@
 
         <div>
 
-            <h1 class="text-3xl font-bold text-white">
+            <h1 class="text-3xl font-bold text-primary">
 
                 Detail Logbook
 
             </h1>
 
-            <p class="text-textsecondary mt-2">
+            <p class="text-primary mt-2">
 
                 {{ $logbook->mahasiswa->user->name }}
 
@@ -26,131 +26,117 @@
 
         </div>
 
-        <x-ui.card>
+       <x-ui.card>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {{-- Informasi --}}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                <div>
+        <div>
 
-                    <label class="text-textsecondary">
+            <p class="text-textsecondary text-sm">
+                Tanggal
+            </p>
 
-                        Tanggal
+            <p class="mt-2 text-lg font-medium">
+                {{ \Carbon\Carbon::parse($logbook->tanggal)->format('d F Y') }}
+            </p>
 
-                    </label>
+        </div>
 
-                    <div class="mt-2">
+        <div>
 
-                        {{ \Carbon\Carbon::parse($logbook->tanggal)->format('d F Y') }}
+            <p class="text-textsecondary text-sm">
+                Status
+            </p>
 
-                    </div>
+            <div class="mt-2">
 
-                </div>
+                @php
+                    $warna = match ($logbook->status) {
+                        'disetujui' => 'bg-green-500/20 text-green-400',
+                        'revisi' => 'bg-yellow-500/20 text-yellow-400',
+                        default => 'bg-blue-500/20 text-blue-400'
+                    };
+                @endphp
 
-                <div>
-
-                    <label class="text-textsecondary">
-                        Status
-                    </label>
-
-                    <div class="mt-2">
-
-                        @php
-                            $warna = match ($logbook->status) {
-                                'disetujui' => 'bg-green-500/20 text-green-400',
-                                'revisi' => 'bg-yellow-500/20 text-yellow-400',
-                                default => 'bg-blue-500/20 text-blue-400'
-                            };
-                        @endphp
-
-                        <span class="px-3 py-1 rounded-full text-sm {{ $warna }}">
-                            {{ ucfirst($logbook->status) }}
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <div class="md:col-span-2">
-
-                    <label class="text-textsecondary">
-
-                        Kegiatan
-
-                    </label>
-
-                    <div class="mt-2 whitespace-pre-line">
-
-                        {{ $logbook->kegiatan }}
-
-                    </div>
-
-                </div>
-
-                <div class="md:col-span-2">
-
-                    <label class="text-textsecondary">
-
-                        Kendala
-
-                    </label>
-
-                    <div class="mt-2 whitespace-pre-line">
-
-                        {{ $logbook->kendala ?: '-' }}
-
-                    </div>
-
-                </div>
-
-                <div class="md:col-span-2">
-
-                    <label class="text-textsecondary">
-
-                        Hasil Pekerjaan
-
-                    </label>
-
-                    <div class="mt-2 whitespace-pre-line">
-
-                        {{ $logbook->hasil_pekerjaan ?: '-' }}
-
-                    </div>
-
-                </div>
-
-                <div class="md:col-span-2">
-
-                    <label class="text-textsecondary">
-
-                        Bukti Kegiatan
-
-                    </label>
-
-                    <div class="mt-3">
-
-                        @if($logbook->bukti_kegiatan)
-
-                            <a href="{{ asset('storage/' . $logbook->bukti_kegiatan) }}" target="_blank"
-                                class="bg-primary text-white px-4 py-2 rounded-lg">
-
-                                Lihat File
-
-                            </a>
-
-                        @else
-
-                            -
-
-                        @endif
-
-                    </div>
-
-                </div>
+                <span class="px-3 py-1 rounded-full text-sm {{ $warna }}">
+                    {{ ucfirst($logbook->status) }}
+                </span>
 
             </div>
 
-        </x-ui.card>
+        </div>
 
+    </div>
+
+    <hr class="my-6 border-bordercolor">
+
+    {{-- Isi --}}
+    <div class="space-y-5">
+
+        <div>
+
+            <p class="text-textsecondary text-sm mb-2">
+                Kegiatan
+            </p>
+
+            <div class="rounded-lg border border-bordercolor p-4 whitespace-pre-line">
+                {{ $logbook->kegiatan }}
+            </div>
+
+        </div>
+
+        <div>
+
+            <p class="text-textsecondary text-sm mb-2">
+                Kendala
+            </p>
+
+            <div class="rounded-lg border border-bordercolor p-4 whitespace-pre-line">
+                {{ $logbook->kendala ?: '-' }}
+            </div>
+
+        </div>
+
+        <div>
+
+            <p class="text-textsecondary text-sm mb-2">
+                Hasil Pekerjaan
+            </p>
+
+            <div class="rounded-lg border border-bordercolor p-4 whitespace-pre-line">
+                {{ $logbook->hasil_pekerjaan ?: '-' }}
+            </div>
+
+        </div>
+
+        <div>
+
+            <p class="text-textsecondary text-sm mb-2">
+                Bukti Kegiatan
+            </p>
+
+            @if($logbook->bukti_kegiatan)
+
+                <a href="{{ asset('storage/' . $logbook->bukti_kegiatan) }}"
+                    target="_blank"
+                    class="inline-flex bg-primary text-white px-4 py-2 rounded-lg">
+
+                    Lihat File
+
+                </a>
+
+            @else
+
+                <p>-</p>
+
+            @endif
+
+        </div>
+
+    </div>
+
+</x-ui.card>
         <x-ui.card>
 
             <form action="{{ route('mentor.logbook.update', $logbook->id) }}" method="POST">
@@ -168,7 +154,7 @@
                     </label>
 
                     <textarea name="komentar_mentor" rows="5"
-                        class="w-full mt-3 rounded-lg bg-background border border-border text-white p-4">{{ old('komentar_mentor', $logbook->komentar_mentor) }}</textarea>
+                        class="w-full mt-3 rounded-lg bg-background border border-border text-primary p-4">{{ old('komentar_mentor', $logbook->komentar_mentor) }}</textarea>
 
                 </div>
 

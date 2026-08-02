@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Detail Logbook')
+@section('title', 'Logbook Mahasiswa')
 
 @section('sidebar')
     @include('layouts.sidebar.sidebar-mentor')
@@ -10,23 +10,21 @@
 
 <div class="space-y-6">
 
+    {{-- Header --}}
     <div>
 
-        <h1 class="text-3xl font-bold text-white">
-
+        <h1 class="text-3xl font-bold text-primary">
             Logbook Mahasiswa
-
         </h1>
 
-        <p class="text-textsecondary mt-2">
-
+        <p class="mt-2 text-primary">
             {{ $mahasiswa->user->name }}
-
         </p>
 
     </div>
 
-    <x-ui.card>
+    {{-- Card --}}
+    <div class="bg-card border border-bordercolor rounded-2xl overflow-hidden shadow-card">
 
         <div class="overflow-x-auto">
 
@@ -34,51 +32,57 @@
 
                 <thead>
 
-                    <tr class="border-b border-border text-textsecondary">
+                    <tr class="border-b border-bordercolor text-textsecondary">
 
-                        <th class="py-3">No</th>
+                        <th class="w-16 py-4 text-center">
+                            No
+                        </th>
 
-                        <th>Tanggal</th>
+                        <th class="px-6 text-center">
+                            Tanggal
+                        </th>
 
-                        <th>Kegiatan</th>
+                        <th class="px-6 text-left">
+                            Kegiatan
+                        </th>
 
-                        <th>Status</th>
+                        <th class="px-6 text-center">
+                            Status
+                        </th>
 
-                        <th class="text-center">
-
+                        <th class="px-6 text-center">
                             Aksi
-
                         </th>
 
                     </tr>
 
                 </thead>
 
-                <tbody class="divide-y divide-border">
+                <tbody class="divide-y divide-bordercolor">
 
                     @forelse($logbooks as $logbook)
 
-                        <tr>
+                        <tr class="hover:bg-black/10 transition">
 
-                            <td class="py-4">
+                            <td class="py-5 text-center">
 
                                 {{ $loop->iteration }}
 
                             </td>
 
-                            <td>
+                            <td class="text-center text-white">
 
                                 {{ \Carbon\Carbon::parse($logbook->tanggal)->format('d M Y') }}
 
                             </td>
 
-                            <td>
+                            <td class="px-6 text-white">
 
-                                {{ \Illuminate\Support\Str::limit($logbook->kegiatan,50) }}
+                                {{ \Illuminate\Support\Str::limit($logbook->kegiatan, 70) }}
 
                             </td>
 
-                            <td>
+                            <td class="text-center">
 
                                 @php
 
@@ -94,7 +98,7 @@
 
                                 @endphp
 
-                                <span class="px-3 py-1 rounded-full text-sm {{ $warna }}">
+                                <span class="inline-flex px-3 py-1 rounded-full text-sm {{ $warna }}">
 
                                     {{ ucfirst($logbook->status) }}
 
@@ -104,8 +108,7 @@
 
                             <td class="text-center">
 
-                                <a
-                                    href="{{ route('mentor.logbook.show',$logbook->id) }}"
+                                <a href="{{ route('mentor.logbook.show', $logbook->id) }}"
                                     class="bg-primary px-4 py-2 rounded-lg text-white">
 
                                     Detail
@@ -120,7 +123,7 @@
 
                         <tr>
 
-                            <td colspan="5" class="text-center py-8 text-textsecondary">
+                            <td colspan="5" class="py-10 text-center text-textsecondary">
 
                                 Belum ada logbook.
 
@@ -136,7 +139,7 @@
 
         </div>
 
-    </x-ui.card>
+    </div>
 
 </div>
 

@@ -19,13 +19,16 @@ class DashboardController extends Controller
             ->where('user_id', $user->id)
             ->latest()
             ->first();
-
         $mahasiswa = Mahasiswa::with('mentor')
             ->where('user_id', $user->id)
             ->first();
 
-        $jumlahLogbook = Logbook::where('mahasiswa_id', $mahasiswa->id)->count();
-        
+        $jumlahLogbook = 0;
+
+        if ($mahasiswa) {
+            $jumlahLogbook = Logbook::where('mahasiswa_id', $mahasiswa->id)->count();
+        }
+
 
         return view('mahasiswa.dashboard', [
 

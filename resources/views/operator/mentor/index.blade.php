@@ -100,9 +100,6 @@
                         <x-table.td>
                             {{ $mentor->nip }}
 
-                        </x-table.td>
-                        {{ $mentor->jabatan }}
-                        <x-table.td>
 
                             <x-ui.badge>
 

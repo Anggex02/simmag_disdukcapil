@@ -43,35 +43,35 @@
                     <label class="block mb-2 text-white">Nama Lengkap</label>
 
                     <input type="text" name="name" value="{{ old('name') }}"
-                        class="w-full rounded-xl bg-background border border-bordercolor px-4 py-3 text-white" required>
+                        class="w-full rounded-xl bg-background border border-bordercolor px-4 py-3 text-primary" required>
                 </div>
 
                 <div>
                     <label class="block mb-2 text-white">Email</label>
 
                     <input type="email" name="email" value="{{ old('email') }}"
-                        class="w-full rounded-xl bg-background border border-bordercolor px-4 py-3 text-white" required>
+                        class="w-full rounded-xl bg-background border border-bordercolor px-4 py-3 text-primary" required>
                 </div>
 
                 <div>
                     <label class="block mb-2 text-white">Username</label>
 
                     <input type="text" name="username" value="{{ old('username') }}"
-                        class="w-full rounded-xl bg-background border border-bordercolor px-4 py-3 text-white" required>
+                        class="w-full rounded-xl bg-background border border-bordercolor px-4 py-3 text-primary" required>
                 </div>
 
                 <div>
                     <label class="block mb-2 text-white">Password</label>
 
                     <input type="password" name="password"
-                        class="w-full rounded-xl bg-background border border-bordercolor px-4 py-3 text-white" required>
+                        class="w-full rounded-xl bg-background border border-bordercolor px-4 py-3 text-primary" required>
                 </div>
 
                 <div>
                     <label class="block mb-2 text-white">Konfirmasi Password</label>
 
                     <input type="password" name="password_confirmation"
-                        class="w-full rounded-xl bg-background border border-bordercolor px-4 py-3 text-white" required>
+                        class="w-full rounded-xl bg-background border border-bordercolor px-4 py-3 text-primary" required>
                 </div>
 
                 <button type="submit"

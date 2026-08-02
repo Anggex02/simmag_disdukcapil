@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Logbook;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use App\Models\Mentor;
 
 class LogbookController extends Controller
 {
@@ -14,8 +15,11 @@ class LogbookController extends Controller
      */
     public function index()
     {
+        $mentor = Mentor::where('user_id', auth()->id())->firstOrFail();
+
         $mahasiswas = Mahasiswa::with('user')
             ->withCount('logbooks')
+            ->where('mentor_id', $mentor->id)
             ->latest()
             ->get();
 
