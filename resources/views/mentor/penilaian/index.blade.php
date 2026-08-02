@@ -12,13 +12,13 @@
 
         <div>
 
-            <h1 class="text-3xl font-bold text-white">
+            <h1 class="text-3xl font-bold text-primary">
 
                 Penilaian Mahasiswa
 
             </h1>
 
-            <p class="text-textsecondary mt-2">
+            <p class="text-primary mt-2">
 
                 Berikan nilai akhir kepada mahasiswa bimbingan.
 
@@ -33,74 +33,54 @@
                 <table class="w-full">
 
                     <thead>
+                        <tr class="border-b border-bordercolor text-textsecondary">
 
-                        <tr class="border-b border-border text-textsecondary">
+                            <th class="w-16 py-4 text-center">No</th>
 
-                            <th class="py-3">No</th>
+                            <th class="w-72 py-4 text-left">Nama</th>
 
-                            <th>Nama</th>
+                            <th class="py-4 text-left">Universitas</th>
 
-                            <th>Universitas</th>
+                            <th class="w-40 py-4 text-center">Nilai Akhir</th>
 
-                            <th class="text-center">Nilai Akhir</th>
-
-                            <th class="text-center">Aksi</th>
+                            <th class="w-40 py-4 text-center">Aksi</th>
 
                         </tr>
-
                     </thead>
-
-                    <tbody class="divide-y divide-border">
+                    <tbody class="divide-y divide-bordercolor">
 
                         @forelse($mahasiswas as $mahasiswa)
 
-                            <tr>
+                            <tr class="border-b border-bordercolor hover:bg-black/10 transition">
 
-                                <td class="py-4">
-
+                                <td class="py-5 text-center align-middle">
                                     {{ $loop->iteration }}
-
                                 </td>
 
-                                <td>
-
+                                <td class="px-6 py-5 align-middle font-medium text-white">
                                     {{ $mahasiswa->user->name }}
-
                                 </td>
 
-                                <td>
-
+                                <td class="px-6 py-5 align-middle text-white">
                                     {{ $mahasiswa->universitas }}
-
                                 </td>
 
-                                <td class="text-center">
-
-                                    @if($mahasiswa->penilaian)
-
-                                        {{ number_format($mahasiswa->penilaian->nilai_akhir, 2) }}
-
-                                    @else
-
-                                        -
-
-                                    @endif
-
+                                <td class="py-5 text-center align-middle text-white">
+                                    {{ $mahasiswa->penilaian->nilai_akhir ?? '-' }}
                                 </td>
 
-                                <td class="text-center">
+                                <td class="py-5 text-center align-middle">
 
                                     <a href="{{ route('mentor.penilaian.edit', $mahasiswa->id) }}"
-                                        class="bg-primary text-white px-4 py-2 rounded-lg hover:opacity-90">
+                                        class="bg-primary hover:bg-primary-hover text-white px-5 py-2 rounded-lg transition inline-block">
 
-                                        {{ $mahasiswa->penilaian ? 'Edit' : 'Beri Nilai' }}
+                                        Beri Nilai
 
                                     </a>
 
                                 </td>
 
                             </tr>
-
                         @empty
 
                             <tr>
@@ -114,7 +94,6 @@
                             </tr>
 
                         @endforelse
-
                     </tbody>
 
                 </table>

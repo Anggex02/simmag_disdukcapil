@@ -6,15 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Models\Mahasiswa;
 use App\Models\Penilaian;
 use Illuminate\Http\Request;
+use App\Models\Mentor;
+use Illuminate\Support\Facades\Auth;
 
 class PenilaianController extends Controller
 {
     public function index()
     {
+        $mentor = Mentor::where('user_id', Auth::id())->first();
+
         $mahasiswas = Mahasiswa::with(['user', 'penilaian'])
+            ->where('mentor_id', $mentor->id)
             ->latest()
             ->get();
-
         return view(
             'mentor.penilaian.index',
             compact('mahasiswas')
@@ -23,7 +27,10 @@ class PenilaianController extends Controller
 
     public function edit($id)
     {
+        $mentor = Mentor::where('user_id', Auth::id())->first();
+
         $mahasiswa = Mahasiswa::with(['user', 'penilaian'])
+            ->where('mentor_id', $mentor->id)
             ->findOrFail($id);
 
         return view(
@@ -32,48 +39,57 @@ class PenilaianController extends Controller
         );
     }
 
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'disiplin' => 'required|numeric|min:0|max:100',
-            'kerjasama' => 'required|numeric|min:0|max:100',
-            'komunikasi' => 'required|numeric|min:0|max:100',
-            'tanggung_jawab' => 'required|numeric|min:0|max:100',
-            'inisiatif' => 'required|numeric|min:0|max:100',
-            'catatan' => 'nullable|string'
-        ]);
+        public function update(Request $request, $id)
+        {
+            
+            $request->validate([
+                'disiplin' => 'required|numeric|min:0|max:100',
+                'tanggung_jawab' => 'required|numeric|min:0|max:100',
+                'komunikasi' => 'required|numeric|min:0|max:100',
+                'kemampuan_teknis' => 'required|numeric|min:0|max:100',
+                'kerja_sama' => 'required|numeric|min:0|max:100',
+                'inisiatif' => 'required|numeric|min:0|max:100',
+                'etika_kerja' => 'required|numeric|min:0|max:100',
+                'catatan' => 'nullable|string',
+            ]);
 
-        $nilaiAkhir = (
-            $request->disiplin +
-            $request->kerjasama +
-            $request->komunikasi +
-            $request->tanggung_jawab +
-            $request->inisiatif
-        ) / 5;
+            $mentor = \App\Models\Mentor::where('user_id', auth()->id())->firstOrFail();
 
-        Penilaian::updateOrCreate(
+            $nilaiAkhir = (
+                $request->disiplin +
+                $request->tanggung_jawab +
+                $request->komunikasi +
+                $request->kemampuan_teknis +
+                $request->kerja_sama +
+                $request->inisiatif +
+                $request->etika_kerja
+            ) / 7;
 
-            [
-                'mahasiswa_id' => $id
-            ],
+            Penilaian::updateOrCreate(
 
-            [
-                // sementara mentor_id = 1 dulu
-                // nanti kita ubah mengikuti mentor login
-                'mentor_id' => 1,
+                [
+                    'mahasiswa_id' => $id
+                ],
 
-                'disiplin' => $request->disiplin,
-                'kerjasama' => $request->kerjasama,
-                'komunikasi' => $request->komunikasi,
-                'tanggung_jawab' => $request->tanggung_jawab,
-                'inisiatif' => $request->inisiatif,
-                'nilai_akhir' => $nilaiAkhir,
-                'catatan' => $request->catatan
-            ]
-        );
+                [
+                    'mentor_id' => $mentor->id,
 
-        return redirect()
-            ->route('mentor.penilaian')
-            ->with('success', 'Penilaian berhasil disimpan.');
+                    'disiplin' => $request->disiplin,
+                    'tanggung_jawab' => $request->tanggung_jawab,
+                    'komunikasi' => $request->komunikasi,
+                    'kemampuan_teknis' => $request->kemampuan_teknis,
+                    'kerja_sama' => $request->kerja_sama,
+                    'inisiatif' => $request->inisiatif,
+                    'etika_kerja' => $request->etika_kerja,
+
+                    'nilai_akhir' => $nilaiAkhir,
+                    'catatan' => $request->catatan,
+                ]
+
+            );
+
+            return redirect()
+                ->route('mentor.penilaian')
+                ->with('success', 'Penilaian berhasil disimpan.');
+        }
     }
-}

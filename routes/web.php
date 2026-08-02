@@ -48,6 +48,7 @@ use App\Http\Controllers\Mahasiswa\DashboardController as MahasiswaDashboard;
 use App\Http\Controllers\Mahasiswa\PendaftaranMagangController;
 use App\Http\Controllers\Mahasiswa\AbsensiController as MahasiswaAbsensiController;
 use App\Http\Controllers\Mahasiswa\LogbookController as MahasiswaLogbookController;
+use App\Http\Controllers\Mahasiswa\PenilaianController as MahasiswaPenilaianController;
 
 
 
@@ -245,6 +246,19 @@ Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
 
     Route::delete('/mahasiswa/logbook/{id}', [MahasiswaLogbookController::class, 'destroy'])
         ->name('mahasiswa.logbook.destroy');
+
+
+    /*
+|--------------------------------------------------------------------------
+| Penilaian
+|--------------------------------------------------------------------------
+*/
+
+    Route::get('/mahasiswa/penilaian', [MahasiswaPenilaianController::class, 'index'])
+        ->name('mahasiswa.penilaian.index');
+
+    Route::get('/mahasiswa/penilaian/cetak', [MahasiswaPenilaianController::class, 'cetak'])
+        ->name('mahasiswa.penilaian.cetak');
 
     /*
     |--------------------------------------------------------------------------

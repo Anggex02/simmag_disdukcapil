@@ -12,31 +12,44 @@
     {{-- Menu --}}
     <nav class="flex-1 px-4 py-6 space-y-2">
 
-        <a href="{{ route('mahasiswa.dashboard') }}" class="flex items-center px-4 py-3 rounded-xl transition
+        <a href="{{ route('mahasiswa.dashboard') }}"
+            class="flex items-center px-4 py-3 rounded-xl transition
             {{ request()->routeIs('mahasiswa.dashboard') ? 'bg-primary text-white' : 'hover:bg-card' }}">
 
             Dashboard
 
         </a>
 
-        <a href="{{ route('mahasiswa.pendaftaran.index') }}" class="flex items-center px-4 py-3 rounded-xl transition
+        <a href="{{ route('mahasiswa.pendaftaran.index') }}"
+            class="flex items-center px-4 py-3 rounded-xl transition
             {{ request()->routeIs('mahasiswa.pendaftaran.*') ? 'bg-primary text-white' : 'hover:bg-card' }}">
 
             Pendaftaran Magang
 
         </a>
 
-        <a href="{{ route('mahasiswa.absensi') }}" class="flex items-center px-4 py-3 rounded-xl transition
-             {{ request()->routeIs('mahasiswa.absensi') ? 'bg-primary text-white' : 'hover:bg-card' }}">
+        <a href="{{ route('mahasiswa.absensi') }}"
+            class="flex items-center px-4 py-3 rounded-xl transition
+            {{ request()->routeIs('mahasiswa.absensi') ? 'bg-primary text-white' : 'hover:bg-card' }}">
 
             Absensi
 
         </a>
 
-        <a href="{{ route('mahasiswa.logbook.index') }}" class="flex items-center px-4 py-3 rounded-xl transition
-        {{ request()->routeIs('mahasiswa.logbook*') ? 'bg-primary text-white' : 'hover:bg-card' }}">
+        <a href="{{ route('mahasiswa.logbook.index') }}"
+            class="flex items-center px-4 py-3 rounded-xl transition
+            {{ request()->routeIs('mahasiswa.logbook*') ? 'bg-primary text-white' : 'hover:bg-card' }}">
 
             Logbook
+
+        </a>
+
+        {{-- Menu Baru --}}
+        <a href="{{ route('mahasiswa.penilaian.index') }}"
+            class="flex items-center px-4 py-3 rounded-xl transition
+            {{ request()->routeIs('mahasiswa.penilaian.*') ? 'bg-primary text-white' : 'hover:bg-card' }}">
+
+            Nilai Magang
 
         </a>
 

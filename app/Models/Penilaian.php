@@ -8,25 +8,29 @@ class Penilaian extends Model
 {
     protected $fillable = [
 
-        'mahasiswa_id',
+    'mahasiswa_id',
 
-        'mentor_id',
+    'mentor_id',
 
-        'disiplin',
+    'disiplin',
 
-        'kerjasama',
+    'tanggung_jawab',
 
-        'komunikasi',
+    'komunikasi',
 
-        'tanggung_jawab',
+    'kemampuan_teknis',
 
-        'inisiatif',
+    'kerja_sama',
 
-        'nilai_akhir',
+    'inisiatif',
 
-        'catatan'
+    'etika_kerja',
 
-    ];
+    'nilai_akhir',
+
+    'catatan',
+
+];
 
     public function mahasiswa()
     {

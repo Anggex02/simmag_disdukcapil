@@ -12,11 +12,10 @@
     {{-- Menu --}}
     <nav class="flex-1 px-4 py-6 space-y-2">
 
-        <a href="{{ route('mentor.dashboard') }}"
-            class="flex items-center px-4 py-3 rounded-xl transition
+        <a href="{{ route('mentor.dashboard') }}" class="flex items-center px-4 py-3 rounded-xl transition
             {{ request()->routeIs('mentor.dashboard')
-                ? 'bg-primary text-white'
-                : 'hover:bg-card' }}">
+    ? 'bg-primary text-white'
+    : 'hover:bg-card' }}">
 
             Dashboard
 
@@ -28,33 +27,39 @@
 
         </p>
 
-        <a href="{{ route('mentor.mahasiswa') }}"
-            class="flex items-center px-4 py-3 rounded-xl transition
+        <a href="{{ route('mentor.mahasiswa') }}" class="flex items-center px-4 py-3 rounded-xl transition
             {{ request()->routeIs('mentor.mahasiswa*')
-                ? 'bg-primary text-white'
-                : 'hover:bg-card' }}">
+    ? 'bg-primary text-white'
+    : 'hover:bg-card' }}">
 
             Data Mahasiswa
 
         </a>
 
-        <a href="{{ route('mentor.absensi') }}"
-            class="flex items-center px-4 py-3 rounded-xl transition
+        <a href="{{ route('mentor.absensi') }}" class="flex items-center px-4 py-3 rounded-xl transition
             {{ request()->routeIs('mentor.absensi*')
-                ? 'bg-primary text-white'
-                : 'hover:bg-card' }}">
+    ? 'bg-primary text-white'
+    : 'hover:bg-card' }}">
 
             Absensi
 
         </a>
 
-        <a href="{{ route('mentor.logbook') }}"
-            class="flex items-center px-4 py-3 rounded-xl transition
+        <a href="{{ route('mentor.logbook') }}" class="flex items-center px-4 py-3 rounded-xl transition
             {{ request()->routeIs('mentor.logbook*')
-                ? 'bg-primary text-white'
-                : 'hover:bg-card' }}">
+    ? 'bg-primary text-white'
+    : 'hover:bg-card' }}">
 
             Logbook
+
+        </a>
+
+        <a href="{{ route('mentor.penilaian') }}" class="flex items-center px-4 py-3 rounded-xl transition
+            {{ request()->routeIs('mentor.penilaian*')
+    ? 'bg-primary text-white'
+    : 'hover:bg-card' }}">
+
+            Penilaian
 
         </a>
 
