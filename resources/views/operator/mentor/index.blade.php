@@ -40,7 +40,7 @@
         <form method="GET" action="{{ route('mentor.index') }}" class="flex gap-4">
 
             <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari mentor..."
-                class="flex-1 rounded-xl bg-background border border-bordercolor px-4 py-3 text-white placeholder:text-gray-500">
+                class="flex-1 rounded-xl bg-background border border-bordercolor px-4 py-3 text-primary placeholder:text-primary">
 
             <x-ui.button type="submit">
                 Cari

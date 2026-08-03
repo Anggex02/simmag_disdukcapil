@@ -39,7 +39,6 @@
             </a>
 
         </div>
-
         @if(session('success'))
 
             <div class="bg-green-500/20 border border-green-500 rounded-xl p-4 text-green-300">
